@@ -4,29 +4,26 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField]List<Transform> paths;
-    List<Vector3> location;
+    [SerializeField]List<Transform> location;
     int nextLocation;
     Vector3 targetLocation;
     [SerializeField] float speed;
 
     void Start()
     {
-        location = new List<Vector3>();
-        for(int i = 0; i < paths.Count; i++)
-            location.Add(paths[i].position);
         nextLocation = 0;
         targetLocation = GetNextLocation();
+        RotateEnemy();
     }
 
     Vector3 GetNextLocation(){
         nextLocation++;
         nextLocation = nextLocation % location.Count;
-        /*if(nextLocation % 2 == 0)
-            transform.rotation = Quaternion.Euler(0, 0, 180);
-        else
-            transform.rotation = Quaternion.Euler(0, 0, 0);*/
-        return location[nextLocation];
+        return location[nextLocation].position;
+    }
+
+    void RotateEnemy(){
+        transform.right = targetLocation - transform.position;
     }
 
     void Update()
@@ -34,7 +31,7 @@ public class EnemyMovement : MonoBehaviour
         Vector2 delta = Vector2.MoveTowards(transform.position, targetLocation, speed * Time.deltaTime);
         if(delta == new Vector2(transform.position.x, transform.position.y)){
             targetLocation =  GetNextLocation();
-            transform.Rotate(0, 0, 180, Space.Self);
+            RotateEnemy();
         }
         else
             transform.position = delta;
