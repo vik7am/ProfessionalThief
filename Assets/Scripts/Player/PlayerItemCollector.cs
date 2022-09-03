@@ -6,6 +6,11 @@ public class PlayerItemCollector : MonoBehaviour
 {
     bool collectableNearby;
     SafeController safe;
+    PlayerInventory inventory;
+
+    private void Awake() {
+        inventory = GetComponent<PlayerInventory>();
+    }
 
     void Update()
     {
@@ -21,7 +26,11 @@ public class PlayerItemCollector : MonoBehaviour
     }
 
     void CollectItem(){
-        safe.OpenSafe();
+        CollectableItem collectableItem = safe.OpenSafe();
+        int quantity = safe.GetItemQuantity();
+        inventory.AddItem(collectableItem, quantity);
+        collectableNearby = false;
+        /*
         int value = safe.GetItemValue();
         int quantity = safe.GetItemQuantity();
         string itemName = safe.GetItemName();
@@ -29,7 +38,7 @@ public class PlayerItemCollector : MonoBehaviour
         UIManager.Instance().UpdateCollectableValue(quantity * value);
         UIManager.Instance().UpdateActionLog(actionLogText);
         collectableNearby = false;
-        UIManager.Instance().UpdateItemInfo("");
+        UIManager.Instance().UpdateItemInfo("");*/
     }
 
     private void OnCollisionEnter2D(Collision2D other) {

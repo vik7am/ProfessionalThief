@@ -5,6 +5,7 @@ using UnityEngine;
 public class StunGun : MonoBehaviour
 {
     [SerializeField] Bullet bullet;
+    [SerializeField] int ammo;
 
     void Update()
     {

@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Color: {r: 0.6462264, g: 1, b: 0.70365554, a: 1}
   m_Intensity: 0.4
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 00000000175728f931722315112604fea1a084da2934b6ba
+  m_ApplyToSortingLayers: 00000000175728f931722315112604fe533ba637a1a084da2934b6ba
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -161,6 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 7238474279193884020, guid: 23630f37f183b9e45a8e7f66c11ef64f, type: 3}
+  ammo: 0
 --- !u!1 &8655294308653967029
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,7 +173,7 @@ GameObject:
   - component: {fileID: 8655294308653967030}
   - component: {fileID: 8655294308653967031}
   m_Layer: 0
-  m_Name: Torch
+  m_Name: Torch Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -210,7 +211,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 00000000175728f931722315a1a084da2934b6ba112604fe
+  m_ApplyToSortingLayers: 00000000175728f931722315112604fe533ba637a1a084da2934b6ba
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -247,6 +248,7 @@ GameObject:
   - component: {fileID: 8655294308829973998}
   - component: {fileID: 8655294308829973997}
   - component: {fileID: 1402901442}
+  - component: {fileID: 1449820806}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -309,7 +311,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1162464215
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2a71705366af75d45b1fe63c0cca6972, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -392,5 +394,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc6d8ab48d68a7a47a936bee16880790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1449820806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8655294308829973994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a80bc4618d4b614497425cfcb01917a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

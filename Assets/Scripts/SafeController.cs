@@ -9,27 +9,20 @@ public class SafeController : MonoBehaviour
     bool safeEmpty;
     int itemQuantity;
 
-    void GetCollectableItem(){
+    void SpawnCollectableItem(){
         int randomItem = Random.Range(0, collectableItems.Count);
         collectableItem = collectableItems[randomItem];
     }
 
-    void GetCollectableItemQuantity(){
+    void SetCollectableItemQuantity(){
         itemQuantity = Random.Range(collectableItem.GetMinQuantity(),collectableItem.GetMaxQuantity()+1);
     }
 
-    public void OpenSafe(){
-        GetCollectableItem();
-        GetCollectableItemQuantity();
+    public CollectableItem OpenSafe(){
+        SpawnCollectableItem();
+        SetCollectableItemQuantity();
         safeEmpty = true;
-    }
-
-    public int GetItemValue(){
-        return collectableItem.GetItemValue();
-    }
-
-    public string GetItemName(){
-        return collectableItem.GetItemName();
+        return collectableItem;
     }
 
     public int GetItemQuantity(){

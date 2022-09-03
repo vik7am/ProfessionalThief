@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ItemType{CASH, SILVER_COIN, GOLD_COIN}
+
 
 public class CollectableItem : MonoBehaviour
 {
@@ -16,6 +16,7 @@ public class CollectableItem : MonoBehaviour
             case ItemType.CASH : return "10$ Cash";
             case ItemType.SILVER_COIN : return "Silver Coin";
             case ItemType.GOLD_COIN : return "Gold Coin";
+            case ItemType.BATTERY : return "Battery";
         }
         return "";
     }

@@ -8,24 +8,20 @@ public class HudUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreValue;
     [SerializeField] TextMeshProUGUI itemInfo;
     [SerializeField] TextMeshProUGUI actionLogText;
-    int totalCollectableValue;
     Coroutine coroutine;
     List<string> actionLog;
     int actionLogCounter = 0;
 
     void Start()
     {
-        totalCollectableValue = 0;
         actionLog = new List<string>();
         scoreValue.text = "$ 0";
         itemInfo.text = "";
         actionLogText.text = "";
     }
 
-    public void UpdateCollectableValue(int value)
-    {
-        totalCollectableValue += value;
-        scoreValue.text = "$ " + totalCollectableValue;
+    public void UpdateCollectableValue(int totalTake){
+        scoreValue.text = "$ " + totalTake;
     }
 
     public void UpdateItemInfo(string info){
