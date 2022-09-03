@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CCTV : MonoBehaviour
+public class IntruderDetection : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -15,7 +15,7 @@ public class CCTV : MonoBehaviour
     {
         
     }
-
+    
     private void OnTriggerEnter2D(Collider2D other) {
         PlayerMovement player = other.GetComponent<PlayerMovement>();
         if(player != null){

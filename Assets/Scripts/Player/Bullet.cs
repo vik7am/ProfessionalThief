@@ -16,4 +16,17 @@ public class Bullet : MonoBehaviour
             despawnTime -= Time.deltaTime;
         transform.position += transform.right * speed * Time.deltaTime;
     }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        CCTVController cctv = other.GetComponent<CCTVController>();
+        if(cctv != null){
+            cctv.DisableCCTV();
+            Destroy(gameObject);
+        }
+        GaurdController gaurd = other.GetComponent<GaurdController>();
+        if(gaurd != null){
+            gaurd.DisableGaurd();
+            Destroy(gameObject);
+        }
+    }
 }

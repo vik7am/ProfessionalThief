@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour
+public class GaurdMovement : MonoBehaviour
 {
     [SerializeField]List<Transform> location;
     int nextLocation;
     Vector3 targetLocation;
     [SerializeField] float speed;
+    bool stopMovement;
 
     void Start()
     {
@@ -26,8 +27,14 @@ public class EnemyMovement : MonoBehaviour
         transform.right = targetLocation - transform.position;
     }
 
+    public void StopMovement(){
+        stopMovement = true;
+    }
+
     void Update()
     {
+        if(stopMovement)
+            return;
         Vector2 delta = Vector2.MoveTowards(transform.position, targetLocation, speed * Time.deltaTime);
         if(delta == new Vector2(transform.position.x, transform.position.y)){
             targetLocation =  GetNextLocation();
