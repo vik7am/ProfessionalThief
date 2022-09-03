@@ -27,4 +27,8 @@ public class UIManager : MonoBehaviour
         hudUI.UpdateItemInfo(info);
     }
 
+    public void UpdateActionLog(string text){
+        hudUI.UpdateActionLog(text);
+    }
+
 }

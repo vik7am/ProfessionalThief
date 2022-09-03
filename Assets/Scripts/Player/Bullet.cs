@@ -22,11 +22,13 @@ public class Bullet : MonoBehaviour
         if(cctv != null){
             cctv.DisableCCTV();
             Destroy(gameObject);
+            UIManager.Instance().UpdateActionLog("CCTV Disabled");
         }
         GaurdController gaurd = other.GetComponent<GaurdController>();
         if(gaurd != null){
             gaurd.DisableGaurd();
             Destroy(gameObject);
+            UIManager.Instance().UpdateActionLog("Guard Incapacitated");
         }
     }
 }
