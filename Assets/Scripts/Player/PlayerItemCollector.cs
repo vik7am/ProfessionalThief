@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerItemCollector : MonoBehaviour
 {
     bool collectableNearby;
-    CollectableItem item;
+    SafeController safe;
 
     void Update()
     {
@@ -21,24 +21,32 @@ public class PlayerItemCollector : MonoBehaviour
     }
 
     void CollectItem(){
-        int value = item.GetItemValue();
-        UIManager.Instance().UpdateCollectableValue(value);
-        Destroy(item.gameObject);
+        safe.OpenSafe();
+        int value = safe.GetItemValue();
+        int quantity = safe.GetItemQuantity();
+        string itemName = safe.GetItemName();
+        string actionLogText = "Collected " + quantity + " " + itemName;
+        UIManager.Instance().UpdateCollectableValue(quantity * value);
+        UIManager.Instance().UpdateActionLog(actionLogText);
         collectableNearby = false;
+        UIManager.Instance().UpdateItemInfo("");
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        item = other.GetComponent<CollectableItem>();
-        if(item == null)
+    private void OnCollisionEnter2D(Collision2D other) {
+        safe = other.gameObject.GetComponent<SafeController>();
+        if(safe == null)
             return;
-        collectableNearby = true;
-        UIManager.Instance().UpdateItemInfo(item.GetItemName());
-        
+        if(safe.IsSafeEmpty())
+            UIManager.Instance().UpdateItemInfo("Safe Empty");
+        else{
+            UIManager.Instance().UpdateItemInfo("Open Safe");
+            collectableNearby = true;
+        }
     }
 
-    private void OnTriggerExit2D(Collider2D other) {
-        item = other.GetComponent<CollectableItem>();
-        if(item == null)
+    private void OnCollisionExit2D(Collision2D other) {
+        safe = other.gameObject.GetComponent<SafeController>();
+        if(safe == null)
             return;
         collectableNearby = false;
         UIManager.Instance().UpdateItemInfo("");
