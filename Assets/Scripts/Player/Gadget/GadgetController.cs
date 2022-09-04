@@ -41,7 +41,7 @@ public class GadgetController : MonoBehaviour
         gadgetEquipped = gadget;
     }
 
-    void UnEquipGadget(){
+    public void UnEquipGadget(){
         switch(gadgetEquipped){
             case Gadget.STUN_GUN : stunGun.UnEquip(); break;
             case Gadget.NIGHT_VISION_GOOGLES : nightVisionGoggles.UnEquip(); break;

@@ -6,6 +6,7 @@ public class UIManager : MonoBehaviour
 {
     static UIManager instance;
     [SerializeField] HudUI hudUI;
+    [SerializeField] GameOverUI gameOverUI;
 
     public static UIManager Instance(){
         return instance;
@@ -41,6 +42,11 @@ public class UIManager : MonoBehaviour
 
     public void UpdateChargeStatus(float value){
         hudUI.UpdateChargeStatus(value);
+    }
+
+    public void ShowGameoverUI(){
+        hudUI.gameObject.SetActive(false);
+        gameOverUI.gameObject.SetActive(true);
     }
 
 }

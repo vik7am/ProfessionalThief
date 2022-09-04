@@ -417,6 +417,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   intruderDetection: {fileID: 183416090645385813}
   pointLight: {fileID: 7774162480609160474}
+  recoveryTime: 5
+  activationTime: 2
 --- !u!50 &951633753
 Rigidbody2D:
   serializedVersion: 4

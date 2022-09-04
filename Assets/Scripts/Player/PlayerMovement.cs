@@ -10,16 +10,17 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float speed;
     float x, y;
     Camera cam;
-    bool stopMovement;
+    bool movement;
 
     void Awake(){
         body = GetComponent<Rigidbody2D>();
         cam = Camera.main;
+        movement = true;
     }
 
     void Update()
     {
-        if(stopMovement)
+        if(!movement)
             return;
         GetPlayerInput();
         UpdatePlayerRotation();
@@ -52,8 +53,8 @@ public class PlayerMovement : MonoBehaviour
             transform.localRotation = Quaternion.Euler(0, 0, -90);
     }
 
-    public void SetStopMovement(bool status){
+    public void StopMovement(){
         velocity = Vector2.zero;
-        stopMovement = status;
+        movement = false;
     }
 }

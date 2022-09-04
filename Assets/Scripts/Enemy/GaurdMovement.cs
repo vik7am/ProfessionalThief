@@ -32,6 +32,10 @@ public class GaurdMovement : MonoBehaviour
         stopMovement = true;
     }
 
+    public void StartMovement(){
+        stopMovement = false;
+    }
+
     void Update()
     {
         if(stopMovement)
