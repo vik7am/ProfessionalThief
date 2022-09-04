@@ -9,7 +9,7 @@ public class StunGun : MonoBehaviour
 
     void Update()
     {
-        GetPlayerInput();
+        //GetPlayerInput();
     }
 
     void GetPlayerInput(){
@@ -18,7 +18,19 @@ public class StunGun : MonoBehaviour
     }
 
     void FireGun(){
-        Instantiate(bullet, transform.position, transform.parent.localRotation);
+        Instantiate(bullet, transform.position, transform.parent.parent.localRotation);
+    }
+
+    public void Reload(){
+
+    }
+
+    public void Equip(){
+
+    }
+
+    public void UnEquip(){
+        
     }
 
 }

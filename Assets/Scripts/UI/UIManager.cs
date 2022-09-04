@@ -31,4 +31,12 @@ public class UIManager : MonoBehaviour
         hudUI.UpdateActionLog(text);
     }
 
+    public void UpdateGadgetStatus(Gadget gadget, int value){
+        hudUI.UpdateGadgetStatus(gadget, value);
+    }
+
+    public void UpdateChargeStatus(float value){
+        hudUI.UpdateChargeStatus(value);
+    }
+
 }

@@ -32,4 +32,8 @@ public class CollectableItem : MonoBehaviour
     public int GetMaxQuantity(){
         return maxQuantity;
     }
+
+    public ItemType GetItemType(){
+        return itemType;
+    }
 }
