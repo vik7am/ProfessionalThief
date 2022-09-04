@@ -44,7 +44,7 @@ public class NightVisionGoggles : MonoBehaviour
         }
         if(currentCharge < charge){
             if(Input.GetKeyDown(KeyCode.R))
-                Reload();
+                Recharge();
         }
     }
 
@@ -60,22 +60,22 @@ public class NightVisionGoggles : MonoBehaviour
         greenLight.SetActive(false);
     }
 
-    public void Reload(){
+    public void Recharge(){
         if(inventory.UseBattery())
             currentCharge = charge;
-        UIManager.Instance().UpdateGadgetStatus(Gadget.NIGHT_VISION_GOOGLES, inventory.GetAvalableBattery());
+        UIManager.Instance().UpdateAvailableBattery(inventory.GetAvalableBattery());
         UIManager.Instance().UpdateChargeStatus(currentCharge);
     }
 
     public void Equip(){
         equipped = true;
-        UIManager.Instance().UpdateGadgetStatus(Gadget.NIGHT_VISION_GOOGLES, inventory.GetAvalableBattery());
+        UIManager.Instance().UpdateEquippedGadget(Gadget.NIGHT_VISION_GOOGLES);
         UIManager.Instance().UpdateChargeStatus(currentCharge);
     }
 
     public void UnEquip(){
         equipped = false;
         DeactivateNightVision();
-        UIManager.Instance().UpdateGadgetStatus(Gadget.Empty, inventory.GetAvalableBattery());
+        UIManager.Instance().UpdateEquippedGadget(Gadget.Empty);
     }
 }

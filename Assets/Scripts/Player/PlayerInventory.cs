@@ -24,8 +24,11 @@ public class PlayerInventory : MonoBehaviour
     }
 
     void AddUsableItems(ItemType itemType , int quantity){
-        if(itemType == ItemType.BATTERY)
+        if(itemType == ItemType.BATTERY){
             availableBattery += quantity;
+            UIManager.Instance().UpdateAvailableBattery(availableBattery);
+        }
+            
     }
 
     public bool UseBattery(){

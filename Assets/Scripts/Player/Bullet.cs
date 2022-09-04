@@ -20,15 +20,22 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         CCTVController cctv = other.GetComponent<CCTVController>();
         if(cctv != null){
-            cctv.DisableCCTV();
-            Destroy(gameObject);
-            UIManager.Instance().UpdateActionLog("CCTV Disabled");
+            if(cctv.IsActive()){
+                cctv.DisableCCTV();
+                UIManager.Instance().UpdateActionLog("CCTV Disabled");
+            }
         }
         GaurdController gaurd = other.GetComponent<GaurdController>();
         if(gaurd != null){
-            gaurd.DisableGaurd();
-            Destroy(gameObject);
-            UIManager.Instance().UpdateActionLog("Guard Incapacitated");
+            if(gaurd.IsActive()){
+                gaurd.DisableGaurd();
+                UIManager.Instance().UpdateActionLog("Guard Incapacitated");
+            }
         }
+        IntruderDetection intruderDetection = other.GetComponent<IntruderDetection>();
+        if(intruderDetection != null){
+            return;
+        }
+        Destroy(gameObject);
     }
 }

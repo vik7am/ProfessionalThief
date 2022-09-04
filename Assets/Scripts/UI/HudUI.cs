@@ -9,7 +9,8 @@ public class HudUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreValue;
     [SerializeField] TextMeshProUGUI itemInfo;
     [SerializeField] TextMeshProUGUI actionLogText;
-    [SerializeField] TextMeshProUGUI gadgetStatus;
+    [SerializeField] TextMeshProUGUI availableBattery;
+    [SerializeField] TextMeshProUGUI equippedGadget;
     [SerializeField] Slider chargeStatus;
     Coroutine coroutine;
     List<string> actionLog;
@@ -21,8 +22,7 @@ public class HudUI : MonoBehaviour
         scoreValue.text = "$ 0";
         itemInfo.text = "";
         actionLogText.text = "";
-        gadgetStatus.text = "";
-        chargeStatus.gameObject.SetActive(false);
+        ToggleGadgetUI(false);
     }
 
     public void UpdateCollectableValue(int totalTake){
@@ -50,20 +50,30 @@ public class HudUI : MonoBehaviour
         coroutine = null;
     }
 
-    public void UpdateGadgetStatus(Gadget gadget, int value){
+    public void UpdateEquippedGadget(Gadget gadget){
         switch(gadget){
             case Gadget.Empty : 
-                gadgetStatus.text = "";
-                chargeStatus.gameObject.SetActive(false); break;
+                ToggleGadgetUI(false); break;
             case Gadget.STUN_GUN :
-                gadgetStatus.text = value.ToString();
-                chargeStatus.gameObject.SetActive(true);
-                chargeStatus.maxValue = 10; break;
+                ToggleGadgetUI(true);
+                equippedGadget.text = "T";
+                chargeStatus.maxValue = 1; break;
             case Gadget.NIGHT_VISION_GOOGLES :
-                gadgetStatus.text = value.ToString();
-                chargeStatus.gameObject.SetActive(true);
+                ToggleGadgetUI(true);
+                equippedGadget.text = "N";
                 chargeStatus.maxValue = 10; break;
         }
+    }
+
+    public void ToggleGadgetUI(bool status){
+        chargeStatus.gameObject.SetActive(status);
+        availableBattery.gameObject.SetActive(status);
+        equippedGadget.gameObject.SetActive(status);
+    }
+
+    public void UpdateAvailableBattery(int number){
+        availableBattery.text = number.ToString();
+        
     }
 
     public void UpdateChargeStatus(float value){
