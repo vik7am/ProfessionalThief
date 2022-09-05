@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NightVisionGoggles : MonoBehaviour
+public class Torch : MonoBehaviour
 {
-    [SerializeField] GameObject greenLight;
+    [SerializeField] GameObject torchLight;
     [SerializeField] PlayerInventory inventory;
     [SerializeField] float charge;
     float currentCharge;
@@ -29,7 +29,7 @@ public class NightVisionGoggles : MonoBehaviour
             currentCharge -= Time.deltaTime;
         else{
             currentCharge = 0;
-            DeactivateNightVision();
+            DeactivateTorch();
         }
         UIManager.Instance().UpdateChargeStatus(currentCharge);
     }
@@ -38,9 +38,9 @@ public class NightVisionGoggles : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             if(active)
-                DeactivateNightVision();
+                DeactivateTorch();
             else
-                ActivateNightVision();
+                ActivateTorch();
         }
         if(currentCharge < charge){
             if(Input.GetKeyDown(KeyCode.R))
@@ -48,16 +48,16 @@ public class NightVisionGoggles : MonoBehaviour
         }
     }
 
-    void ActivateNightVision(){
+    void ActivateTorch(){
         if(currentCharge == 0)
             return;
         active = true;
-        greenLight.SetActive(true);
+        torchLight.SetActive(true);
     }
 
-    void DeactivateNightVision(){
+    void DeactivateTorch(){
         active = false;
-        greenLight.SetActive(false);
+        torchLight.SetActive(false);
     }
 
     public void Recharge(){
@@ -69,13 +69,13 @@ public class NightVisionGoggles : MonoBehaviour
 
     public void Equip(){
         equipped = true;
-        UIManager.Instance().UpdateEquippedGadget(Gadget.NIGHT_VISION_GOOGLES);
+        UIManager.Instance().UpdateEquippedGadget(Gadget.TORCH);
         UIManager.Instance().UpdateChargeStatus(currentCharge);
     }
 
     public void UnEquip(){
         equipped = false;
-        DeactivateNightVision();
+        DeactivateTorch();
         UIManager.Instance().UpdateEquippedGadget(Gadget.EMPTY);
     }
 }

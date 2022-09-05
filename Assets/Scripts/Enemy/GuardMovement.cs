@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GaurdMovement : MonoBehaviour
+public class GuardMovement : MonoBehaviour
 {
     [SerializeField]List<Transform> location;
     int nextLocation;

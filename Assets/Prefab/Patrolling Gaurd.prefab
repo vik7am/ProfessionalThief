@@ -311,8 +311,9 @@ GameObject:
   - component: {fileID: 4619700814017038087}
   - component: {fileID: 951633753}
   - component: {fileID: 951633752}
+  - component: {fileID: 1068085477}
   m_Layer: 0
-  m_Name: Gaurd
+  m_Name: Guard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -374,7 +375,7 @@ SpriteRenderer:
   m_SortingLayerID: -628842335
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5120002d1cc59b841887b4768953adcc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 637f9035531d27a46b8b638da88b2c25, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -466,6 +467,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.4, y: 0.6}
   m_EdgeRadius: 0
+--- !u!95 &1068085477
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7774162481030406931}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 88f482858e7b161498122f8c2584547c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7774162481264882341
 GameObject:
   m_ObjectHideFlags: 0

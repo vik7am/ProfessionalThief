@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GaurdController : MonoBehaviour
+public class GuardController : MonoBehaviour
 {
-    GaurdMovement gaurdMovement;
+    GuardMovement gaurdMovement;
+    Animator animator;
     [SerializeField] IntruderDetection intruderDetection;
     [SerializeField] GameObject pointLight;
     [SerializeField] float recoveryTime;
@@ -14,7 +15,8 @@ public class GaurdController : MonoBehaviour
     void Awake()
     {
         active = true;
-        gaurdMovement = GetComponent<GaurdMovement>();
+        gaurdMovement = GetComponent<GuardMovement>();
+        animator = GetComponent<Animator>();
     }
 
     void Update() {
@@ -30,6 +32,7 @@ public class GaurdController : MonoBehaviour
     public void DisableGaurd(){
         active = false;
         gaurdMovement.StopMovement();
+        animator.enabled = false;
         intruderDetection.gameObject.SetActive(false);
         pointLight.SetActive(false);
         if(GameManager.Instance().IsGameOver())
@@ -40,6 +43,7 @@ public class GaurdController : MonoBehaviour
     public void EnableGaurd(){
         active = true;
         gaurdMovement.StartMovement();
+        animator.enabled = true;
         intruderDetection.gameObject.SetActive(true);
     }
 

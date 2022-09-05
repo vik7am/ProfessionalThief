@@ -69,7 +69,7 @@ public class StunGun : MonoBehaviour
 
     public void UnEquip(){
         equipped = false;
-        UIManager.Instance().UpdateEquippedGadget(Gadget.Empty);
+        UIManager.Instance().UpdateEquippedGadget(Gadget.EMPTY);
     }
 
 }

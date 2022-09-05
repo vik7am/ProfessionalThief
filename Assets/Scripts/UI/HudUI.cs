@@ -52,11 +52,15 @@ public class HudUI : MonoBehaviour
 
     public void UpdateEquippedGadget(Gadget gadget){
         switch(gadget){
-            case Gadget.Empty : 
+            case Gadget.EMPTY : 
                 ToggleGadgetUI(false); break;
-            case Gadget.STUN_GUN :
+            case Gadget.TORCH :
                 ToggleGadgetUI(true);
                 equippedGadget.text = "T";
+                chargeStatus.maxValue = 20; break;
+            case Gadget.STUN_GUN :
+                ToggleGadgetUI(true);
+                equippedGadget.text = "G";
                 chargeStatus.maxValue = 1; break;
             case Gadget.NIGHT_VISION_GOOGLES :
                 ToggleGadgetUI(true);

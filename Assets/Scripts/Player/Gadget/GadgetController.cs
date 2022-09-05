@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Gadget {Empty, STUN_GUN, NIGHT_VISION_GOOGLES};
+public enum Gadget {EMPTY, TORCH, STUN_GUN, NIGHT_VISION_GOOGLES};
 
 public class GadgetController : MonoBehaviour
 {
+    [SerializeField] Torch torch;
     [SerializeField] StunGun stunGun;
     [SerializeField] NightVisionGoggles nightVisionGoggles;
+    [SerializeField] Animator animator;
     Gadget gadgetEquipped;
 
     void Start()
     {
-        gadgetEquipped = Gadget.Empty;
+        gadgetEquipped = Gadget.EMPTY;
     }
 
     void Update()
@@ -22,8 +24,10 @@ public class GadgetController : MonoBehaviour
 
     void GetPlayerInput(){
         if(Input.GetKeyDown(KeyCode.Alpha1))
-            EquipGadget(Gadget.STUN_GUN);
+            EquipGadget(Gadget.TORCH);
         else if(Input.GetKeyDown(KeyCode.Alpha2))
+            EquipGadget(Gadget.STUN_GUN);
+        else if(Input.GetKeyDown(KeyCode.Alpha3))
             EquipGadget(Gadget.NIGHT_VISION_GOOGLES);
     }
 
@@ -32,10 +36,11 @@ public class GadgetController : MonoBehaviour
             UnEquipGadget();
             return;
         }
-        if(gadgetEquipped != Gadget.Empty)
+        if(gadgetEquipped != Gadget.EMPTY)
             UnEquipGadget();
         switch(gadget){
-            case Gadget.STUN_GUN : stunGun.Equip(); break;
+            case Gadget.TORCH : torch.Equip(); break;
+            case Gadget.STUN_GUN : stunGun.Equip(); animator.SetBool("gun", true); break;
             case Gadget.NIGHT_VISION_GOOGLES : nightVisionGoggles.Equip(); break;
         }
         gadgetEquipped = gadget;
@@ -43,10 +48,11 @@ public class GadgetController : MonoBehaviour
 
     public void UnEquipGadget(){
         switch(gadgetEquipped){
-            case Gadget.STUN_GUN : stunGun.UnEquip(); break;
+            case Gadget.TORCH : torch.UnEquip(); break;
+            case Gadget.STUN_GUN : stunGun.UnEquip(); animator.SetBool("gun", false); break;
             case Gadget.NIGHT_VISION_GOOGLES : nightVisionGoggles.UnEquip(); break;
         }
-        gadgetEquipped = Gadget.Empty;
+        gadgetEquipped = Gadget.EMPTY;
     }
 
 }

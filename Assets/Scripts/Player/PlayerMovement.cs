@@ -11,9 +11,11 @@ public class PlayerMovement : MonoBehaviour
     float x, y;
     Camera cam;
     bool movement;
+    Animator animator;
 
     void Awake(){
         body = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         cam = Camera.main;
         movement = true;
     }
@@ -37,6 +39,10 @@ public class PlayerMovement : MonoBehaviour
     void GetPlayerInput(){
         velocity.x = Input.GetAxisRaw("Horizontal");
         velocity.y = Input.GetAxisRaw("Vertical");
+        if(velocity.x == 0 && velocity.y == 0)
+            animator.SetBool("walking", false);
+        else
+            animator.SetBool("walking", true);
     }
 
     void UpdatePlayerRotation(){

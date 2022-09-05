@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour
                 UIManager.Instance().UpdateActionLog("CCTV Disabled");
             }
         }
-        GaurdController gaurd = other.GetComponent<GaurdController>();
+        GuardController gaurd = other.GetComponent<GuardController>();
         if(gaurd != null){
             if(gaurd.IsActive()){
                 gaurd.DisableGaurd();
