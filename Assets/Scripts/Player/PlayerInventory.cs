@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public enum ItemType{CASH, SILVER_COIN, GOLD_COIN, BATTERY}
-
+namespace ProfessionalThief{
 public class PlayerInventory : MonoBehaviour
 {
     int totalTake;
@@ -49,4 +46,5 @@ public class PlayerInventory : MonoBehaviour
         UIManager.Instance().UpdateActionLog(actionLogText);
         UIManager.Instance().UpdateItemInfo("");
     }
+}
 }

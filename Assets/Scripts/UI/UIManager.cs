@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+namespace ProfessionalThief{
 public class UIManager : MonoBehaviour
 {
     static UIManager instance;
@@ -48,5 +47,5 @@ public class UIManager : MonoBehaviour
         hudUI.gameObject.SetActive(false);
         gameOverUI.gameObject.SetActive(true);
     }
-
+}
 }

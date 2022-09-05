@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+namespace ProfessionalThief{
 public class Bullet : MonoBehaviour
 {
     Vector3 direction;
@@ -38,4 +37,5 @@ public class Bullet : MonoBehaviour
         }
         Destroy(gameObject);
     }
+}
 }

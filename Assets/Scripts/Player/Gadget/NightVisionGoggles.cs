@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+namespace ProfessionalThief{
 public class NightVisionGoggles : MonoBehaviour
 {
     [SerializeField] GameObject greenLight;
@@ -78,4 +77,5 @@ public class NightVisionGoggles : MonoBehaviour
         DeactivateNightVision();
         UIManager.Instance().UpdateEquippedGadget(Gadget.EMPTY);
     }
+}
 }

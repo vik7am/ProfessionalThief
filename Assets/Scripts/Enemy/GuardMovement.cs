@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace ProfessionalThief{
 public class GuardMovement : MonoBehaviour
 {
     [SerializeField]List<Transform> location;
@@ -48,4 +48,5 @@ public class GuardMovement : MonoBehaviour
         else
             transform.position = delta;
     }
+}
 }

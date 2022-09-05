@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+namespace ProfessionalThief{
 public class PlayerController : MonoBehaviour
 {
     PlayerMovement playerMovement;
@@ -18,7 +17,10 @@ public class PlayerController : MonoBehaviour
     public void DisablePlayer()
     {
         playerMovement.StopMovement();
+        gadgetController.UnEquipGadget();
         animator.enabled = false;
         torchLight.SetActive(false);
+        
     }
+}
 }

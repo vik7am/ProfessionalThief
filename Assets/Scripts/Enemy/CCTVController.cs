@@ -1,7 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+namespace ProfessionalThief{
 public class CCTVController : MonoBehaviour
 {
     Animator animator;
@@ -49,4 +49,5 @@ public class CCTVController : MonoBehaviour
         yield return new WaitForSeconds(activationTime);
         EnableCCTV();
     }
+}
 }

@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+namespace ProfessionalThief{
 public class GameOverUI : MonoBehaviour
 {
     [SerializeField] Button restartButton;
@@ -22,4 +21,5 @@ public class GameOverUI : MonoBehaviour
     void QuitGame(){
         Application.Quit();
     }
+}
 }

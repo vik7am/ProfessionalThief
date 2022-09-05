@@ -1,9 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class GuardController : MonoBehaviour
-{
+namespace ProfessionalThief{
+public class GuardController : MonoBehaviour{
     GuardMovement gaurdMovement;
     Animator animator;
     [SerializeField] IntruderDetection intruderDetection;
@@ -53,4 +52,4 @@ public class GuardController : MonoBehaviour
         yield return new WaitForSeconds(activationTime);
         EnableGaurd();
     }
-}
+}}

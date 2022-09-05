@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace ProfessionalThief{
 public class SafeController : MonoBehaviour
 {
     [SerializeField] List<CollectableItem> collectableItems;
@@ -32,4 +32,5 @@ public class SafeController : MonoBehaviour
     public bool IsSafeEmpty(){
         return safeEmpty;
     }
+}
 }

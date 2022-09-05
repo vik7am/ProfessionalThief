@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+namespace ProfessionalThief{
 public class StunGun : MonoBehaviour
 {
     [SerializeField] Bullet bullet;
@@ -72,4 +71,5 @@ public class StunGun : MonoBehaviour
         UIManager.Instance().UpdateEquippedGadget(Gadget.EMPTY);
     }
 
+}
 }

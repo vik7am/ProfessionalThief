@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+namespace ProfessionalThief{
 public class HudUI : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI scoreValue;
@@ -83,4 +84,5 @@ public class HudUI : MonoBehaviour
     public void UpdateChargeStatus(float value){
         chargeStatus.value = value;
     }
+}
 }

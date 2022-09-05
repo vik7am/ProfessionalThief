@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+namespace ProfessionalThief{
 public class GameManager : MonoBehaviour
 {
     static GameManager instance;
@@ -23,12 +22,13 @@ public class GameManager : MonoBehaviour
 
     public void GameOver(){
         gameOver = true;
-        sunlight.SetActive(true);
         player.DisablePlayer();
+        sunlight.SetActive(true);
         UIManager.Instance().ShowGameoverUI();
     }
 
     public bool IsGameOver(){
         return gameOver;
     }
+}
 }

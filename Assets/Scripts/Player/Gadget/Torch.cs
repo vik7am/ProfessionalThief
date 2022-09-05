@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+namespace ProfessionalThief{
 public class Torch : MonoBehaviour
 {
     [SerializeField] GameObject torchLight;
@@ -78,4 +77,5 @@ public class Torch : MonoBehaviour
         DeactivateTorch();
         UIManager.Instance().UpdateEquippedGadget(Gadget.EMPTY);
     }
+}
 }

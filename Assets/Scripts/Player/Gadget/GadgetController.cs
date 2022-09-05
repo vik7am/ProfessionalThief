@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public enum Gadget {EMPTY, TORCH, STUN_GUN, NIGHT_VISION_GOOGLES};
-
+namespace ProfessionalThief{
 public class GadgetController : MonoBehaviour
 {
     [SerializeField] Torch torch;
@@ -55,4 +52,5 @@ public class GadgetController : MonoBehaviour
         gadgetEquipped = Gadget.EMPTY;
     }
 
+}
 }

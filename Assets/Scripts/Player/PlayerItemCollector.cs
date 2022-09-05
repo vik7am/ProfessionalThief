@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+namespace ProfessionalThief{
 public class PlayerItemCollector : MonoBehaviour
 {
     bool collectableNearby;
@@ -30,15 +29,6 @@ public class PlayerItemCollector : MonoBehaviour
         int quantity = safe.GetItemQuantity();
         inventory.AddItem(collectableItem, quantity);
         collectableNearby = false;
-        /*
-        int value = safe.GetItemValue();
-        int quantity = safe.GetItemQuantity();
-        string itemName = safe.GetItemName();
-        string actionLogText = "Collected " + quantity + " " + itemName;
-        UIManager.Instance().UpdateCollectableValue(quantity * value);
-        UIManager.Instance().UpdateActionLog(actionLogText);
-        collectableNearby = false;
-        UIManager.Instance().UpdateItemInfo("");*/
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
@@ -46,9 +36,9 @@ public class PlayerItemCollector : MonoBehaviour
         if(safe == null)
             return;
         if(safe.IsSafeEmpty())
-            UIManager.Instance().UpdateItemInfo("Safe Empty");
+            UIManager.Instance().UpdateItemInfo("Empty");
         else{
-            UIManager.Instance().UpdateItemInfo("Open Safe");
+            UIManager.Instance().UpdateItemInfo("Press E to Open");
             collectableNearby = true;
         }
     }
@@ -60,4 +50,5 @@ public class PlayerItemCollector : MonoBehaviour
         collectableNearby = false;
         UIManager.Instance().UpdateItemInfo("");
     }
+}
 }

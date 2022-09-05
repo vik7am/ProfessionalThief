@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+namespace ProfessionalThief{
 public class IntruderDetection : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other) {
@@ -11,4 +10,5 @@ public class IntruderDetection : MonoBehaviour
             player.StopMovement();
         }
     }
+}
 }

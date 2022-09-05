@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-
-
+namespace ProfessionalThief{
 public class CollectableItem : MonoBehaviour
 {
     [SerializeField] ItemType itemType;
@@ -36,4 +33,5 @@ public class CollectableItem : MonoBehaviour
     public ItemType GetItemType(){
         return itemType;
     }
+}
 }

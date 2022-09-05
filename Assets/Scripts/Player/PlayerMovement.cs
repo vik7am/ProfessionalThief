@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+namespace ProfessionalThief{
 public class PlayerMovement : MonoBehaviour
 {
     Vector2 velocity;
@@ -63,4 +62,5 @@ public class PlayerMovement : MonoBehaviour
         velocity = Vector2.zero;
         movement = false;
     }
+}
 }
