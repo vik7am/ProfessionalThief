@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace ProfessionalThief{
-public class Torch : MonoBehaviour
+public class Torch : MonoBehaviour, IGadget
 {
     [SerializeField] GameObject torchLight;
     [SerializeField] PlayerInventory inventory;
@@ -18,7 +18,6 @@ public class Torch : MonoBehaviour
     {
         if(!equipped)
             return;
-        GetPlayerInput();
         if(active)
             ReduceCharge();
     }
@@ -31,20 +30,6 @@ public class Torch : MonoBehaviour
             DeactivateTorch();
         }
         UIManager.Instance().UpdateChargeStatus(currentCharge);
-    }
-        
-    void GetPlayerInput(){
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            if(active)
-                DeactivateTorch();
-            else
-                ActivateTorch();
-        }
-        if(currentCharge < charge){
-            if(Input.GetKeyDown(KeyCode.R))
-                Recharge();
-        }
     }
 
     void ActivateTorch(){
@@ -66,16 +51,29 @@ public class Torch : MonoBehaviour
         UIManager.Instance().UpdateChargeStatus(currentCharge);
     }
 
-    public void Equip(){
+    public void EquipGadget(){
         equipped = true;
         UIManager.Instance().UpdateEquippedGadget(Gadget.TORCH);
         UIManager.Instance().UpdateChargeStatus(currentCharge);
     }
 
-    public void UnEquip(){
+    public void UnEquipGadget(){
         equipped = false;
         DeactivateTorch();
         UIManager.Instance().UpdateEquippedGadget(Gadget.EMPTY);
+    }
+
+    public void UseGadget(){
+        if(active)
+                DeactivateTorch();
+            else
+                ActivateTorch();
+    }
+
+    public void RechargeGadget(){
+        if(currentCharge < charge)
+                Recharge();
+        
     }
 }
 }

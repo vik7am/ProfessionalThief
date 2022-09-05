@@ -6478,6 +6478,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!95 &1003226296 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1003226296, guid: b56494723e112b3488f70821b65cba2f, type: 3}
+  m_PrefabInstance: {fileID: 8655294308896913664}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1038342638
 GameObject:
   m_ObjectHideFlags: 0
@@ -9142,9 +9147,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1190236699, guid: b56494723e112b3488f70821b65cba2f, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1003226296}
+    - target: {fileID: 1277611099, guid: b56494723e112b3488f70821b65cba2f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8655294308829973994, guid: b56494723e112b3488f70821b65cba2f, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655294308829973994, guid: b56494723e112b3488f70821b65cba2f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8655294308829973996, guid: b56494723e112b3488f70821b65cba2f, type: 3}
       propertyPath: m_RootOrder

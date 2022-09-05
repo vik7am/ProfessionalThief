@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace ProfessionalThief{
-public class NightVisionGoggles : MonoBehaviour
+public class NightVisionGoggles : MonoBehaviour, IGadget
 {
     [SerializeField] GameObject greenLight;
     [SerializeField] PlayerInventory inventory;
@@ -18,7 +18,6 @@ public class NightVisionGoggles : MonoBehaviour
     {
         if(!equipped)
             return;
-        GetPlayerInput();
         if(active)
             ReduceCharge();
     }
@@ -31,20 +30,6 @@ public class NightVisionGoggles : MonoBehaviour
             DeactivateNightVision();
         }
         UIManager.Instance().UpdateChargeStatus(currentCharge);
-    }
-        
-    void GetPlayerInput(){
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            if(active)
-                DeactivateNightVision();
-            else
-                ActivateNightVision();
-        }
-        if(currentCharge < charge){
-            if(Input.GetKeyDown(KeyCode.R))
-                Recharge();
-        }
     }
 
     void ActivateNightVision(){
@@ -66,16 +51,29 @@ public class NightVisionGoggles : MonoBehaviour
         UIManager.Instance().UpdateChargeStatus(currentCharge);
     }
 
-    public void Equip(){
+    public void EquipGadget(){
         equipped = true;
         UIManager.Instance().UpdateEquippedGadget(Gadget.NIGHT_VISION_GOOGLES);
         UIManager.Instance().UpdateChargeStatus(currentCharge);
     }
 
-    public void UnEquip(){
+    public void UnEquipGadget(){
         equipped = false;
         DeactivateNightVision();
         UIManager.Instance().UpdateEquippedGadget(Gadget.EMPTY);
+    }
+
+    public void UseGadget(){
+        if(active)
+            DeactivateNightVision();
+        else
+            ActivateNightVision();
+    }
+
+    public void RechargeGadget(){
+        if(currentCharge < charge){
+            Recharge();
+        }
     }
 }
 }

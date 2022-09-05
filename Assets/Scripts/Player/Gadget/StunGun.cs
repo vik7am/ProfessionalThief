@@ -1,11 +1,12 @@
 using UnityEngine;
 
 namespace ProfessionalThief{
-public class StunGun : MonoBehaviour
+public class StunGun : MonoBehaviour, IGadget
 {
     [SerializeField] Bullet bullet;
     [SerializeField] PlayerInventory inventory;
     [SerializeField] float charge;
+    [SerializeField] Animator animator;
     float currentCharge;
     bool equipped;
     bool startRecharge;
@@ -18,9 +19,6 @@ public class StunGun : MonoBehaviour
     {
         if(startRecharge)
             Increasecharge();
-        if(!equipped)
-            return;
-        GetPlayerInput();
     }
 
     void Increasecharge(){
@@ -32,18 +30,6 @@ public class StunGun : MonoBehaviour
         }
         if(equipped)
             UIManager.Instance().UpdateChargeStatus(currentCharge);
-    }
-
-    void GetPlayerInput(){
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            if(currentCharge == charge)
-                FireGun();
-        }
-        if(currentCharge == 0){
-            if(Input.GetKeyDown(KeyCode.R))
-                Recharge();
-        }
     }
 
     void FireGun(){
@@ -59,16 +45,28 @@ public class StunGun : MonoBehaviour
         UIManager.Instance().UpdateAvailableBattery(inventory.GetAvalableBattery());
     }
 
-    public void Equip(){
+    public void EquipGadget(){
         equipped = true;
+        animator.SetBool("gun", true);
         UIManager.Instance().UpdateEquippedGadget(Gadget.STUN_GUN);
         UIManager.Instance().UpdateAvailableBattery(inventory.GetAvalableBattery());
         UIManager.Instance().UpdateChargeStatus(currentCharge);
     }
 
-    public void UnEquip(){
+    public void UnEquipGadget(){
         equipped = false;
+        animator.SetBool("gun", false);
         UIManager.Instance().UpdateEquippedGadget(Gadget.EMPTY);
+    }
+
+    public void UseGadget(){
+        if(currentCharge == charge)
+                FireGun();
+    }
+
+    public void RechargeGadget(){
+        if(currentCharge == 0)
+                Recharge();
     }
 
 }

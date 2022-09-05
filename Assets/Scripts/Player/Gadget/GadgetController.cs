@@ -6,51 +6,55 @@ public class GadgetController : MonoBehaviour
     [SerializeField] Torch torch;
     [SerializeField] StunGun stunGun;
     [SerializeField] NightVisionGoggles nightVisionGoggles;
-    [SerializeField] Animator animator;
-    Gadget gadgetEquipped;
+    IGadget gadgetEquipped;
 
     void Start()
     {
-        gadgetEquipped = Gadget.EMPTY;
+        gadgetEquipped = null;
     }
 
     void Update()
     {
         GetPlayerInput();
+        if(gadgetEquipped != null)
+            GetGadgetInput();
     }
 
     void GetPlayerInput(){
         if(Input.GetKeyDown(KeyCode.Alpha1))
-            EquipGadget(Gadget.TORCH);
+            SwitchGadget(torch);
         else if(Input.GetKeyDown(KeyCode.Alpha2))
-            EquipGadget(Gadget.STUN_GUN);
+            SwitchGadget(stunGun);
         else if(Input.GetKeyDown(KeyCode.Alpha3))
-            EquipGadget(Gadget.NIGHT_VISION_GOOGLES);
+            SwitchGadget(nightVisionGoggles);
     }
 
-    void EquipGadget(Gadget gadget){
-        if(gadgetEquipped == gadget){
-            UnEquipGadget();
-            return;
-        }
-        if(gadgetEquipped != Gadget.EMPTY)
-            UnEquipGadget();
-        switch(gadget){
-            case Gadget.TORCH : torch.Equip(); break;
-            case Gadget.STUN_GUN : stunGun.Equip(); animator.SetBool("gun", true); break;
-            case Gadget.NIGHT_VISION_GOOGLES : nightVisionGoggles.Equip(); break;
-        }
-        gadgetEquipped = gadget;
+    void GetGadgetInput(){
+        if(Input.GetKeyDown(KeyCode.Space))
+            gadgetEquipped.UseGadget();
+        else if(Input.GetKeyDown(KeyCode.R))
+            gadgetEquipped.RechargeGadget();
     }
 
-    public void UnEquipGadget(){
-        switch(gadgetEquipped){
-            case Gadget.TORCH : torch.UnEquip(); break;
-            case Gadget.STUN_GUN : stunGun.UnEquip(); animator.SetBool("gun", false); break;
-            case Gadget.NIGHT_VISION_GOOGLES : nightVisionGoggles.UnEquip(); break;
+    void SwitchGadget(IGadget gadget){
+        if(gadgetEquipped == null){
+            gadgetEquipped = gadget;
+            gadgetEquipped.EquipGadget();
         }
-        gadgetEquipped = Gadget.EMPTY;
+        else if(gadgetEquipped == gadget){
+            gadgetEquipped.UnEquipGadget();
+            gadgetEquipped = null;
+        }
+        else{
+            gadgetEquipped.UnEquipGadget();
+            gadgetEquipped = gadget;
+            gadgetEquipped.EquipGadget();
+        }
     }
 
+    public void UnEquipAllGadget(){
+        gadgetEquipped.UnEquipGadget();
+        gadgetEquipped = null;
+    }
 }
 }
