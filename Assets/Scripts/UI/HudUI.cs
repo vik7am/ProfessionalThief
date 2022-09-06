@@ -58,7 +58,7 @@ public class HudUI : MonoBehaviour
             case Gadget.TORCH :
                 ToggleGadgetUI(true);
                 equippedGadget.text = "T";
-                chargeStatus.maxValue = 20; break;
+                chargeStatus.maxValue = 60; break;
             case Gadget.STUN_GUN :
                 ToggleGadgetUI(true);
                 equippedGadget.text = "G";

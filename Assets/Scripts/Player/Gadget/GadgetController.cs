@@ -53,7 +53,8 @@ public class GadgetController : MonoBehaviour
     }
 
     public void UnEquipAllGadget(){
-        gadgetEquipped.UnEquipGadget();
+        if(gadgetEquipped != null)
+            gadgetEquipped.UnEquipGadget();
         gadgetEquipped = null;
     }
 }
