@@ -21,11 +21,11 @@ public class GadgetController : MonoBehaviour
     }
 
     void GetPlayerInput(){
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if(Input.GetKeyDown(KeyCode.Alpha1) && torch.gameObject.activeSelf)
             SwitchGadget(torch);
-        else if(Input.GetKeyDown(KeyCode.Alpha2))
+        else if(Input.GetKeyDown(KeyCode.Alpha2) && stunGun.gameObject.activeSelf)
             SwitchGadget(stunGun);
-        else if(Input.GetKeyDown(KeyCode.Alpha3))
+        else if(Input.GetKeyDown(KeyCode.Alpha3) && nightVisionGoggles.gameObject.activeSelf)
             SwitchGadget(nightVisionGoggles);
     }
 
@@ -56,6 +56,14 @@ public class GadgetController : MonoBehaviour
         if(gadgetEquipped != null)
             gadgetEquipped.UnEquipGadget();
         gadgetEquipped = null;
+    }
+
+    public void UnlockGadget(GadgetType gadgetType){
+        switch(gadgetType){
+            case GadgetType.TORCH : torch.gameObject.SetActive(true); break;
+            case GadgetType.STUN_GUN : stunGun.gameObject.SetActive(true); break;
+            case GadgetType.NIGHT_VISION_GOOGLES : nightVisionGoggles.gameObject.SetActive(true); break;
+        }
     }
 }
 }

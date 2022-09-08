@@ -51,19 +51,19 @@ public class HudUI : MonoBehaviour
         coroutine = null;
     }
 
-    public void UpdateEquippedGadget(Gadget gadget){
+    public void UpdateEquippedGadget(GadgetType gadget){
         switch(gadget){
-            case Gadget.EMPTY : 
+            case GadgetType.EMPTY : 
                 ToggleGadgetUI(false); break;
-            case Gadget.TORCH :
+            case GadgetType.TORCH :
                 ToggleGadgetUI(true);
                 equippedGadget.text = "T";
                 chargeStatus.maxValue = 60; break;
-            case Gadget.STUN_GUN :
+            case GadgetType.STUN_GUN :
                 ToggleGadgetUI(true);
                 equippedGadget.text = "G";
                 chargeStatus.maxValue = 1; break;
-            case Gadget.NIGHT_VISION_GOOGLES :
+            case GadgetType.NIGHT_VISION_GOOGLES :
                 ToggleGadgetUI(true);
                 equippedGadget.text = "N";
                 chargeStatus.maxValue = 10; break;

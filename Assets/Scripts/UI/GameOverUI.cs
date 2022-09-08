@@ -15,11 +15,11 @@ public class GameOverUI : MonoBehaviour
     }
 
     void RestartGame(){
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     void QuitGame(){
-        Application.Quit();
+        SceneManager.LoadScene(0);
     }
 }
 }

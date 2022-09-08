@@ -6,6 +6,7 @@ public class UIManager : MonoBehaviour
     static UIManager instance;
     [SerializeField] HudUI hudUI;
     [SerializeField] GameOverUI gameOverUI;
+    [SerializeField] LevelCompletedUI levelCompletedUI;
 
     public static UIManager Instance(){
         return instance;
@@ -31,7 +32,7 @@ public class UIManager : MonoBehaviour
         hudUI.UpdateActionLog(text);
     }
 
-    public void UpdateEquippedGadget(Gadget gadget){
+    public void UpdateEquippedGadget(GadgetType gadget){
         hudUI.UpdateEquippedGadget(gadget);
     }
 
@@ -46,6 +47,11 @@ public class UIManager : MonoBehaviour
     public void ShowGameoverUI(){
         hudUI.gameObject.SetActive(false);
         gameOverUI.gameObject.SetActive(true);
+    }
+
+    public void ShowLevelCompletedUI(){
+        hudUI.gameObject.SetActive(false);
+        levelCompletedUI.gameObject.SetActive(true);
     }
 }
 }

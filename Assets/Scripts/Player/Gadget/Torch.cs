@@ -53,14 +53,14 @@ public class Torch : MonoBehaviour, IGadget
 
     public void EquipGadget(){
         equipped = true;
-        UIManager.Instance().UpdateEquippedGadget(Gadget.TORCH);
+        UIManager.Instance().UpdateEquippedGadget(GadgetType.TORCH);
         UIManager.Instance().UpdateChargeStatus(currentCharge);
     }
 
     public void UnEquipGadget(){
         equipped = false;
         DeactivateTorch();
-        UIManager.Instance().UpdateEquippedGadget(Gadget.EMPTY);
+        UIManager.Instance().UpdateEquippedGadget(GadgetType.EMPTY);
     }
 
     public void UseGadget(){

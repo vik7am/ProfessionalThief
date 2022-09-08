@@ -294,7 +294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   torchLight: {fileID: 1723544257}
   inventory: {fileID: 1449820806}
-  charge: 20
+  charge: 60
 --- !u!1 &1723544257
 GameObject:
   m_ObjectHideFlags: 0

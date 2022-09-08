@@ -35,7 +35,7 @@ public class StunGun : MonoBehaviour, IGadget
     void FireGun(){
         currentCharge = 0;
         Instantiate(bullet, transform.position, transform.parent.parent.localRotation);
-        UIManager.Instance().UpdateEquippedGadget(Gadget.STUN_GUN);
+        UIManager.Instance().UpdateEquippedGadget(GadgetType.STUN_GUN);
         UIManager.Instance().UpdateChargeStatus(0);
     }
 
@@ -48,7 +48,7 @@ public class StunGun : MonoBehaviour, IGadget
     public void EquipGadget(){
         equipped = true;
         animator.SetBool("gun", true);
-        UIManager.Instance().UpdateEquippedGadget(Gadget.STUN_GUN);
+        UIManager.Instance().UpdateEquippedGadget(GadgetType.STUN_GUN);
         UIManager.Instance().UpdateAvailableBattery(inventory.GetAvalableBattery());
         UIManager.Instance().UpdateChargeStatus(currentCharge);
     }
@@ -56,7 +56,7 @@ public class StunGun : MonoBehaviour, IGadget
     public void UnEquipGadget(){
         equipped = false;
         animator.SetBool("gun", false);
-        UIManager.Instance().UpdateEquippedGadget(Gadget.EMPTY);
+        UIManager.Instance().UpdateEquippedGadget(GadgetType.EMPTY);
     }
 
     public void UseGadget(){

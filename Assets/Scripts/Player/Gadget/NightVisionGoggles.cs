@@ -53,14 +53,14 @@ public class NightVisionGoggles : MonoBehaviour, IGadget
 
     public void EquipGadget(){
         equipped = true;
-        UIManager.Instance().UpdateEquippedGadget(Gadget.NIGHT_VISION_GOOGLES);
+        UIManager.Instance().UpdateEquippedGadget(GadgetType.NIGHT_VISION_GOOGLES);
         UIManager.Instance().UpdateChargeStatus(currentCharge);
     }
 
     public void UnEquipGadget(){
         equipped = false;
         DeactivateNightVision();
-        UIManager.Instance().UpdateEquippedGadget(Gadget.EMPTY);
+        UIManager.Instance().UpdateEquippedGadget(GadgetType.EMPTY);
     }
 
     public void UseGadget(){
