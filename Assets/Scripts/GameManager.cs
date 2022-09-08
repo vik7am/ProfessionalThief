@@ -25,6 +25,17 @@ public class GameManager : MonoBehaviour
 
     void Start(){
         totalLevel = System.Enum.GetNames(typeof(LevelName)).Length;
+        UnlockGadgets();
+    }
+
+    void UnlockGadgets(){
+        LevelName levelName = (LevelName)SceneManager.GetActiveScene().buildIndex;
+        switch(levelName){
+            case LevelName.LEVEL2 : gadget.UnlockGadget(GadgetType.TORCH); break;
+            case LevelName.LEVEL3 : 
+                gadget.UnlockGadget(GadgetType.TORCH);
+                gadget.UnlockGadget(GadgetType.STUN_GUN); break;
+        }
     }
 
     public void GameOver(){
