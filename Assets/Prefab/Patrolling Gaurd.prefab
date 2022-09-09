@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 1659533549324684690}
   - component: {fileID: 1638004422684351422}
   m_Layer: 6
-  m_Name: Circle
+  m_Name: Minimap Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

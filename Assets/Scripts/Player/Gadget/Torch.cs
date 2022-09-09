@@ -5,7 +5,7 @@ public class Torch : MonoBehaviour, IGadget
 {
     [SerializeField] GameObject torchLight;
     [SerializeField] PlayerInventory inventory;
-    [SerializeField] float charge;
+    [SerializeField] int charge;
     float currentCharge;
     bool equipped;
     bool active;
@@ -33,8 +33,10 @@ public class Torch : MonoBehaviour, IGadget
     }
 
     void ActivateTorch(){
-        if(currentCharge == 0)
+        if(currentCharge == 0){
+            UIManager.Instance().UpdateActionLog("Press R to Reload");
             return;
+        }
         active = true;
         torchLight.SetActive(true);
     }
@@ -47,20 +49,22 @@ public class Torch : MonoBehaviour, IGadget
     public void Recharge(){
         if(inventory.UseBattery())
             currentCharge = charge;
+        else
+            UIManager.Instance().UpdateActionLog("Out of Batteries");
         UIManager.Instance().UpdateAvailableBattery(inventory.GetAvalableBattery());
         UIManager.Instance().UpdateChargeStatus(currentCharge);
     }
 
     public void EquipGadget(){
         equipped = true;
-        UIManager.Instance().UpdateEquippedGadget(GadgetType.TORCH);
+        UIManager.Instance().UpdateEquippedGadget(GadgetType.TORCH, charge);
         UIManager.Instance().UpdateChargeStatus(currentCharge);
     }
 
     public void UnEquipGadget(){
         equipped = false;
         DeactivateTorch();
-        UIManager.Instance().UpdateEquippedGadget(GadgetType.EMPTY);
+        UIManager.Instance().UpdateEquippedGadget(GadgetType.EMPTY, 0);
     }
 
     public void UseGadget(){
@@ -72,8 +76,7 @@ public class Torch : MonoBehaviour, IGadget
 
     public void RechargeGadget(){
         if(currentCharge < charge)
-                Recharge();
-        
+            Recharge();
     }
 }
 }

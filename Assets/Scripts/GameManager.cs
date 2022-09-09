@@ -74,5 +74,9 @@ public class GameManager : MonoBehaviour
     public void LoadNextLevel(){
         SceneManager.LoadScene(GetNextLevelIndex());
     }
+
+    public int GetTotalCollection(){
+        return player.GetComponent<PlayerInventory>().GetTotalItemValue();
+    }
 }
 }

@@ -18,7 +18,7 @@ public class GateController : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        UIManager.Instance().UpdateItemInfo("Complete Objective First");
+        UIManager.Instance().UpdateItemInfo("Steal Gadget First");
     }
 
     private void OnCollisionExit2D(Collision2D other) {

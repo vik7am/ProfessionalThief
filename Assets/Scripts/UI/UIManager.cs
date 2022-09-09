@@ -32,8 +32,8 @@ public class UIManager : MonoBehaviour
         hudUI.UpdateActionLog(text);
     }
 
-    public void UpdateEquippedGadget(GadgetType gadget){
-        hudUI.UpdateEquippedGadget(gadget);
+    public void UpdateEquippedGadget(GadgetType gadget, int charge){
+        hudUI.UpdateEquippedGadget(gadget, charge);
     }
 
     public void UpdateAvailableBattery(int value){
@@ -52,6 +52,7 @@ public class UIManager : MonoBehaviour
     public void ShowLevelCompletedUI(){
         hudUI.gameObject.SetActive(false);
         levelCompletedUI.gameObject.SetActive(true);
+        levelCompletedUI.UpdateTotalCollection();
     }
 }
 }

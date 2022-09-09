@@ -3,19 +3,20 @@ using UnityEngine;
 namespace ProfessionalThief{
 public class PlayerInventory : MonoBehaviour
 {
-    int totalTake;
+    int totalItemValue;
     int availableBattery;
 
     void Start(){
-        totalTake = 0;
-        availableBattery = 5;
+        totalItemValue = 0;
+        availableBattery = 0;
+        UIManager.Instance().UpdateAvailableBattery(availableBattery);
     }
 
     public void AddItem(CollectableItem item, int quantity){
         int itemValue = item.GetItemValue();
         string itemName = item.GetItemName();
         AddUsableItems(item.GetItemType(), quantity);
-        totalTake += itemValue * quantity;
+        totalItemValue += itemValue * quantity;
         string actionLogText = "Collected " + quantity + " " + itemName;
         UpdateHUD(actionLogText);
     }
@@ -25,7 +26,6 @@ public class PlayerInventory : MonoBehaviour
             availableBattery += quantity;
             UIManager.Instance().UpdateAvailableBattery(availableBattery);
         }
-            
     }
 
     public bool UseBattery(){
@@ -42,9 +42,13 @@ public class PlayerInventory : MonoBehaviour
     }
 
     void UpdateHUD(string actionLogText){
-        UIManager.Instance().UpdateCollectableValue(totalTake);
+        UIManager.Instance().UpdateCollectableValue(totalItemValue);
         UIManager.Instance().UpdateActionLog(actionLogText);
         UIManager.Instance().UpdateItemInfo("");
+    }
+
+    public int GetTotalItemValue(){
+        return totalItemValue;
     }
 }
 }
