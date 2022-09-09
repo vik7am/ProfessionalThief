@@ -35,7 +35,6 @@ public class StunGun : MonoBehaviour, IGadget
     void FireGun(){
         currentCharge = 0;
         Instantiate(bullet, transform.position, transform.parent.parent.localRotation);
-        //UIManager.Instance().UpdateEquippedGadget(GadgetType.STUN_GUN, charge);
         UIManager.Instance().UpdateChargeStatus(0);
     }
 

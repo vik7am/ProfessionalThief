@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 namespace ProfessionalThief{
 public class GameOverUI : MonoBehaviour
@@ -15,11 +14,11 @@ public class GameOverUI : MonoBehaviour
     }
 
     void RestartGame(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Utils.ReloadLevel();
     }
 
     void QuitGame(){
-        SceneManager.LoadScene(0);
+        Utils.LoadLevel(LevelName.MAIN_MENU);
     }
 }
 }

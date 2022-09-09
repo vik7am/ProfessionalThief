@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour
         gadgetController.UnEquipAllGadget();
         animator.enabled = false;
         torchLight.SetActive(false);
-        
     }
 }
 }

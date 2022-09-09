@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
+namespace ProfessionalThief{
 public interface IGadget 
 {
     void EquipGadget();
     void UnEquipGadget();
     void UseGadget();
     void RechargeGadget();
+}
 }

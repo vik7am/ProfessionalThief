@@ -19,6 +19,8 @@ public class GuardController : MonoBehaviour{
     }
 
     void Update() {
+        if(GameManager.Instance() == null)
+            return;
         if(GameManager.Instance().IsGameOver())
             if(IsActive())
                 DisableGaurd();

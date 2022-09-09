@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProfessionalThief{
@@ -7,13 +5,11 @@ public class GateController : MonoBehaviour
 {
     BoxCollider2D box;
 
-    void Awake()
-    {
+    void Awake(){
         box = GetComponent<BoxCollider2D>();
     }
 
-    public void OpenGate()
-    {
+    public void OpenGate(){
         box.isTrigger = true;
     }
 

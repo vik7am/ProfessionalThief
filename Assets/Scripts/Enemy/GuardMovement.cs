@@ -24,7 +24,6 @@ public class GuardMovement : MonoBehaviour
     }
 
     void RotateEnemy(){
-        //transform.LookAt(new Vector3(targetLocation.x, targetLocation.y, 0));
         transform.right = targetLocation - transform.position;
     }
 

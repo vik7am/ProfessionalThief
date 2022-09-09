@@ -1,15 +1,14 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace ProfessionalThief{
 public class GameManager : MonoBehaviour
 {
     static GameManager instance;
     bool gameOver;
+    int totalLevel;
     [SerializeField] GameObject sunlight;
     [SerializeField] PlayerController player;
     [SerializeField] GadgetController gadget;
-    int totalLevel;
 
     public static GameManager Instance(){
         return instance;
@@ -25,17 +24,26 @@ public class GameManager : MonoBehaviour
 
     void Start(){
         totalLevel = System.Enum.GetNames(typeof(LevelName)).Length;
-        UnlockGadgets();
+        UnlockCollectedGadgets();
     }
 
-    void UnlockGadgets(){
-        LevelName levelName = (LevelName)SceneManager.GetActiveScene().buildIndex;
+    void UnlockCollectedGadgets(){
+        LevelName levelName = Utils.GetActiveLevelName();
         switch(levelName){
-            case LevelName.LEVEL2 : gadget.UnlockGadget(GadgetType.TORCH); break;
+            case LevelName.LEVEL2 : 
+                gadget.UnlockGadget(GadgetType.TORCH); break;
             case LevelName.LEVEL3 : 
                 gadget.UnlockGadget(GadgetType.TORCH);
                 gadget.UnlockGadget(GadgetType.STUN_GUN); break;
         }
+    }
+
+    public void UnlockGadget(GadgetType gadgetType){
+        gadget.UnlockGadget(gadgetType);
+    }
+
+    public bool IsGameOver(){
+        return gameOver;
     }
 
     public void GameOver(){
@@ -49,14 +57,6 @@ public class GameManager : MonoBehaviour
         sunlight.SetActive(true);
     }
 
-    public bool IsGameOver(){
-        return gameOver;
-    }
-
-    public void UnlockGadget(GadgetType gadgetType){
-        gadget.UnlockGadget(gadgetType);
-    }
-
     public void LevelCompleted(){
         StopGame();
         PlayerPrefs.SetInt("ACTIVE_LEVEL", GetNextLevelIndex());
@@ -64,15 +64,15 @@ public class GameManager : MonoBehaviour
     }
 
     public int GetNextLevelIndex(){
-        int currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
-        if(currentLevelIndex + 1 < totalLevel)
-            return currentLevelIndex + 1;
-        else
+        int nextLevelIndex = (int)Utils.GetActiveLevelName() + 1;
+        if(nextLevelIndex == totalLevel)
             return 0;
+        else
+            return nextLevelIndex;
     }
 
     public void LoadNextLevel(){
-        SceneManager.LoadScene(GetNextLevelIndex());
+        Utils.LoadLevel((LevelName)GetNextLevelIndex());
     }
 
     public int GetTotalCollection(){

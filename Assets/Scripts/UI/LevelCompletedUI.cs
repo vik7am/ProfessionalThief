@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using UnityEngine;
 using TMPro;
 
@@ -27,7 +24,7 @@ public class LevelCompletedUI : MonoBehaviour
     }
 
     void QuitGame(){
-        SceneManager.LoadScene(0);
+        Utils.LoadLevel(LevelName.MAIN_MENU);
     }
 }
 }

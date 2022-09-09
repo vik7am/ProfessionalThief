@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 namespace ProfessionalThief{
 public class MainMenuUI : MonoBehaviour
@@ -10,7 +7,7 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] Button continueButton;
     [SerializeField] Button newGameButton;
     [SerializeField] Button exitButton;
-    int activeLevel;
+    LevelName activeLevel;
 
     void Start()
     {
@@ -21,23 +18,20 @@ public class MainMenuUI : MonoBehaviour
     }
 
     void GetActiveLevel(){
-        activeLevel = PlayerPrefs.GetInt("ACTIVE_LEVEL", (int)LevelName.MAIN_MENU);
-        if(activeLevel == 0)
+        activeLevel = (LevelName)PlayerPrefs.GetInt("ACTIVE_LEVEL", (int)LevelName.MAIN_MENU);
+        if(activeLevel == LevelName.MAIN_MENU)
             continueButton.gameObject.SetActive(false);
     }
 
-    void ContinueGame()
-    {
-        SceneManager.LoadScene(activeLevel);
+    void ContinueGame(){
+        Utils.LoadLevel(activeLevel);
     }
 
-    void StartNewGame()
-    {
-        SceneManager.LoadScene((int)LevelName.LEVEL1);
+    void StartNewGame(){
+        Utils.LoadLevel(LevelName.LEVEL1);
     }
 
-    void ExitGame()
-    {
+    void ExitGame(){
         Application.Quit();
     }
 }
