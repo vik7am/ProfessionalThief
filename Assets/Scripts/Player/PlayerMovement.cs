@@ -1,66 +1,46 @@
+using System;
 using UnityEngine;
 
-namespace ProfessionalThief{
-public class PlayerMovement : MonoBehaviour
+namespace ProfessionalThief
 {
-    Vector2 velocity;
-    Vector2 oldVelocity;
-    Rigidbody2D body;
-    [SerializeField] float speed;
-    float x, y;
-    Camera cam;
-    bool movement;
-    Animator animator;
-
-    void Awake(){
-        body = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-        cam = Camera.main;
-        movement = true;
-    }
-
-    void Update()
+    public class PlayerMovement : MonoBehaviour
     {
-        if(!movement)
-            return;
-        GetPlayerInput();
-        UpdatePlayerRotation();
-    }
+        [SerializeField] float speed;
+        private Rigidbody2D body;
+        PlayerInput playerInput;
+        Vector2 currentVelocity;
 
-    void FixedUpdate() {
-        body.velocity = velocity * speed;
-    }
+        void Awake()
+        {
+            body = GetComponent<Rigidbody2D>();
+            playerInput = GetComponent<PlayerInput>();
+        }
 
-    void LateUpdate() {
-        cam.transform.position = new Vector3(transform.position.x, transform.position.y , -10);
-    }
+        void Update()
+        {
+            UpdatePlayerRotation();
+        }
 
-    void GetPlayerInput(){
-        velocity.x = Input.GetAxisRaw("Horizontal");
-        velocity.y = Input.GetAxisRaw("Vertical");
-        if(velocity.x == 0 && velocity.y == 0)
-            animator.SetBool("walking", false);
-        else
-            animator.SetBool("walking", true);
-    }
+        void FixedUpdate()
+        {
+            UpdatePlayerMovement();
+        }
 
-    void UpdatePlayerRotation(){
-        if(oldVelocity == velocity)
-            return;
-        oldVelocity = velocity;
-        if(velocity.x == 1)
-            transform.localRotation = Quaternion.Euler(0, 0, 0);
-        else if(velocity.x == -1)
-            transform.localRotation = Quaternion.Euler(0, 0, 180);
-        else if(velocity.y == 1)
-            transform.localRotation = Quaternion.Euler(0, 0, 90);
-        else if(velocity.y == -1)
-            transform.localRotation = Quaternion.Euler(0, 0, -90);
-    }
+        private void UpdatePlayerMovement()
+        {
+            currentVelocity = playerInput.MovementInput.normalized;
+            body.velocity = currentVelocity * speed;
+        }
 
-    public void StopMovement(){
-        velocity = Vector2.zero;
-        movement = false;
+        void UpdatePlayerRotation()
+        {
+            if(playerInput.MovementInput == Vector2.zero) return;
+            transform.right = playerInput.MovementInput.normalized;
+        }
+
+        public void StopMovement()
+        {
+            currentVelocity = Vector2.zero;
+        }
     }
-}
 }

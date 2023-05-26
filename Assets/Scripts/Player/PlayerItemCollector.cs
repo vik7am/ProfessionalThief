@@ -3,8 +3,8 @@ using UnityEngine;
 namespace ProfessionalThief{
 public class PlayerItemCollector : MonoBehaviour
 {
-    bool collectableNearby;
-    SafeController safe;
+    bool safeNearby;
+    Safe safe;
     PlayerInventory inventory;
 
     private void Awake() {
@@ -13,41 +13,42 @@ public class PlayerItemCollector : MonoBehaviour
 
     void Update()
     {
-        if(!collectableNearby)
+        if(!safeNearby)
             return;
         GetPlayerInput();
     }
 
     void GetPlayerInput(){
         if(Input.GetKeyDown(KeyCode.E)){
-            CollectItem();
+            UnlockSafe();
         }
     }
 
-    void CollectItem(){
-        CollectableItem collectableItem = safe.OpenSafe();
-        int quantity = safe.GetItemQuantity();
-        inventory.AddItem(collectableItem, quantity);
-        collectableNearby = false;
+    void UnlockSafe(){
+        safe.Unlock();
+        Item item = safe.GetItem();
+        inventory.AddItems(item);
+        safeNearby = false;
+        UIManager.Instance().UpdateItemInfo("Empty");
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        safe = other.gameObject.GetComponent<SafeController>();
+        safe = other.gameObject.GetComponent<Safe>();
         if(safe == null)
             return;
-        if(safe.IsSafeEmpty())
+        if(!safe.IsLocked())
             UIManager.Instance().UpdateItemInfo("Empty");
         else{
             UIManager.Instance().UpdateItemInfo("Press E to Open");
-            collectableNearby = true;
+            safeNearby = true;
         }
     }
 
     private void OnCollisionExit2D(Collision2D other) {
-        safe = other.gameObject.GetComponent<SafeController>();
+        safe = other.gameObject.GetComponent<Safe>();
         if(safe == null)
             return;
-        collectableNearby = false;
+        safeNearby = false;
         UIManager.Instance().UpdateItemInfo("");
     }
 }

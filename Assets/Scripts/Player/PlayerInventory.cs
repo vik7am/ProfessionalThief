@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProfessionalThief{
@@ -6,10 +7,45 @@ public class PlayerInventory : MonoBehaviour
     int totalItemValue;
     int availableBattery;
 
+    Dictionary<ItemID, Item> playerItemList;
+    //List<IGadget> playerGadgetList;
+
     void Start(){
         totalItemValue = 0;
         availableBattery = 0;
         UIManager.Instance().UpdateAvailableBattery(availableBattery);
+        playerItemList = new Dictionary<ItemID, Item>();
+    }
+
+    public void AddItems(Item item){
+        ItemData itemData = item.itemData;
+        if(playerItemList.TryGetValue(itemData.ID, out Item value)){
+            value.stackSize += item.stackSize;
+        }
+        else{
+            playerItemList.Add(itemData.ID, item);
+        }
+        string actionLogText = "Collected " + item.stackSize + " " + itemData.name;
+        UpdateHUD(actionLogText);
+    }
+
+    public bool HasItem(ItemID itemID){
+        if(playerItemList.ContainsKey(itemID))
+            return true;
+        return false;
+    }
+
+    public int GetItemQuantity(ItemID itemID){
+        if(HasItem(itemID))
+            return playerItemList[itemID].stackSize;
+        return 0;
+    }
+
+    public void RemoveItem(ItemID itemID){
+        if(HasItem(itemID))
+            playerItemList[itemID].stackSize--;
+        if(playerItemList[itemID].stackSize == 0)
+            playerItemList.Remove(itemID);
     }
 
     public void AddItem(CollectableItem item, int quantity){
