@@ -65,8 +65,8 @@ public class PlayerInventory : MonoBehaviour
     }
 
     public bool UseBattery(){
-        if(availableBattery > 0){
-            availableBattery--;
+        if(HasItem(ItemID.BATTERY)){
+            RemoveItem(ItemID.BATTERY);
             return true;
         }
         else
@@ -74,7 +74,7 @@ public class PlayerInventory : MonoBehaviour
     }
 
     public int GetAvalableBattery(){
-        return availableBattery;
+        return GetItemQuantity(ItemID.BATTERY);
     }
 
     void UpdateHUD(string actionLogText){
