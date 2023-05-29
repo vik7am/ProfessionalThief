@@ -2,13 +2,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProfessionalThief{
+
 public class PlayerInventory : MonoBehaviour
 {
     int totalItemValue;
     int availableBattery;
 
     Dictionary<ItemID, Item> playerItemList;
-    //List<IGadget> playerGadgetList;
 
     void Start(){
         totalItemValue = 0;
@@ -17,15 +17,15 @@ public class PlayerInventory : MonoBehaviour
         playerItemList = new Dictionary<ItemID, Item>();
     }
 
-    public void AddItems(Item item){
-        ItemData itemData = item.itemData;
-        if(playerItemList.TryGetValue(itemData.ID, out Item value)){
-            value.stackSize += item.stackSize;
+    public void AddItemToInventory(Item item){
+        ItemID itemID = item.Data.ID;
+        if(playerItemList.TryGetValue(itemID, out Item value)){
+            value.AddToStack(item.StackSize);
         }
         else{
-            playerItemList.Add(itemData.ID, item);
+            playerItemList.Add(itemID, item);
         }
-        string actionLogText = "Collected " + item.stackSize + " " + itemData.name;
+        string actionLogText = "Collected " + item.StackSize + " " + item.Data.name;
         UpdateHUD(actionLogText);
     }
 
@@ -37,14 +37,14 @@ public class PlayerInventory : MonoBehaviour
 
     public int GetItemQuantity(ItemID itemID){
         if(HasItem(itemID))
-            return playerItemList[itemID].stackSize;
+            return playerItemList[itemID].StackSize;
         return 0;
     }
 
     public void RemoveItem(ItemID itemID){
         if(HasItem(itemID))
-            playerItemList[itemID].stackSize--;
-        if(playerItemList[itemID].stackSize == 0)
+            playerItemList[itemID].RemoveFromStack(1);
+        if(playerItemList[itemID].StackSize == 0)
             playerItemList.Remove(itemID);
     }
 
@@ -58,10 +58,10 @@ public class PlayerInventory : MonoBehaviour
     }
 
     void AddUsableItems(ItemType itemType , int quantity){
-        if(itemType == ItemType.BATTERY){
-            availableBattery += quantity;
-            UIManager.Instance().UpdateAvailableBattery(availableBattery);
-        }
+        // if(itemType == ItemType.BATTERY){
+        //     availableBattery += quantity;
+        //     UIManager.Instance().UpdateAvailableBattery(availableBattery);
+        // }
     }
 
     public bool UseBattery(){

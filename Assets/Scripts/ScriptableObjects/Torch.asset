@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 199bcce48719f014190bd7d9529d532f, type: 3}
-  m_Name: Battery
+  m_Name: Torch
   m_EditorClassIdentifier: 
-  id: 3
-  type: 0
-  name: Battery
-  value: 5
+  id: 4
+  type: 1
+  name: Torch
+  value: 0
   quantityRange:
     min: 1
-    max: 2
+    max: 1

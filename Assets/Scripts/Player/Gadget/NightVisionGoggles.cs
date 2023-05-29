@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace ProfessionalThief{
-public class NightVisionGoggles : MonoBehaviour, IGadget
+public class NightVisionGoggles : IGadget
 {
     [SerializeField] GameObject greenLight;
     [SerializeField] PlayerInventory inventory;
@@ -55,29 +55,29 @@ public class NightVisionGoggles : MonoBehaviour, IGadget
         UIManager.Instance().UpdateChargeStatus(currentCharge);
     }
 
-    public void EquipGadget(){
+    public override void EquipGadget(){
         equipped = true;
         UIManager.Instance().UpdateEquippedGadget(GadgetType.NIGHT_VISION_GOOGLES, charge);
         UIManager.Instance().UpdateChargeStatus(currentCharge);
     }
 
-    public void UnEquipGadget(){
+    public override void UnEquipGadget(){
         equipped = false;
         DeactivateNightVision();
         UIManager.Instance().UpdateEquippedGadget(GadgetType.EMPTY, 0);
     }
 
-    public void UseGadget(){
+    public override void UseGadget(){
         if(active)
             DeactivateNightVision();
         else
             ActivateNightVision();
     }
 
-    public void RechargeGadget(){
+    public override void RechargeGadget(){
         if(currentCharge < charge){
             Recharge();
         }
     }
-}
+    }
 }

@@ -4,20 +4,23 @@ using UnityEngine;
 
 namespace ProfessionalThief
 {
-    public enum ItemID{CASH, SILVER_COIN, GOLD_COIN, BATTERY}
+    public enum ItemID {CASH, SILVER_COIN, GOLD_COIN, BATTERY, TORCH,  STUN_GUN, NIGHT_VISION_GOGGLES}
+    public enum ItemType {VALUABLE, GADGET};
 
     [CreateAssetMenu(fileName = "ItemData", menuName = "ScriptableObjects/ItemData")]
     public class ItemData : ScriptableObject
     {
-        [SerializeField] private ItemID itemID;
-        [SerializeField] private string itemName;
-        [SerializeField] private int itemValue;
-        [SerializeField] private Range itemQuantityRange;
+        [SerializeField] private ItemID id;
+        [SerializeField] private ItemType type;
+        [SerializeField] private new string name;
+        [SerializeField] private int value;
+        [SerializeField] private Range quantityRange;
 
-        public ItemID ID { get => itemID; }
-        public string Name {get => itemName; }
-        public int Value { get => itemValue; }
-        public Range QuantityRange { get => itemQuantityRange; }
+        public ItemID ID { get => id; }
+        public ItemType Type {get => type; }
+        public string Name {get => name; }
+        public int Value { get => value; }
+        public Range QuantityRange { get => quantityRange; }
     }
     
     [System.Serializable]

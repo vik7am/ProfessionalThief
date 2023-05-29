@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace ProfessionalThief{
-public class StunGun : MonoBehaviour, IGadget
+public class StunGun : IGadget
 {
     [SerializeField] Bullet bullet;
     [SerializeField] PlayerInventory inventory;
@@ -46,7 +46,7 @@ public class StunGun : MonoBehaviour, IGadget
         UIManager.Instance().UpdateAvailableBattery(inventory.GetAvalableBattery());
     }
 
-    public void EquipGadget(){
+    public override void EquipGadget(){
         equipped = true;
         animator.SetBool("gun", true);
         UIManager.Instance().UpdateEquippedGadget(GadgetType.STUN_GUN, charge);
@@ -54,23 +54,22 @@ public class StunGun : MonoBehaviour, IGadget
         UIManager.Instance().UpdateChargeStatus(currentCharge);
     }
 
-    public void UnEquipGadget(){
+    public override void UnEquipGadget(){
         equipped = false;
         animator.SetBool("gun", false);
         UIManager.Instance().UpdateEquippedGadget(GadgetType.EMPTY, 0);
     }
 
-    public void UseGadget(){
+    public override void UseGadget(){
         if(currentCharge == charge)
             FireGun();
         else
             UIManager.Instance().UpdateActionLog("Press R to Reload");
     }
 
-    public void RechargeGadget(){
+    public override void RechargeGadget(){
         if(currentCharge == 0)
             Recharge();
     }
-
-}
+    }
 }

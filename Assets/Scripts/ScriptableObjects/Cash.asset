@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 199bcce48719f014190bd7d9529d532f, type: 3}
   m_Name: Cash
   m_EditorClassIdentifier: 
-  itemID: 0
-  itemName: Cash
-  itemValue: 10
-  itemQuantityRange:
+  id: 0
+  type: 0
+  name: Cash
+  value: 10
+  quantityRange:
     min: 1
     max: 4

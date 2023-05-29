@@ -4,33 +4,25 @@ using UnityEngine;
 
 namespace ProfessionalThief
 {
-    public interface IUnlockable{
-        bool IsLocked();
-        void Unlock();
-    }
 
-    public class Safe : MonoBehaviour, IUnlockable
+    public class Safe : MonoBehaviour
     {
         private bool isLocked;
-        [SerializeField] private List<ItemData> itemDataList;
+        [SerializeField] private List<Item> itemPrefabList;
         private Item item;
 
-        private void Start()
-        {
+        private void Start(){
             isLocked = true;
         }
 
-        public bool IsLocked()
-        {
+        public bool IsLocked(){
             return isLocked;
         }
 
-        public void Unlock()
-        {
-            ItemData itemData = itemDataList[Random.Range(0, itemDataList.Count)];
-            int itemQuantity = Random.Range(itemData.QuantityRange.min, itemData.QuantityRange.max+1);
-            item = new Item(itemData);
-            item.stackSize = itemQuantity;
+        public void Unlock(){
+            Item itemPrefab = itemPrefabList[Random.Range(0, itemPrefabList.Count)];
+            item = Instantiate<Item>(itemPrefab);
+            item.Initialize();
             isLocked = false;
         }
 

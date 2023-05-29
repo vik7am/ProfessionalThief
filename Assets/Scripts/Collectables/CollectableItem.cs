@@ -9,12 +9,12 @@ public class CollectableItem : MonoBehaviour
     [SerializeField] int maxQuantity;
 
     public string GetItemName(){
-        switch(itemType){
-            case ItemType.CASH : return "10$ Cash";
-            case ItemType.SILVER_COIN : return "Silver Coin";
-            case ItemType.GOLD_COIN : return "Gold Coin";
-            case ItemType.BATTERY : return "Battery";
-        }
+        // switch(itemType){
+        //     case ItemType.CASH : return "10$ Cash";
+        //     case ItemType.SILVER_COIN : return "Silver Coin";
+        //     case ItemType.GOLD_COIN : return "Gold Coin";
+        //     case ItemType.BATTERY : return "Battery";
+        // }
         return "";
     }
 
