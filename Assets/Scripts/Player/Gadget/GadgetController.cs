@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace ProfessionalThief{
@@ -6,56 +7,48 @@ public class GadgetController : MonoBehaviour
     [SerializeField] Torch torch;
     [SerializeField] StunGun stunGun;
     [SerializeField] NightVisionGoggles nightVisionGoggles;
-    IGadget gadgetEquipped;
+    PlayerInventory playerInventory;
+    Gadget gadget;
 
     void Start()
     {
-        gadgetEquipped = null;
+        gadget = null;
     }
 
     void Update()
     {
         GetPlayerInput();
-        if(gadgetEquipped != null)
+        if(gadget != null)
             GetGadgetInput();
     }
 
-    void GetPlayerInput(){
-        if(Input.GetKeyDown(KeyCode.Alpha1) && torch.gameObject.activeSelf)
-            SwitchGadget(torch);
-        else if(Input.GetKeyDown(KeyCode.Alpha2) && stunGun.gameObject.activeSelf)
-            SwitchGadget(stunGun);
-        else if(Input.GetKeyDown(KeyCode.Alpha3) && nightVisionGoggles.gameObject.activeSelf)
-            SwitchGadget(nightVisionGoggles);
+    private void ToggleGadget(ItemID itemID){
+        if(itemID == GetCurrentItemID())
+            gadget.UnEquip();
+        else
+            gadget.Equip();
+        
+    }
+
+        private ItemID GetCurrentItemID()
+        {
+            return gadget.GetComponent<Item>().Data.ID;
+        }
+
+        void GetPlayerInput(){
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+            ToggleGadget(ItemID.TORCH);
+        else if(Input.GetKeyDown(KeyCode.Alpha2))
+            ToggleGadget(ItemID.STUN_GUN);
+        else if(Input.GetKeyDown(KeyCode.Alpha3))
+            ToggleGadget(ItemID.NIGHT_VISION_GOGGLES);
     }
 
     void GetGadgetInput(){
         if(Input.GetKeyDown(KeyCode.Space))
-            gadgetEquipped.UseGadget();
+            gadget.Use();
         else if(Input.GetKeyDown(KeyCode.R))
-            gadgetEquipped.RechargeGadget();
-    }
-
-    void SwitchGadget(IGadget gadget){
-        if(gadgetEquipped == null){
-            gadgetEquipped = gadget;
-            gadgetEquipped.EquipGadget();
-        }
-        else if(gadgetEquipped == gadget){
-            gadgetEquipped.UnEquipGadget();
-            gadgetEquipped = null;
-        }
-        else{
-            gadgetEquipped.UnEquipGadget();
-            gadgetEquipped = gadget;
-            gadgetEquipped.EquipGadget();
-        }
-    }
-
-    public void UnEquipAllGadget(){
-        if(gadgetEquipped != null)
-            gadgetEquipped.UnEquipGadget();
-        gadgetEquipped = null;
+            gadget.Recharge();
     }
 
     public void UnlockGadget(GadgetType gadgetType){

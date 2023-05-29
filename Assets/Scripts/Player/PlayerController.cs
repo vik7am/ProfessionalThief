@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public void DisablePlayer()
     {
         playerMovement.StopMovement();
-        gadgetController.UnEquipAllGadget();
+        //gadgetController.UnEquipAllGadget();
         animator.enabled = false;
         torchLight.SetActive(false);
     }

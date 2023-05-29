@@ -1,14 +1,10 @@
 using UnityEngine;
 
 namespace ProfessionalThief{
-public class StunGun : IGadget
+public class StunGun : Gadget
 {
     [SerializeField] Bullet bullet;
-    [SerializeField] PlayerInventory inventory;
-    [SerializeField] int charge;
     [SerializeField] Animator animator;
-    float currentCharge;
-    bool equipped;
     bool startRecharge;
 
     void Start() {
@@ -38,15 +34,7 @@ public class StunGun : IGadget
         UIManager.Instance().UpdateChargeStatus(0);
     }
 
-    public void Recharge(){
-        if(inventory.UseBattery())
-            startRecharge = true;
-        else
-            UIManager.Instance().UpdateActionLog("Out of Batteries");
-        UIManager.Instance().UpdateAvailableBattery(inventory.GetAvalableBattery());
-    }
-
-    public override void EquipGadget(){
+    public override void Equip(){
         equipped = true;
         animator.SetBool("gun", true);
         UIManager.Instance().UpdateEquippedGadget(GadgetType.STUN_GUN, charge);
@@ -54,22 +42,27 @@ public class StunGun : IGadget
         UIManager.Instance().UpdateChargeStatus(currentCharge);
     }
 
-    public override void UnEquipGadget(){
+    public override void UnEquip(){
         equipped = false;
         animator.SetBool("gun", false);
         UIManager.Instance().UpdateEquippedGadget(GadgetType.EMPTY, 0);
     }
 
-    public override void UseGadget(){
+    public override void Use(){
         if(currentCharge == charge)
             FireGun();
         else
             UIManager.Instance().UpdateActionLog("Press R to Reload");
     }
 
-    public override void RechargeGadget(){
-        if(currentCharge == 0)
-            Recharge();
+    public override void Recharge(){
+        if(currentCharge > 0)
+            return;
+        if(inventory.UseBattery())
+            startRecharge = true;
+        else
+            UIManager.Instance().UpdateActionLog("Out of Batteries");
+        UIManager.Instance().UpdateAvailableBattery(inventory.GetAvalableBattery());
     }
-    }
+}
 }
