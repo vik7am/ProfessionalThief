@@ -26,8 +26,14 @@ public class PlayerItemCollector : MonoBehaviour
 
     void UnlockSafe(){
         safe.Unlock();
-        Item item = safe.GetItem();
-        inventory.AddItemToInventory(item);
+        ICollectable collectable = safe.GetCollectable();
+        CollectableID id = collectable.GetCollectableID();
+        if(id == CollectableID.ITEM){
+            inventory.AddItem((Item)collectable);
+        }
+        else if(id == CollectableID.GADGET){
+            inventory.AddGadget((Gadget)collectable);
+        }
         safeNearby = false;
         UIManager.Instance().UpdateItemInfo("Empty");
     }

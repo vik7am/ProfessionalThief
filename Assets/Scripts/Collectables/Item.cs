@@ -5,15 +5,16 @@ using UnityEngine;
 
 namespace ProfessionalThief
 {
-    public class Item : MonoBehaviour
+    public class Item : ICollectable
     {
-        [SerializeField] private ItemData data;
+        private ItemData data;
         private int stackSize;
 
         public ItemData Data {get => data; }
         public int StackSize {get => stackSize;}
 
-        public void Initialize() {
+        public Item(ItemData itemData) {
+            data = itemData;
             int stackSize = GetRandomStackSize();
             AddToStack(stackSize);
         }
@@ -29,6 +30,10 @@ namespace ProfessionalThief
         public void RemoveFromStack(int quantity){
             stackSize -= quantity;
         }
-       
+
+        public CollectableID GetCollectableID()
+        {
+            return CollectableID.ITEM;
+        }
     }
 }

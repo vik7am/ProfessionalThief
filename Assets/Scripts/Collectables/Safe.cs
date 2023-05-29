@@ -5,29 +5,30 @@ using UnityEngine;
 namespace ProfessionalThief
 {
 
-    public class Safe : MonoBehaviour
+    public abstract class Safe : MonoBehaviour
     {
-        private bool isLocked;
-        [SerializeField] private List<Item> itemPrefabList;
-        private Item item;
+        protected bool isLocked;
+        protected ICollectable collectable;
 
         private void Start(){
             isLocked = true;
         }
 
-        public bool IsLocked(){
-            return isLocked;
+        public bool IsLocked(){ return isLocked; }
+
+        public void Unlock() { 
+            isLocked = false; 
+            InitializeCollectable();
         }
 
-        public void Unlock(){
-            Item itemPrefab = itemPrefabList[Random.Range(0, itemPrefabList.Count)];
-            item = Instantiate<Item>(itemPrefab);
-            item.Initialize();
-            isLocked = false;
-        }
+        public abstract void InitializeCollectable();
 
-        public Item GetItem(){
-            return item;
+        public ICollectable GetCollectable(){
+            return collectable;
         }
     }
+
+    
+
+    
 }

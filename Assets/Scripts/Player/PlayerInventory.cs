@@ -3,58 +3,83 @@ using UnityEngine;
 
 namespace ProfessionalThief{
 
+    public enum CollectableID {ITEM, GADGET};
+
+    public interface ICollectable{
+        public CollectableID GetCollectableID();
+    }
+
 public class PlayerInventory : MonoBehaviour
 {
     int totalItemValue;
     int availableBattery;
 
-    Dictionary<ItemID, Item> playerItemList;
+    Dictionary<ItemID, Item> itemList;
+    Dictionary<GadgetID, Gadget> gadgetList;
 
     void Start(){
         totalItemValue = 0;
         availableBattery = 0;
         UIManager.Instance().UpdateAvailableBattery(availableBattery);
-        playerItemList = new Dictionary<ItemID, Item>();
+        itemList = new Dictionary<ItemID, Item>();
+        gadgetList = new Dictionary<GadgetID, Gadget>();
     }
 
-    public void AddItemToInventory(Item item){
+    public void AddItem(Item item){
         ItemID itemID = item.Data.ID;
-        if(playerItemList.TryGetValue(itemID, out Item value)){
+        if(itemList.TryGetValue(itemID, out Item value)){
             value.AddToStack(item.StackSize);
         }
         else{
-            playerItemList.Add(itemID, item);
+            itemList.Add(itemID, item);
         }
         string actionLogText = "Collected " + item.StackSize + " " + item.Data.name;
         UpdateHUD(actionLogText);
     }
 
+
     public bool HasItem(ItemID itemID){
-        if(playerItemList.ContainsKey(itemID))
+        if(itemList.ContainsKey(itemID))
+            return true;
+        return false;
+    }
+
+    public bool HasGadget(GadgetID gadgetID){
+        if(gadgetList.ContainsKey(gadgetID))
             return true;
         return false;
     }
 
     public int GetItemQuantity(ItemID itemID){
         if(HasItem(itemID))
-            return playerItemList[itemID].StackSize;
+            return itemList[itemID].StackSize;
         return 0;
     }
 
     public void RemoveItem(ItemID itemID){
         if(HasItem(itemID))
-            playerItemList[itemID].RemoveFromStack(1);
-        if(playerItemList[itemID].StackSize == 0)
-            playerItemList.Remove(itemID);
+            itemList[itemID].RemoveFromStack(1);
+        if(itemList[itemID].StackSize == 0)
+            itemList.Remove(itemID);
     }
 
-    public void AddItem(CollectableItem item, int quantity){
-        int itemValue = item.GetItemValue();
-        string itemName = item.GetItemName();
-        AddUsableItems(item.GetItemType(), quantity);
-        totalItemValue += itemValue * quantity;
-        string actionLogText = "Collected " + quantity + " " + itemName;
+    // public void AddItem(CollectableItem item, int quantity){
+    //     int itemValue = item.GetItemValue();
+    //     string itemName = item.GetItemName();
+    //     AddUsableItems(item.GetItemType(), quantity);
+    //     totalItemValue += itemValue * quantity;
+    //     string actionLogText = "Collected " + quantity + " " + itemName;
+    //     UpdateHUD(actionLogText);
+    // }
+
+    public void AddGadget(Gadget gadget){
+        gadgetList.Add(gadget.GetID(), gadget);
+        string actionLogText = "Collected " + gadget.name;
         UpdateHUD(actionLogText);
+    }
+
+    public Gadget GetGadget(GadgetID gadgetID){
+        return gadgetList[gadgetID];
     }
 
     void AddUsableItems(ItemType itemType , int quantity){

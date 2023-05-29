@@ -2,53 +2,49 @@ using System;
 using UnityEngine;
 
 namespace ProfessionalThief{
+
+    public enum GadgetID {TORCH, STUN_GUN, NIGHT_VISION_GOGGLES};
 public class GadgetController : MonoBehaviour
 {
     [SerializeField] Torch torch;
     [SerializeField] StunGun stunGun;
     [SerializeField] NightVisionGoggles nightVisionGoggles;
     PlayerInventory playerInventory;
-    Gadget gadget;
+    Gadget equippedGadget;
 
-    void Start()
-    {
-        gadget = null;
+    void Start(){
+        equippedGadget = null;
     }
 
     void Update()
     {
         GetPlayerInput();
-        if(gadget != null)
+        if(equippedGadget != null)
             GetGadgetInput();
     }
 
-    private void ToggleGadget(ItemID itemID){
-        if(itemID == GetCurrentItemID())
-            gadget.UnEquip();
+    private void ToggleGadget(GadgetID gadgetID){
+        if(equippedGadget != null && gadgetID == equippedGadget.GetID())
+            equippedGadget = null;
         else
-            gadget.Equip();
+            equippedGadget = playerInventory.GetGadget(gadgetID);
         
     }
 
-        private ItemID GetCurrentItemID()
-        {
-            return gadget.GetComponent<Item>().Data.ID;
-        }
-
         void GetPlayerInput(){
         if(Input.GetKeyDown(KeyCode.Alpha1))
-            ToggleGadget(ItemID.TORCH);
+            ToggleGadget(GadgetID.TORCH);
         else if(Input.GetKeyDown(KeyCode.Alpha2))
-            ToggleGadget(ItemID.STUN_GUN);
+            ToggleGadget(GadgetID.STUN_GUN);
         else if(Input.GetKeyDown(KeyCode.Alpha3))
-            ToggleGadget(ItemID.NIGHT_VISION_GOGGLES);
+            ToggleGadget(GadgetID.NIGHT_VISION_GOGGLES);
     }
 
     void GetGadgetInput(){
         if(Input.GetKeyDown(KeyCode.Space))
-            gadget.Use();
+            equippedGadget.Use();
         else if(Input.GetKeyDown(KeyCode.R))
-            gadget.Recharge();
+            equippedGadget.Recharge();
     }
 
     public void UnlockGadget(GadgetType gadgetType){

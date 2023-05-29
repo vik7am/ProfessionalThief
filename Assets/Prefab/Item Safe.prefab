@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 5694752062286484670}
   - component: {fileID: 5694752062286484665}
   - component: {fileID: 5694752062286484668}
-  - component: {fileID: 8724385452873757672}
+  - component: {fileID: 1211680969968860207}
   m_Layer: 0
-  m_Name: Money Safe
+  m_Name: Item Safe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,7 +112,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &8724385452873757672
+--- !u!114 &1211680969968860207
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,13 +121,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5694752062286484664}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f932763c26762a4a957746eab82f691, type: 3}
+  m_Script: {fileID: 11500000, guid: 4bf782d70594e4d4bba63ff37af83ae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemList:
+  itemDataList:
   - {fileID: 11400000, guid: 5028a92318d7b37448db07d39a562819, type: 2}
   - {fileID: 11400000, guid: ea1aacfc82d420e4ba6730fc3e7e71bb, type: 2}
   - {fileID: 11400000, guid: f8de0a87d7c5aa84eb21acd2260fdab6, type: 2}
+  - {fileID: 11400000, guid: 73a354f7d79e260499372da95a21a262, type: 2}
 --- !u!1 &5702031083233911338
 GameObject:
   m_ObjectHideFlags: 0

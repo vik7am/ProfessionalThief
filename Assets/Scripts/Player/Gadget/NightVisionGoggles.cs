@@ -41,10 +41,6 @@ public class NightVisionGoggles : Gadget
         greenLight.SetActive(false);
     }
 
-    public void RechargeIt(){
-        
-    }
-
     public override void Equip(){
         equipped = true;
         UIManager.Instance().UpdateEquippedGadget(GadgetType.NIGHT_VISION_GOOGLES, charge);
