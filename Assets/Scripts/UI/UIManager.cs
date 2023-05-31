@@ -1,58 +1,39 @@
 using UnityEngine;
 
 namespace ProfessionalThief{
-public class UIManager : MonoBehaviour
+    public enum UIType {HUD, GAME_OVER, LEVEL_COMPLETED}
+public class UIManager : GenericMonoSingleton<UIManager>
 {
     static UIManager instance;
-    [SerializeField] HudUI hudUI;
-    [SerializeField] GameOverUI gameOverUI;
-    [SerializeField] LevelCompletedUI levelCompletedUI;
+    [SerializeField] private HudUI hudUI;
+    [SerializeField] private GameOverUI gameOverUI;
+    [SerializeField] private LevelCompletedUI levelCompletedUI;
 
-    public static UIManager Instance(){
-        return instance;
+    public HudUI Hud { get => hudUI;}
+    public GameOverUI GameOver {get => gameOverUI;}
+    public LevelCompletedUI levelCompleted {get => levelCompletedUI;}
+
+    GameObject activeUI;
+
+    private void Start() {
+        ChangeUI(UIType.HUD);
     }
 
-    void Awake()
-    {
-        if(instance == null)
-            instance = this;
-        else
-            Destroy(gameObject);
+    public void ChangeUI(UIType uiType){
+        if(activeUI != null)
+            activeUI.SetActive(false);
+        activeUI = GetUI(uiType);
+        activeUI.SetActive(true);
     }
 
-    public void UpdateCollectableValue(int value){
-        hudUI.UpdateCollectableValue(value);
+    public GameObject GetUI(UIType uiType){
+        switch(uiType){
+            case UIType.HUD : return hudUI.gameObject;
+            case UIType.GAME_OVER : return gameOverUI.gameObject;
+            case UIType.LEVEL_COMPLETED : return levelCompletedUI.gameObject;
+            default : return null;
+        }
     }
 
-    public void UpdateItemInfo(string info){
-        hudUI.UpdateItemInfo(info);
-    }
-
-    public void UpdateActionLog(string text){
-        hudUI.UpdateActionLog(text);
-    }
-
-    public void UpdateEquippedGadget(GadgetType gadget, int charge){
-        //hudUI.UpdateEquippedGadget(gadget, charge);
-    }
-
-    public void UpdateAvailableBattery(int value){
-        hudUI.UpdateAvailableBattery(value);
-    }
-
-    public void UpdateChargeStatus(float value){
-        hudUI.UpdateChargeStatus(value);
-    }
-
-    public void ShowGameoverUI(){
-        hudUI.gameObject.SetActive(false);
-        gameOverUI.gameObject.SetActive(true);
-    }
-
-    public void ShowLevelCompletedUI(){
-        hudUI.gameObject.SetActive(false);
-        levelCompletedUI.gameObject.SetActive(true);
-        levelCompletedUI.UpdateTotalCollection();
-    }
 }
 }

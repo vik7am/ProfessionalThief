@@ -6,9 +6,14 @@ public class PlayerItemCollector : MonoBehaviour
     bool safeNearby;
     Safe safe;
     PlayerInventory inventory;
+    private HudUI hudUI;
 
     private void Awake() {
         inventory = GetComponent<PlayerInventory>();
+    }
+
+    private void Start() {
+        hudUI = UIManager.Instance.Hud;
     }
 
     void Update()
@@ -35,7 +40,7 @@ public class PlayerItemCollector : MonoBehaviour
             inventory.AddGadget((Gadget)collectable);
         }
         safeNearby = false;
-        UIManager.Instance().UpdateItemInfo("Empty");
+        hudUI.UpdateItemInfo("Empty");
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
@@ -43,9 +48,9 @@ public class PlayerItemCollector : MonoBehaviour
         if(safe == null)
             return;
         if(!safe.IsLocked())
-            UIManager.Instance().UpdateItemInfo("Empty");
+            hudUI.UpdateItemInfo("Empty");
         else{
-            UIManager.Instance().UpdateItemInfo("Press E to Open");
+            hudUI.UpdateItemInfo("Press E to Open");
             safeNearby = true;
         }
     }
@@ -55,7 +60,7 @@ public class PlayerItemCollector : MonoBehaviour
         if(safe == null)
             return;
         safeNearby = false;
-        UIManager.Instance().UpdateItemInfo("");
+        hudUI.UpdateItemInfo("");
     }
 }
 }

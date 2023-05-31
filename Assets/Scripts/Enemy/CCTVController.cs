@@ -18,9 +18,9 @@ public class CCTVController : MonoBehaviour
     }
 
     void Update() {
-        if(GameManager.Instance() == null)
+        if(GameManager.Instance == null)
             return;
-        if(GameManager.Instance().IsGameOver())
+        if(GameManager.Instance.IsGameOver())
             if(IsActive())
                 DisableCCTV();
     }
@@ -34,7 +34,7 @@ public class CCTVController : MonoBehaviour
         animator.enabled = false;
         intruderDetection.gameObject.SetActive(false);
         pointLight.SetActive(false);
-        if(GameManager.Instance().IsGameOver())
+        if(GameManager.Instance.IsGameOver())
             return;
         StartCoroutine(RecoverCCTV());
     }

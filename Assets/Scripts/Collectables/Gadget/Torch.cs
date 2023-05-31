@@ -7,6 +7,7 @@ public class Torch : Gadget
 
     void Start() {
         currentCharge = charge;
+        hudUI = UIManager.Instance.Hud;
     }
 
     void Update()
@@ -24,12 +25,12 @@ public class Torch : Gadget
             currentCharge = 0;
             DeactivateTorch();
         }
-        UIManager.Instance().UpdateChargeStatus(currentCharge);
+        hudUI.UpdateChargeStatus(currentCharge);
     }
 
     void ActivateTorch(){
         if(currentCharge == 0){
-            UIManager.Instance().UpdateActionLog("Press R to Reload");
+            hudUI.UpdateActionLog("Press R to Reload");
             return;
         }
         active = true;
@@ -43,14 +44,14 @@ public class Torch : Gadget
 
     public override void Equip(){
         equipped = true;
-        UIManager.Instance().UpdateEquippedGadget(GadgetType.TORCH, charge);
-        UIManager.Instance().UpdateChargeStatus(currentCharge);
+        hudUI.UpdateEquippedGadget(this);
+        hudUI.UpdateChargeStatus(currentCharge);
     }
 
     public override void UnEquip(){
         equipped = false;
         DeactivateTorch();
-        UIManager.Instance().UpdateEquippedGadget(GadgetType.EMPTY, 0);
+        hudUI.UpdateEquippedGadget(null);
     }
 
     public override void Use(){
@@ -66,9 +67,9 @@ public class Torch : Gadget
         if(inventory.UseBattery())
             currentCharge = charge;
         else
-            UIManager.Instance().UpdateActionLog("Out of Batteries");
-        UIManager.Instance().UpdateAvailableBattery(inventory.GetAvalableBattery());
-        UIManager.Instance().UpdateChargeStatus(currentCharge);
+            hudUI.UpdateActionLog("Out of Batteries");
+        hudUI.UpdateAvailableBattery(inventory.GetAvalableBattery());
+        hudUI.UpdateChargeStatus(currentCharge);
     }
     }
 }

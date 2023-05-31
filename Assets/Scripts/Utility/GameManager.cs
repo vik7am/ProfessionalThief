@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace ProfessionalThief{
-public class GameManager : MonoBehaviour
+public class GameManager : GenericMonoSingleton<GameManager>
 {
     static GameManager instance;
     bool gameOver;
@@ -9,18 +9,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject sunlight;
     [SerializeField] PlayerController player;
     [SerializeField] GadgetController gadget;
-
-    public static GameManager Instance(){
-        return instance;
-    }
-
-    void Awake()
-    {
-        if(instance == null)
-            instance = this;
-        else
-            Destroy(gameObject);
-    }
 
     void Start(){
         totalLevel = System.Enum.GetNames(typeof(LevelName)).Length;
@@ -48,7 +36,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver(){
         StopGame();
-        UIManager.Instance().ShowGameoverUI();
+        UIManager.Instance.ChangeUI(UIType.GAME_OVER);
     }
 
     void StopGame(){
@@ -60,7 +48,7 @@ public class GameManager : MonoBehaviour
     public void LevelCompleted(){
         StopGame();
         PlayerPrefs.SetInt("ACTIVE_LEVEL", GetNextLevelIndex());
-        UIManager.Instance().ShowLevelCompletedUI();
+        UIManager.Instance.ChangeUI(UIType.LEVEL_COMPLETED);
     }
 
     public int GetNextLevelIndex(){

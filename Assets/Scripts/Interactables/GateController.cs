@@ -4,9 +4,14 @@ namespace ProfessionalThief{
 public class GateController : MonoBehaviour
 {
     BoxCollider2D box;
+    HudUI hudUI;
 
     void Awake(){
         box = GetComponent<BoxCollider2D>();
+    }
+
+    private void Start() {
+        hudUI = UIManager.Instance.Hud;
     }
 
     public void OpenGate(){
@@ -14,15 +19,15 @@ public class GateController : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        UIManager.Instance().UpdateItemInfo("Steal Gadget First");
+        hudUI.UpdateItemInfo("Steal Gadget First");
     }
 
     private void OnCollisionExit2D(Collision2D other) {
-        UIManager.Instance().UpdateItemInfo("");
+        hudUI.UpdateItemInfo("");
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        GameManager.Instance().LevelCompleted();
+        GameManager.Instance.LevelCompleted();
     }
 }
 }

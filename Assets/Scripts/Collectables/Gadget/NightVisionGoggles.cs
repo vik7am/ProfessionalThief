@@ -7,6 +7,7 @@ public class NightVisionGoggles : Gadget
 
     void Start() {
         currentCharge = charge;
+        hudUI = UIManager.Instance.Hud;
     }
 
     void Update()
@@ -24,12 +25,12 @@ public class NightVisionGoggles : Gadget
             currentCharge = 0;
             DeactivateNightVision();
         }
-        UIManager.Instance().UpdateChargeStatus(currentCharge);
+        hudUI.UpdateChargeStatus(currentCharge);
     }
 
     void ActivateNightVision(){
         if(currentCharge == 0){
-            UIManager.Instance().UpdateActionLog("Press R to Reload");
+            hudUI.UpdateActionLog("Press R to Reload");
             return;
         }
         active = true;
@@ -43,14 +44,14 @@ public class NightVisionGoggles : Gadget
 
     public override void Equip(){
         equipped = true;
-        UIManager.Instance().UpdateEquippedGadget(GadgetType.NIGHT_VISION_GOOGLES, charge);
-        UIManager.Instance().UpdateChargeStatus(currentCharge);
+        hudUI.UpdateEquippedGadget(this);
+        hudUI.UpdateChargeStatus(currentCharge);
     }
 
     public override void UnEquip(){
         equipped = false;
         DeactivateNightVision();
-        UIManager.Instance().UpdateEquippedGadget(GadgetType.EMPTY, 0);
+        hudUI.UpdateEquippedGadget(null);
     }
 
     public override void Use(){
@@ -66,9 +67,9 @@ public class NightVisionGoggles : Gadget
         if(inventory.UseBattery())
             currentCharge = charge;
         else
-            UIManager.Instance().UpdateActionLog("Out of Batteries");
-        UIManager.Instance().UpdateAvailableBattery(inventory.GetAvalableBattery());
-        UIManager.Instance().UpdateChargeStatus(currentCharge);
+            hudUI.UpdateActionLog("Out of Batteries");
+        hudUI.UpdateAvailableBattery(inventory.GetAvalableBattery());
+        hudUI.UpdateChargeStatus(currentCharge);
         }
     }
 }

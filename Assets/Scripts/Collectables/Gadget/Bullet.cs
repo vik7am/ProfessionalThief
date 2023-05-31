@@ -6,7 +6,12 @@ public class Bullet : MonoBehaviour
     Vector3 direction;
     [SerializeField] float despawnTime;
     [SerializeField] float speed;
-    
+    private HudUI hudUI;
+
+    private void Start() {
+        hudUI = UIManager.Instance.Hud;    
+    }
+
     void Update()
     {
         if(despawnTime <= 0)
@@ -21,14 +26,14 @@ public class Bullet : MonoBehaviour
         if(cctv != null){
             if(cctv.IsActive()){
                 cctv.DisableCCTV();
-                UIManager.Instance().UpdateActionLog("CCTV Disabled");
+                hudUI.UpdateActionLog("CCTV Disabled");
             }
         }
         GuardController gaurd = other.GetComponent<GuardController>();
         if(gaurd != null){
             if(gaurd.IsActive()){
                 gaurd.DisableGaurd();
-                UIManager.Instance().UpdateActionLog("Guard Incapacitated");
+                hudUI.UpdateActionLog("Guard Incapacitated");
             }
         }
         IntruderDetection intruderDetection = other.GetComponent<IntruderDetection>();

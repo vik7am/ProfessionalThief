@@ -13,6 +13,7 @@ namespace ProfessionalThief{
         protected bool active;
         protected GadgetID id;
         [SerializeField] protected string icon;
+        protected HudUI hudUI;
         public abstract void Equip();
         public abstract void UnEquip();
         public abstract void Use();

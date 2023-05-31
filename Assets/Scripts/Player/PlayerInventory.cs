@@ -17,12 +17,16 @@ public class PlayerInventory : MonoBehaviour
     Dictionary<ItemID, Item> itemList;
     Dictionary<GadgetID, Gadget> gadgetList;
 
+    private HudUI hudUI;
+
     void Start(){
         totalItemValue = 0;
         availableBattery = 0;
-        UIManager.Instance().UpdateAvailableBattery(availableBattery);
+        hudUI = UIManager.Instance.Hud;
+        hudUI.UpdateAvailableBattery(availableBattery);
         itemList = new Dictionary<ItemID, Item>();
         gadgetList = new Dictionary<GadgetID, Gadget>();
+        
     }
 
     public void AddItem(Item item){
@@ -103,9 +107,9 @@ public class PlayerInventory : MonoBehaviour
     }
 
     void UpdateHUD(string actionLogText){
-        UIManager.Instance().UpdateCollectableValue(totalItemValue);
-        UIManager.Instance().UpdateActionLog(actionLogText);
-        UIManager.Instance().UpdateItemInfo("");
+        hudUI.UpdateCollectableValue(totalItemValue);
+        hudUI.UpdateActionLog(actionLogText);
+        hudUI.UpdateItemInfo("");
     }
 
     public int GetTotalItemValue(){

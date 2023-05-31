@@ -36,7 +36,7 @@ public class HudUI : MonoBehaviour
     }
 
     private void RegistForEvents(){
-        GadgetController.OnGadgetEquipped += OnGadgetEquipped;
+        //GadgetController.OnGadgetEquipped += OnGadgetEquipped;
         //Gadget.OnGadgetActive += OnGadgetActive;
         //Gadget.OnGadgedRecharged += UpdateChargeStatusUI;
     }
@@ -50,7 +50,7 @@ public class HudUI : MonoBehaviour
         chargeStatusUI.value = equippedGadget.CurrentCharge;
     }
 
-    private void OnGadgetEquipped(Gadget gadget)
+    public void UpdateEquippedGadget(Gadget gadget)
     {
         if(gadget == null){
             equippedGadget = null;

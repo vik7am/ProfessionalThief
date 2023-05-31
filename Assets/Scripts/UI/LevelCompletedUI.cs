@@ -16,11 +16,11 @@ public class LevelCompletedUI : MonoBehaviour
     }
 
     public void UpdateTotalCollection(){
-        collection.text = "Collected $" +  GameManager.Instance().GetTotalCollection();
+        collection.text = "Collected $" +  GameManager.Instance.GetTotalCollection();
     }
 
     void LoadNextLevel(){
-        GameManager.Instance().LoadNextLevel();
+        GameManager.Instance.LoadNextLevel();
     }
 
     void QuitGame(){
