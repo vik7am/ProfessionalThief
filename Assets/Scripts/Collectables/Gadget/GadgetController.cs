@@ -3,19 +3,19 @@ using UnityEngine;
 
 namespace ProfessionalThief{
 
-    public enum GadgetID {TORCH, STUN_GUN, NIGHT_VISION_GOGGLES};
+    
 public class GadgetController : MonoBehaviour
 {
-    [SerializeField] Torch torch;
-    [SerializeField] StunGun stunGun;
-    [SerializeField] NightVisionGoggles nightVisionGoggles;
     PlayerInventory playerInventory;
     Gadget equippedGadget;
+    HudUI hudUI;
 
-    public static event Action<Gadget> OnGadgetEquipped;
+    //public static event Action<Gadget> OnGadgetEquipped;
 
     void Start(){
         equippedGadget = null;
+        playerInventory = GetComponent<PlayerInventory>();
+        hudUI = UIManager.Instance.Hud;
     }
 
     void Update()
@@ -28,12 +28,17 @@ public class GadgetController : MonoBehaviour
     private void ToggleGadget(GadgetID gadgetID){
         if(equippedGadget != null && gadgetID == equippedGadget.ID){
             equippedGadget = null;
-            OnGadgetEquipped?.Invoke(null);
+            hudUI.UpdateEquippedGadget(equippedGadget);
+            
+            //OnGadgetEquipped?.Invoke(null);
         }
         else{
+            
             if(!playerInventory.HasGadget(gadgetID)) return;
+            
             equippedGadget = playerInventory.GetGadget(gadgetID);
-            OnGadgetEquipped(equippedGadget);
+            hudUI.UpdateEquippedGadget(equippedGadget);
+            //OnGadgetEquipped(equippedGadget);
         }
     }
 
@@ -51,14 +56,6 @@ public class GadgetController : MonoBehaviour
             equippedGadget.Use();
         else if(Input.GetKeyDown(KeyCode.R))
             equippedGadget.Recharge();
-    }
-
-    public void UnlockGadget(GadgetType gadgetType){
-        switch(gadgetType){
-            case GadgetType.TORCH : torch.gameObject.SetActive(true); break;
-            case GadgetType.STUN_GUN : stunGun.gameObject.SetActive(true); break;
-            case GadgetType.NIGHT_VISION_GOOGLES : nightVisionGoggles.gameObject.SetActive(true); break;
-        }
     }
 }
 }

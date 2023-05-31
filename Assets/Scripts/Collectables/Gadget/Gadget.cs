@@ -3,7 +3,7 @@ using UnityEngine;
 using System;
 
 namespace ProfessionalThief{
-
+    public enum GadgetID {TORCH, STUN_GUN, NIGHT_VISION_GOGGLES};
     public abstract class Gadget : MonoBehaviour, ICollectable
     {
         protected PlayerInventory inventory;
@@ -26,6 +26,11 @@ namespace ProfessionalThief{
         public string Icon { get => icon; }
         public int Charge {get => charge; }
         public float CurrentCharge { get => currentCharge; }
+
+        public virtual void Start(){
+            currentCharge = charge;
+            hudUI = UIManager.Instance.Hud;
+        }
 
         public CollectableID GetCollectableID()
         {

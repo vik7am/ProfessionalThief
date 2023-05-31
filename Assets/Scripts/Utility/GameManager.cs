@@ -12,23 +12,23 @@ public class GameManager : GenericMonoSingleton<GameManager>
 
     void Start(){
         totalLevel = System.Enum.GetNames(typeof(LevelName)).Length;
-        UnlockCollectedGadgets();
+        //UnlockCollectedGadgets();
     }
 
-    void UnlockCollectedGadgets(){
-        LevelName levelName = Utils.GetActiveLevelName();
-        switch(levelName){
-            case LevelName.LEVEL2 : 
-                gadget.UnlockGadget(GadgetType.TORCH); break;
-            case LevelName.LEVEL3 : 
-                gadget.UnlockGadget(GadgetType.TORCH);
-                gadget.UnlockGadget(GadgetType.STUN_GUN); break;
-        }
-    }
+    // void UnlockCollectedGadgets(){
+    //     LevelName levelName = Utils.GetActiveLevelName();
+    //     switch(levelName){
+    //         case LevelName.LEVEL2 : 
+    //             gadget.UnlockGadget(GadgetType.TORCH); break;
+    //         case LevelName.LEVEL3 : 
+    //             gadget.UnlockGadget(GadgetType.TORCH);
+    //             gadget.UnlockGadget(GadgetType.STUN_GUN); break;
+    //     }
+    // }
 
-    public void UnlockGadget(GadgetType gadgetType){
-        gadget.UnlockGadget(gadgetType);
-    }
+    // public void UnlockGadget(GadgetType gadgetType){
+    //     gadget.UnlockGadget(gadgetType);
+    // }
 
     public bool IsGameOver(){
         return gameOver;
@@ -66,5 +66,7 @@ public class GameManager : GenericMonoSingleton<GameManager>
     public int GetTotalCollection(){
         return player.GetComponent<PlayerInventory>().GetTotalItemValue();
     }
+
+    
 }
 }

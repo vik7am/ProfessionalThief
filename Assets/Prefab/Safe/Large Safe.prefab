@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2472523764113685738}
   - component: {fileID: 2472523764113685739}
-  - component: {fileID: 2472523764113685736}
   - component: {fileID: 2472523764113685737}
+  - component: {fileID: 7962495380938210649}
   m_Layer: 0
   m_Name: Large Safe
   m_TagString: Untagged
@@ -85,20 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2472523764113685736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2472523764113685742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc065273531dc0b4d92cf15f5ca6b91f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gate: {fileID: 0}
-  gadgetType: 3
 --- !u!61 &2472523764113685737
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -125,6 +111,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.1, y: 0.7}
   m_EdgeRadius: 0
+--- !u!114 &7962495380938210649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2472523764113685742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dfc9e5fe34891d408946c7850cb711d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  torch: {fileID: 3728092222585319126, guid: 4adb8d84a4722e54c8127f1dac6879a5, type: 3}
+  stunGun: {fileID: 3936812114269835426, guid: 23927268db0a6e84f8da1090c81eca32, type: 3}
+  nightVisionGoggles: {fileID: 6702677945987698956, guid: 182661d7f17c99a49a7a4ad988681a17, type: 3}
+  gadgetPrefab: {fileID: 0}
 --- !u!1 &4454224879685622619
 GameObject:
   m_ObjectHideFlags: 0

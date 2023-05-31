@@ -5,9 +5,9 @@ public class NightVisionGoggles : Gadget
 {
     [SerializeField] GameObject greenLight;
 
-    void Start() {
-        currentCharge = charge;
-        hudUI = UIManager.Instance.Hud;
+    public override void Start() {
+        base.Start();
+        id = GadgetID.NIGHT_VISION_GOGGLES;
     }
 
     void Update()

@@ -17,6 +17,8 @@ public class PlayerInventory : MonoBehaviour
     Dictionary<ItemID, Item> itemList;
     Dictionary<GadgetID, Gadget> gadgetList;
 
+    [SerializeField] Transform gadgetsInventoryTransform;
+
     private HudUI hudUI;
 
     void Start(){
@@ -49,6 +51,7 @@ public class PlayerInventory : MonoBehaviour
     }
 
     public bool HasGadget(GadgetID gadgetID){
+        //gadgetList
         if(gadgetList.ContainsKey(gadgetID))
             return true;
         return false;
@@ -67,17 +70,12 @@ public class PlayerInventory : MonoBehaviour
             itemList.Remove(itemID);
     }
 
-    // public void AddItem(CollectableItem item, int quantity){
-    //     int itemValue = item.GetItemValue();
-    //     string itemName = item.GetItemName();
-    //     AddUsableItems(item.GetItemType(), quantity);
-    //     totalItemValue += itemValue * quantity;
-    //     string actionLogText = "Collected " + quantity + " " + itemName;
-    //     UpdateHUD(actionLogText);
-    // }
 
     public void AddGadget(Gadget gadget){
         gadgetList.Add(gadget.ID, gadget);
+        //Debug.Log(gadget.ID);
+        gadget.transform.SetParent(gadgetsInventoryTransform);
+        gadget.transform.localPosition = Vector2.zero;
         string actionLogText = "Collected " + gadget.name;
         UpdateHUD(actionLogText);
     }
@@ -86,12 +84,6 @@ public class PlayerInventory : MonoBehaviour
         return gadgetList[gadgetID];
     }
 
-    void AddUsableItems(ItemType itemType , int quantity){
-        // if(itemType == ItemType.BATTERY){
-        //     availableBattery += quantity;
-        //     UIManager.Instance().UpdateAvailableBattery(availableBattery);
-        // }
-    }
 
     public bool UseBattery(){
         if(HasItem(ItemID.BATTERY)){

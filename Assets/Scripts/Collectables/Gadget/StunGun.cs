@@ -7,9 +7,9 @@ public class StunGun : Gadget
     [SerializeField] Animator animator;
     bool startRecharge;
 
-    void Start() {
-        currentCharge = charge;
-        hudUI = UIManager.Instance.Hud;
+    public override void Start() {
+        base.Start();
+        id = GadgetID.STUN_GUN;
     }
 
     void Update()

@@ -18,7 +18,6 @@ public class HudUI : MonoBehaviour
     List<string> actionLog;
     int actionLogCounter = 0;
     Gadget equippedGadget;
-    bool gadgetActive;
 
     void Start()
     {
@@ -26,28 +25,7 @@ public class HudUI : MonoBehaviour
         scoreValueUI.text = "$ 0";
         itemInfoUI.text = "";
         actionLogTextUI.text = "";
-        gadgetActive = false;
         ToggleGadgetUI(false);
-    }
-
-    private void Update() {
-        if(gadgetActive)
-            UpdateChargeStatusUI();
-    }
-
-    private void RegistForEvents(){
-        //GadgetController.OnGadgetEquipped += OnGadgetEquipped;
-        //Gadget.OnGadgetActive += OnGadgetActive;
-        //Gadget.OnGadgedRecharged += UpdateChargeStatusUI;
-    }
-
-    private void OnGadgetActive(bool status)
-    {
-        gadgetActive = true;
-    }
-
-    private void UpdateChargeStatusUI(){
-        chargeStatusUI.value = equippedGadget.CurrentCharge;
     }
 
     public void UpdateEquippedGadget(Gadget gadget)
@@ -91,12 +69,11 @@ public class HudUI : MonoBehaviour
     public void ToggleGadgetUI(bool status){
         chargeStatusUI.gameObject.SetActive(status);
         availableBatteryUI.gameObject.SetActive(status);
-        equippedGadget.gameObject.SetActive(status);
+        equippedGadgetUI.gameObject.SetActive(status);
     }
 
     public void UpdateAvailableBattery(int number){
         availableBatteryUI.text = number.ToString();
-        
     }
 
     public void UpdateChargeStatus(float value){

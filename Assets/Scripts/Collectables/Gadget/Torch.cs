@@ -5,9 +5,9 @@ public class Torch : Gadget
 {
     [SerializeField] GameObject torchLight;
 
-    void Start() {
-        currentCharge = charge;
-        hudUI = UIManager.Instance.Hud;
+    public override void Start() {
+        base.Start();
+        id = GadgetID.TORCH;
     }
 
     void Update()
