@@ -27,8 +27,10 @@ public class GadgetController : MonoBehaviour
 
     private void ToggleGadget(GadgetID gadgetID){
         if(equippedGadget != null && gadgetID == equippedGadget.ID){
+            equippedGadget.UnEquip();
             equippedGadget = null;
             hudUI.UpdateEquippedGadget(equippedGadget);
+            
             
             //OnGadgetEquipped?.Invoke(null);
         }
@@ -37,7 +39,9 @@ public class GadgetController : MonoBehaviour
             if(!playerInventory.HasGadget(gadgetID)) return;
             
             equippedGadget = playerInventory.GetGadget(gadgetID);
+            equippedGadget.Equip();
             hudUI.UpdateEquippedGadget(equippedGadget);
+            
             //OnGadgetEquipped(equippedGadget);
         }
     }

@@ -45,6 +45,7 @@ public class Torch : Gadget
     public override void Equip(){
         equipped = true;
         hudUI.UpdateEquippedGadget(this);
+        //Debug.Log(currentCharge);
         hudUI.UpdateChargeStatus(currentCharge);
     }
 
@@ -64,11 +65,11 @@ public class Torch : Gadget
     public override void Recharge(){
         if(currentCharge >= charge)
             return;
-        if(inventory.UseBattery())
+        if(playerInventory.UseBattery())
             currentCharge = charge;
         else
             hudUI.UpdateActionLog("Out of Batteries");
-        hudUI.UpdateAvailableBattery(inventory.GetAvalableBattery());
+        hudUI.UpdateAvailableBattery(playerInventory.GetAvalableBattery());
         hudUI.UpdateChargeStatus(currentCharge);
     }
     }

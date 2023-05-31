@@ -39,6 +39,9 @@ public class PlayerInventory : MonoBehaviour
         else{
             itemList.Add(itemID, item);
         }
+        if(itemID == ItemID.BATTERY){
+            hudUI.UpdateAvailableBattery(GetItemQuantity(ItemID.BATTERY));
+        }
         string actionLogText = "Collected " + item.StackSize + " " + item.Data.name;
         UpdateHUD(actionLogText);
     }
@@ -76,6 +79,7 @@ public class PlayerInventory : MonoBehaviour
         //Debug.Log(gadget.ID);
         gadget.transform.SetParent(gadgetsInventoryTransform);
         gadget.transform.localPosition = Vector2.zero;
+        gadget.SetPlayerInventory(this);
         string actionLogText = "Collected " + gadget.name;
         UpdateHUD(actionLogText);
     }

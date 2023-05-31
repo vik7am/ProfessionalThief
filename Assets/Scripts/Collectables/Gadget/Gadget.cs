@@ -6,7 +6,7 @@ namespace ProfessionalThief{
     public enum GadgetID {TORCH, STUN_GUN, NIGHT_VISION_GOGGLES};
     public abstract class Gadget : MonoBehaviour, ICollectable
     {
-        protected PlayerInventory inventory;
+        protected PlayerInventory playerInventory;
         [SerializeField] protected int charge;
         protected float currentCharge;
         protected bool equipped;
@@ -30,6 +30,10 @@ namespace ProfessionalThief{
         public virtual void Start(){
             currentCharge = charge;
             hudUI = UIManager.Instance.Hud;
+        }
+
+        public void SetPlayerInventory(PlayerInventory inventory){
+            playerInventory = inventory;
         }
 
         public CollectableID GetCollectableID()

@@ -39,7 +39,7 @@ public class StunGun : Gadget
         equipped = true;
         animator.SetBool("gun", true);
         hudUI.UpdateEquippedGadget(this);
-        hudUI.UpdateAvailableBattery(inventory.GetAvalableBattery());
+        //hudUI.UpdateAvailableBattery(inventory.GetAvalableBattery());
         hudUI.UpdateChargeStatus(currentCharge);
     }
 
@@ -59,11 +59,11 @@ public class StunGun : Gadget
     public override void Recharge(){
         if(currentCharge > 0)
             return;
-        if(inventory.UseBattery())
+        if(playerInventory.UseBattery())
             startRecharge = true;
         else
             hudUI.UpdateActionLog("Out of Batteries");
-        hudUI.UpdateAvailableBattery(inventory.GetAvalableBattery());
+        hudUI.UpdateAvailableBattery(playerInventory.GetAvalableBattery());
     }
 }
 }
