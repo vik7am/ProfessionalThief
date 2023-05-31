@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charge: 15
+  icon: N
   greenLight: {fileID: 6702677946482375481}
 --- !u!1 &6702677946482375481
 GameObject:

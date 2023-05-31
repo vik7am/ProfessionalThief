@@ -73,7 +73,7 @@ public class PlayerInventory : MonoBehaviour
     // }
 
     public void AddGadget(Gadget gadget){
-        gadgetList.Add(gadget.GetID(), gadget);
+        gadgetList.Add(gadget.ID, gadget);
         string actionLogText = "Collected " + gadget.name;
         UpdateHUD(actionLogText);
     }

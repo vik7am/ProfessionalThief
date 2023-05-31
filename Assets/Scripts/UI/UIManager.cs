@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
     }
 
     public void UpdateEquippedGadget(GadgetType gadget, int charge){
-        hudUI.UpdateEquippedGadget(gadget, charge);
+        //hudUI.UpdateEquippedGadget(gadget, charge);
     }
 
     public void UpdateAvailableBattery(int value){

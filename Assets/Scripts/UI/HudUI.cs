@@ -3,35 +3,72 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 namespace ProfessionalThief{
 public class HudUI : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI scoreValue;
-    [SerializeField] TextMeshProUGUI itemInfo;
-    [SerializeField] TextMeshProUGUI actionLogText;
-    [SerializeField] TextMeshProUGUI availableBattery;
-    [SerializeField] TextMeshProUGUI equippedGadget;
-    [SerializeField] Slider chargeStatus;
+    [SerializeField] TextMeshProUGUI scoreValueUI;
+    [SerializeField] TextMeshProUGUI itemInfoUI;
+    [SerializeField] TextMeshProUGUI actionLogTextUI;
+    [SerializeField] TextMeshProUGUI availableBatteryUI;
+    [SerializeField] TextMeshProUGUI equippedGadgetUI;
+    [SerializeField] Slider chargeStatusUI;
     Coroutine coroutine;
     List<string> actionLog;
     int actionLogCounter = 0;
+    Gadget equippedGadget;
+    bool gadgetActive;
 
     void Start()
     {
         actionLog = new List<string>();
-        scoreValue.text = "$ 0";
-        itemInfo.text = "";
-        actionLogText.text = "";
+        scoreValueUI.text = "$ 0";
+        itemInfoUI.text = "";
+        actionLogTextUI.text = "";
+        gadgetActive = false;
         ToggleGadgetUI(false);
     }
 
+    private void Update() {
+        if(gadgetActive)
+            UpdateChargeStatusUI();
+    }
+
+    private void RegistForEvents(){
+        GadgetController.OnGadgetEquipped += OnGadgetEquipped;
+        //Gadget.OnGadgetActive += OnGadgetActive;
+        //Gadget.OnGadgedRecharged += UpdateChargeStatusUI;
+    }
+
+    private void OnGadgetActive(bool status)
+    {
+        gadgetActive = true;
+    }
+
+    private void UpdateChargeStatusUI(){
+        chargeStatusUI.value = equippedGadget.CurrentCharge;
+    }
+
+    private void OnGadgetEquipped(Gadget gadget)
+    {
+        if(gadget == null){
+            equippedGadget = null;
+            ToggleGadgetUI(false);
+            return;
+        }
+        equippedGadget = gadget;
+        equippedGadgetUI.text = equippedGadget.Icon;
+        chargeStatusUI.maxValue = equippedGadget.Charge;
+        ToggleGadgetUI(true);
+    }
+    
     public void UpdateCollectableValue(int totalTake){
-        scoreValue.text = "$ " + totalTake;
+        scoreValueUI.text = "$ " + totalTake;
     }
 
     public void UpdateItemInfo(string info){
-        itemInfo.text = info;
+        itemInfoUI.text = info;
     }
 
     public void UpdateActionLog(string text){
@@ -42,47 +79,28 @@ public class HudUI : MonoBehaviour
 
     IEnumerator ShowList(){
         while(actionLogCounter < actionLog.Count){
-            actionLogText.text = actionLog[actionLogCounter];
+            actionLogTextUI.text = actionLog[actionLogCounter];
             yield return new WaitForSeconds(2);
-            actionLogText.text = "";
+            actionLogTextUI.text = "";
             actionLogCounter++;
             yield return new WaitForSeconds(1);
         }
         coroutine = null;
     }
 
-    public void UpdateEquippedGadget(GadgetType gadget, int charge){
-        switch(gadget){
-            case GadgetType.EMPTY : 
-                ToggleGadgetUI(false); break;
-            case GadgetType.TORCH :
-                ToggleGadgetUI(true);
-                equippedGadget.text = "T";
-                chargeStatus.maxValue = charge; break;
-            case GadgetType.STUN_GUN :
-                ToggleGadgetUI(true);
-                equippedGadget.text = "G";
-                chargeStatus.maxValue = charge; break;
-            case GadgetType.NIGHT_VISION_GOOGLES :
-                ToggleGadgetUI(true);
-                equippedGadget.text = "N";
-                chargeStatus.maxValue = charge; break;
-        }
-    }
-
     public void ToggleGadgetUI(bool status){
-        chargeStatus.gameObject.SetActive(status);
-        availableBattery.gameObject.SetActive(status);
+        chargeStatusUI.gameObject.SetActive(status);
+        availableBatteryUI.gameObject.SetActive(status);
         equippedGadget.gameObject.SetActive(status);
     }
 
     public void UpdateAvailableBattery(int number){
-        availableBattery.text = number.ToString();
+        availableBatteryUI.text = number.ToString();
         
     }
 
     public void UpdateChargeStatus(float value){
-        chargeStatus.value = value;
+        chargeStatusUI.value = value;
     }
 }
 }

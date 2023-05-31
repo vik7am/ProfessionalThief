@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charge: 30
+  icon: T
   torchLight: {fileID: 3728092223028711498}
 --- !u!1 &3728092223028711498
 GameObject:

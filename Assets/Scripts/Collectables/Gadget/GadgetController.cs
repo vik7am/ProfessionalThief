@@ -12,6 +12,8 @@ public class GadgetController : MonoBehaviour
     PlayerInventory playerInventory;
     Gadget equippedGadget;
 
+    public static event Action<Gadget> OnGadgetEquipped;
+
     void Start(){
         equippedGadget = null;
     }
@@ -24,11 +26,15 @@ public class GadgetController : MonoBehaviour
     }
 
     private void ToggleGadget(GadgetID gadgetID){
-        if(equippedGadget != null && gadgetID == equippedGadget.GetID())
+        if(equippedGadget != null && gadgetID == equippedGadget.ID){
             equippedGadget = null;
-        else
+            OnGadgetEquipped?.Invoke(null);
+        }
+        else{
+            if(!playerInventory.HasGadget(gadgetID)) return;
             equippedGadget = playerInventory.GetGadget(gadgetID);
-        
+            OnGadgetEquipped(equippedGadget);
+        }
     }
 
         void GetPlayerInput(){

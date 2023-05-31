@@ -44,5 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charge: 2
+  icon: G
   bullet: {fileID: 7238474279193884020, guid: 23630f37f183b9e45a8e7f66c11ef64f, type: 3}
   animator: {fileID: 0}
