@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ProfessionalThief{
+namespace ProfessionalThief.V1{
 public class StunGun : MonoBehaviour, IGadget
 {
     [SerializeField] Bullet bullet;

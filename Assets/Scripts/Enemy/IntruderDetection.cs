@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ProfessionalThief{
+namespace ProfessionalThief.V1{
 public class IntruderDetection : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other) {

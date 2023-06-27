@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-namespace ProfessionalThief{
+namespace ProfessionalThief.V1{
 public class Utils 
 {
     public static LevelName GetActiveLevelName(){

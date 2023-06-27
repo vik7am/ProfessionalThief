@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ProfessionalThief{
+namespace ProfessionalThief.V1{
 public class PlayerController : MonoBehaviour
 {
     PlayerMovement playerMovement;

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ProfessionalThief{
+namespace ProfessionalThief.V1{
 public class GameOverUI : MonoBehaviour
 {
     [SerializeField] Button restartButton;

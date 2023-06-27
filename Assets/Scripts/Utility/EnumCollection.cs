@@ -1,5 +1,5 @@
 
-namespace ProfessionalThief{
+namespace ProfessionalThief.V1{
 
 public enum GadgetType {EMPTY, TORCH, STUN_GUN, NIGHT_VISION_GOOGLES};
 

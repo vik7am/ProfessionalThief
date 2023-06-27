@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace ProfessionalThief{
+namespace ProfessionalThief.V1{
 public class GuardController : MonoBehaviour{
     GuardMovement gaurdMovement;
     Animator animator;

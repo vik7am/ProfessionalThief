@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ProfessionalThief{
+namespace ProfessionalThief.V1{
 public class GuardMovement : MonoBehaviour
 {
     [SerializeField]List<Transform> location;

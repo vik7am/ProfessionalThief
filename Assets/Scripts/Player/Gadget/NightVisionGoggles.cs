@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ProfessionalThief{
+namespace ProfessionalThief.V1{
 public class NightVisionGoggles : MonoBehaviour, IGadget
 {
     [SerializeField] GameObject greenLight;

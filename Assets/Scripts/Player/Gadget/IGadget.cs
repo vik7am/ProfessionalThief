@@ -1,5 +1,5 @@
 
-namespace ProfessionalThief{
+namespace ProfessionalThief.V1{
 public interface IGadget 
 {
     void EquipGadget();

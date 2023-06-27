@@ -2,7 +2,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
-namespace ProfessionalThief{
+namespace ProfessionalThief.V1{
 public class LevelCompletedUI : MonoBehaviour
 {
     [SerializeField] Button nextLevelButton;

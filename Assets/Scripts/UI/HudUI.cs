@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-namespace ProfessionalThief{
+namespace ProfessionalThief.V1{
 public class HudUI : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI scoreValue;
