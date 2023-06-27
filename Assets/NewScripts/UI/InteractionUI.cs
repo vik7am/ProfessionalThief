@@ -15,6 +15,7 @@ namespace ProfessionalThief.UI
         
         private void Start(){
             RegisterForEvents();
+            ToggleInteractionUI(null);
         }
 
         private void RegisterForEvents(){
@@ -24,11 +25,12 @@ namespace ProfessionalThief.UI
         private void ToggleInteractionUI(IInteractableItem item)
         {
             if(item == null){
+                interactionMessage.text = "";
                 interactionPanel.SetActive(false);
                 return;
             }
-            interactionPanel.SetActive(true);
             interactionMessage.text = "Press E to collect item from chest";
+            interactionPanel.SetActive(true);
         }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 using ProfessionalThief.UI;
+using ProfessionalThief.Player;
 
 namespace ProfessionalThief.Util
 {

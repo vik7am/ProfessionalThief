@@ -10,9 +10,17 @@ namespace ProfessionalThief.UI
     public class ActionLogUI : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI actionLogTextUI;
+        private Queue<string> actionLogQueue;
+        [SerializeField] float logTextVisibilityDuration;
+        private Coroutine logCoroutine;
+        private string logText;
 
-        private void Start()
-        {
+        private void Awake() {
+            actionLogQueue = new Queue<string>();
+        }
+
+        private void Start(){
+            actionLogTextUI.text = "";
             RegisterForEvents();
         }
 
@@ -22,11 +30,27 @@ namespace ProfessionalThief.UI
         }
 
         private void OnGadgetAdded(Gadget gadget){
-            actionLogTextUI.text = "Collected " + gadget.name;
+            AddLogToQueue("Collected " + gadget.name);
         }
 
         private void OnValuableAdded(Valuable valuable, int quantity){
-            actionLogTextUI.text = "Collected " + quantity + " $" +valuable.value + " " + valuable.name;
+            AddLogToQueue("Collected " + quantity + " $" +valuable.value + " " + valuable.name);
+        }
+
+        private void AddLogToQueue(string text){
+            actionLogQueue.Enqueue(text);
+            if(logCoroutine == null){
+                logCoroutine = StartCoroutine(ShowActionLogCoroutine());
+            }
+        }
+
+        IEnumerator ShowActionLogCoroutine(){
+            while(actionLogQueue.Count>0){
+                actionLogTextUI.text = actionLogQueue.Dequeue();
+                yield return new WaitForSeconds(logTextVisibilityDuration);
+            }
+            actionLogTextUI.text = "";
+            logCoroutine = null;
         }
     }
 }
