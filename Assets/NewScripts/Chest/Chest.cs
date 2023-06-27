@@ -7,11 +7,12 @@ namespace ProfessionalThief.Chest
 {
     public interface IInteractableItem{
         void Interact(Interactor interactor);
+        string InteractionMessage();
     }
 
     public abstract class Chest : MonoBehaviour, IInteractableItem
     {
-        private bool isEmpty;
+        protected bool isEmpty;
 
         public bool IsEmpty {get => isEmpty;}
 
@@ -21,6 +22,7 @@ namespace ProfessionalThief.Chest
         }
 
         public abstract void Interact(Interactor interactor);
+        public abstract string InteractionMessage();
         
         protected abstract void InitializeItem();
         

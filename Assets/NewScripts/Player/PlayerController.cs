@@ -22,6 +22,7 @@ namespace ProfessionalThief.Player
 
         private void RegisterForEvents(){
             GameManager.Instance.onGameOver += DisablePlayerMovement;
+            GameManager.Instance.onMissionCompleted += DisablePlayerMovement;
         }
 
         private void DisablePlayerMovement(){

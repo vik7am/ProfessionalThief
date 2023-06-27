@@ -25,22 +25,38 @@ namespace ProfessionalThief.UI
 
         private void Start(){
             RegisterForEvents();
-            SwitchUI(UserInterfaceID.HUD);
+            activeUI = hudUI;
+            activeUI.ToggleUI(true);
+            //SwitchUI(UserInterfaceID.HUD);
         }
 
         private void RegisterForEvents(){
-            GameManager.Instance.onSwitchUI += SwitchUI;
+            //GameManager.Instance.onSwitchUI += SwitchUI;
+            GameManager.Instance.onGameOver += OnGameOver;
+            GameManager.Instance.onMissionCompleted += OnMissionCompleted;
         }
 
-        public void SwitchUI(UserInterfaceID userInterfaceID){
-            if(activeUI != null)
-                activeUI.ToggleUI(false);
-            switch(userInterfaceID){
-                case UserInterfaceID.HUD : activeUI = hudUI; break;
-                case UserInterfaceID.MISSION_COMPLETED : activeUI = missionCompletedUI; break;
-                case UserInterfaceID.MISSION_FAILED : activeUI = missionFailedUI; break;
-            }
+        private void OnMissionCompleted(){
+            activeUI.ToggleUI(false);
+            activeUI = missionCompletedUI;
             activeUI.ToggleUI(true);
         }
+
+        private void OnGameOver(){
+            activeUI.ToggleUI(false);
+            activeUI = missionFailedUI;
+            activeUI.ToggleUI(true);
+        }
+
+        // public void SwitchUI(UserInterfaceID userInterfaceID){
+        //     if(activeUI != null)
+        //         activeUI.ToggleUI(false);
+        //     switch(userInterfaceID){
+        //         case UserInterfaceID.HUD : activeUI = hudUI; break;
+        //         case UserInterfaceID.MISSION_COMPLETED : activeUI = missionCompletedUI; break;
+        //         case UserInterfaceID.MISSION_FAILED : activeUI = missionFailedUI; break;
+        //     }
+        //     activeUI.ToggleUI(true);
+        // }
     }
 }

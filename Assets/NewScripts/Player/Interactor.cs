@@ -23,6 +23,7 @@ namespace ProfessionalThief.Player
         private void InteractWithItem(){
             if(interactableItem == null) return;
             interactableItem.Interact(this);
+            onNearInteractableItem(interactableItem);
         }
 
         private void OnCollisionEnter2D(Collision2D other) {
@@ -36,7 +37,6 @@ namespace ProfessionalThief.Player
             if(other.gameObject.TryGetComponent<IInteractableItem>(out IInteractableItem item)){
                 this.interactableItem = null;
                 onNearInteractableItem(null);
-
             }
         }
     }

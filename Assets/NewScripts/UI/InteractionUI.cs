@@ -29,7 +29,7 @@ namespace ProfessionalThief.UI
                 interactionPanel.SetActive(false);
                 return;
             }
-            interactionMessage.text = "Press E to collect item from chest";
+            interactionMessage.text = item.InteractionMessage();
             interactionPanel.SetActive(true);
         }
     }

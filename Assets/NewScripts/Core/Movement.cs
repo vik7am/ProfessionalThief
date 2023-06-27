@@ -41,7 +41,7 @@ namespace ProfessionalThief.Core
 
         private void UpdateLookDirection(){
             if(direction == Vector2.zero) return;
-            transform.up = direction;
+            transform.right = direction;
         }
 
         private void UpdateMovement(){
