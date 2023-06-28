@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ProfessionalThief.Player;
-using ProfessionalThief.Item;
+using ProfessionalThief.Items;
 
 namespace ProfessionalThief.Chest
 {
@@ -15,14 +15,16 @@ namespace ProfessionalThief.Chest
 
         protected override void InitializeItem(){
             quantity = GetRandomValueInRange(valuableData.minStackSize, valuableData.maxStackSize);
-            valuable = new Valuable(valuableData);
+            valuable = Instantiate<Valuable>(valuablePrefab);
+            valuable.Initialize(valuableData, quantity);
         }
 
         public override void Interact(Interactor interactor){
             if(isEmpty) return;
             Inventory inventory = interactor.GetComponent<Inventory>();
             if(inventory){
-                inventory.AddValuable(valuable, quantity);
+                inventory.AddItem(valuable);
+                //inventory.AddValuable(valuable, quantity);
                 isEmpty = true;
             }
         }

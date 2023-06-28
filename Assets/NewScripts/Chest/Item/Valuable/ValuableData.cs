@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ProfessionalThief.Item
+namespace ProfessionalThief.Items
 {
     [CreateAssetMenu(fileName ="ValuableData", menuName = "SO/ValuableData", order = 1)]
     public class ValuableData : ScriptableObject

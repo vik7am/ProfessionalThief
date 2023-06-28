@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using ProfessionalThief.UI;
 using ProfessionalThief.Player;
-using ProfessionalThief.Item;
+using ProfessionalThief.Items;
 
 namespace ProfessionalThief.Util
 {
@@ -20,7 +20,7 @@ namespace ProfessionalThief.Util
 
         private void OnGadgetAdded(Gadget gadget)
         {
-            if(gadget.id == GadgetId.TORCH)
+            if(gadget.itemId == ItemId.GADGET_TORCH)
                 onMainObjectiveCompleted?.Invoke();
         }
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using ProfessionalThief.Item;
+using ProfessionalThief.Items;
 
 
 namespace ProfessionalThief.Player
@@ -11,26 +11,45 @@ namespace ProfessionalThief.Player
     {
         private Dictionary<ValuableId, Valuable> valuableList;
         private Dictionary<GadgetId, Gadget> gadgetList;
+        private Dictionary<ItemId, Item> itemList;
+        private GadgetController gadgetController;
         private int totalTake;
 
         public static event Action<Valuable ,int> onValuableAdded;
         public static event Action<Gadget> onGadgetAdded;
         public static event Action<int> onTotalTakeUpdated;
+
+        private void Awake() {
+            gadgetController = GetComponent<GadgetController>();
+        }
         
 
         private void Start(){
             valuableList = new Dictionary<ValuableId, Valuable>();
             gadgetList = new Dictionary<GadgetId, Gadget>();
+            itemList = new Dictionary<ItemId, Item>();
             totalTake = 0;
         }
 
+        public void AddItem(Item item){
+            itemList.Add(item.Id, item);
+            if(item.Type == ItemType.VALUABLE){
+                Valuable valuable = item.GetComponent<Valuable>();
+                AddValuable(valuable, valuable.stackSize);
+            }
+            else if(item.Type == ItemType.GADGET){
+                Gadget gadget = item.GetComponent<Gadget>();
+                AddGadget(gadget);
+            }
+        }
+
         public void AddGadget(Gadget gadget){
-            gadgetList.Add(gadget.id, gadget);
+            gadgetController.AddGadget(gadget);
             onGadgetAdded?.Invoke(gadget);
         }
 
         public void AddValuable(Valuable valuable , int quantity){
-            valuableList.Add(valuable.id, valuable);
+            //valuableList.Add(valuable.id, valuable);
             onValuableAdded?.Invoke(valuable, quantity);
             UpdateTotalTake(valuable, quantity);
         }

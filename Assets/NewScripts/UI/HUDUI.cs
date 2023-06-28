@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using ProfessionalThief.Player;
+using ProfessionalThief.Items;
 
 namespace ProfessionalThief.UI
 {
@@ -20,10 +21,24 @@ namespace ProfessionalThief.UI
 
         private void RegisterForEvents(){
             Inventory.onTotalTakeUpdated += OnTotalTakeUpdated;
+            GadgetController.onGadgetEquip += OnGadgetEquip;
+            GadgetController.onGadgetUnEquip += OnGadgetUnEquip;
+            gadgetUI.gameObject.SetActive(false);
         }
 
         private void OnTotalTakeUpdated(int amountInDollar){
             totalTakeTextUI.text = "$ " + amountInDollar;
+        }
+
+        public void OnGadgetEquip(Gadget gadget){
+            gadgetUI.gameObject.SetActive(true);
+            gadgetUI.OnGadgetEquip(gadget);
+
+        }
+
+        public void OnGadgetUnEquip(){
+            gadgetUI.OnGadgetUnEquip();
+            gadgetUI.gameObject.SetActive(false);
         }
     }
 }

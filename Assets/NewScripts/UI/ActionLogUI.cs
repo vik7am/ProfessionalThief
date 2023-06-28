@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using ProfessionalThief.Player;
-using ProfessionalThief.Item;
+using ProfessionalThief.Items;
 
 namespace ProfessionalThief.UI
 {
