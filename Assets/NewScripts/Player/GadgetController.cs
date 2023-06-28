@@ -17,32 +17,43 @@ namespace ProfessionalThief.Items
         }
 
         void Update(){
-            HandlePlayerInput();
+            HandleGadgetToggleInput();
+            if(equippedGadget)
+                HandleEquippedGadgetToggleInput();
+        }
+
+        private void HandleGadgetToggleInput(){
+            if(Input.GetKeyDown(KeyCode.Alpha1)){
+                ToggleGadget(ItemId.GADGET_TORCH);
+            }
+            else if(Input.GetKeyDown(KeyCode.Alpha2)){
+                ToggleGadget(ItemId.GADGET_STUN_GUN);
+            }
+        }
+
+        private void HandleEquippedGadgetToggleInput(){
+            if(Input.GetKeyDown(KeyCode.Space)){
+                Debug.Log("working");
+                equippedGadget.ToggleState();
+            }
         }
 
         public void AddGadget(Gadget gadget){
             gadgetList.Add(gadget.Id, gadget);
-        }
-
-        private void HandlePlayerInput()
-        {
-            if(Input.GetKeyDown(KeyCode.Alpha1)){
-                ToggleGadget(ItemId.GADGET_TORCH);
-            }
+            gadget.transform.SetParent(this.transform);
+            gadget.transform.localPosition = Vector2.zero;
         }
 
         private void ToggleGadget(ItemId itemId){
             if(!gadgetList.ContainsKey(itemId)) return;
-            if(equippedGadget){
-                if(equippedGadget.Id == itemId){
-                    UnEquipGadget();
-                }
-                else{
-                    UnEquipGadget();
-                    EquipGadget(itemId);
-                }
+            if(equippedGadget == null){
+                EquipGadget(itemId);
+            }
+            else if(equippedGadget.Id == itemId){
+                UnEquipGadget();
             }
             else{
+                UnEquipGadget();
                 EquipGadget(itemId);
             }
         }

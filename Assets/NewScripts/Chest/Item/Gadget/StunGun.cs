@@ -1,18 +1,17 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine;
 
 namespace ProfessionalThief.Items
 {
-    public class Torch : Gadget
+    public class StunGun : Gadget
     {
-        [SerializeField] private Light2D light2D;
+        [SerializeField] private Bullet bulletPrefab;
+        [SerializeField] private Transform bulletFirePoint;
 
         protected override void Start() {
             base.Start();
-            light2D.enabled = false;
         }
         
         private void Update(){
@@ -21,7 +20,7 @@ namespace ProfessionalThief.Items
 
         private void UpdateCharge(){
             if(IsActive){
-                ReduceCharge(Time.deltaTime);
+                ReduceCharge(maxCharge);
             }
             else if(currentCharge <= maxCharge){
                 RestoreCharge(Time.deltaTime);
@@ -36,14 +35,13 @@ namespace ProfessionalThief.Items
         }
 
         protected override void Activate(){
+            if(currentCharge < maxCharge) return;
+            Instantiate(bulletPrefab, bulletFirePoint.position, transform.parent.rotation);
             IsActive = true;
-            light2D.enabled = true;
         }
 
         protected override void Deactivate(){
             IsActive = false;
-            light2D.enabled = false;
         }
-
     }
 }

@@ -26,7 +26,7 @@ namespace ProfessionalThief.UI
         }
 
         private void Update(){
-            if(equippedGadget && equippedGadget.IsActive){
+            if(equippedGadget){
                 chargeLeftUI.value = equippedGadget.currentCharge;
             }
         }
