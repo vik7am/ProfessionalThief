@@ -14,7 +14,7 @@ namespace ProfessionalThief.Chest
     {
         protected bool isEmpty;
 
-        public bool IsEmpty {get => isEmpty;}
+        public bool IsEmpty => isEmpty;
 
         private void Start(){
             isEmpty = false;
@@ -23,8 +23,6 @@ namespace ProfessionalThief.Chest
 
         public abstract void Interact(Interactor interactor);
         public abstract string InteractionMessage();
-        
         protected abstract void InitializeItem();
-        
     }
 }

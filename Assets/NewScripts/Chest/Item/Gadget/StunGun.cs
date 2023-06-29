@@ -9,10 +9,6 @@ namespace ProfessionalThief.Items
     {
         [SerializeField] private Bullet bulletPrefab;
         [SerializeField] private Transform bulletFirePoint;
-
-        protected override void Start() {
-            base.Start();
-        }
         
         private void Update(){
             UpdateCharge();
@@ -24,9 +20,6 @@ namespace ProfessionalThief.Items
             }
         }
 
-        public override void Equip(){
-        }
-
         public override void UnEquip(){
             Deactivate();
         }
@@ -34,7 +27,7 @@ namespace ProfessionalThief.Items
         protected override void Activate(){
             if(currentCharge < maxCharge) return;
             FireBullet();
-            IsActive = true;
+            isActive = true;
         }
 
         private void FireBullet(){
@@ -43,7 +36,7 @@ namespace ProfessionalThief.Items
         }
 
         protected override void Deactivate(){
-            IsActive = false;
+            isActive = false;
         }
     }
 }

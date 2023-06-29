@@ -9,6 +9,7 @@ namespace ProfessionalThief.Items
     {
         private Dictionary<ItemId, Gadget> gadgetList;
         private Gadget equippedGadget;
+        
         public static Action<Gadget> onGadgetEquip;
         public static Action onGadgetUnEquip;
 
@@ -41,7 +42,7 @@ namespace ProfessionalThief.Items
         }
 
         public void AddGadget(Gadget gadget){
-            gadgetList.Add(gadget.Id, gadget);
+            gadgetList.Add(gadget.ItemId, gadget);
             gadget.transform.SetParent(this.transform);
             gadget.transform.localPosition = Vector2.zero;
         }
@@ -51,7 +52,7 @@ namespace ProfessionalThief.Items
             if(equippedGadget == null){
                 EquipGadget(itemId);
             }
-            else if(equippedGadget.Id == itemId){
+            else if(equippedGadget.ItemId == itemId){
                 UnEquipGadget();
             }
             else{

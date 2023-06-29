@@ -5,10 +5,11 @@ using TMPro;
 using System;
 using ProfessionalThief.Player;
 using ProfessionalThief.Items;
+using ProfessionalThief.Chest;
 
 namespace ProfessionalThief.UI
 {
-    public class HUDUI : UserInterface
+    public class HUDUI : MonoBehaviour
     {
         [SerializeField] private GadgetUI gadgetUI;
         [SerializeField] private ActionLogUI actionLogUI;
@@ -16,14 +17,23 @@ namespace ProfessionalThief.UI
         [SerializeField] private TextMeshProUGUI totalTakeTextUI;
 
         private void Start(){
-            RegisterForEvents();
+            gadgetUI.gameObject.SetActive(false);
+            interactionUI.gameObject.SetActive(false);
         }
 
-        private void RegisterForEvents(){
+        private void OnEnable() {
             Inventory.onTotalTakeUpdated += OnTotalTakeUpdated;
             GadgetController.onGadgetEquip += OnGadgetEquip;
             GadgetController.onGadgetUnEquip += OnGadgetUnEquip;
-            gadgetUI.gameObject.SetActive(false);
+            Interactor.onNearInteractableItem += ToggleInteractionUI;
+        }
+
+        private void OnDisable() {
+            Inventory.onTotalTakeUpdated -= OnTotalTakeUpdated;
+            GadgetController.onGadgetEquip -= OnGadgetEquip;
+            GadgetController.onGadgetUnEquip -= OnGadgetUnEquip;
+            Interactor.onNearInteractableItem -= ToggleInteractionUI;
+
         }
 
         private void OnTotalTakeUpdated(int amountInDollar){
@@ -39,6 +49,17 @@ namespace ProfessionalThief.UI
         public void OnGadgetUnEquip(){
             gadgetUI.OnGadgetUnEquip();
             gadgetUI.gameObject.SetActive(false);
+        }
+
+        public void ToggleInteractionUI(IInteractableItem item){
+            if(item == null){
+                interactionUI.gameObject.SetActive(false);
+                return;
+            }
+            interactionUI.gameObject.SetActive(true);
+            interactionUI.SetInteractionMessage(item);
+            
+            
         }
     }
 }

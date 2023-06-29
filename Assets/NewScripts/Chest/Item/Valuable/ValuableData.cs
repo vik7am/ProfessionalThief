@@ -8,7 +8,7 @@ namespace ProfessionalThief.Items
     public class ValuableData : ScriptableObject
     {
         public new string name;
-        public ValuableId valuableId;
+        public ItemId itemId;
         public int minStackSize;
         public int maxStackSize;
         public int value;

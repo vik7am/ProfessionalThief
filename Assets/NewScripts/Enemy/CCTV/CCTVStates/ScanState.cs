@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace ProfessionalThief.CCTV_NS
 {
@@ -12,7 +9,6 @@ namespace ProfessionalThief.CCTV_NS
 
         public override void Update()
         {
-            throw new System.NotImplementedException();
         }
     }
 }

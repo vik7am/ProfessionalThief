@@ -4,20 +4,25 @@ using UnityEngine;
 
 namespace ProfessionalThief.Items
 {
-    public enum ValuableId{CASH, SILVER_COIN, GOLD_COIN}
-
     public class Valuable : Item
     {
-        public ValuableId id;
-        public new string name;
-        public int value;
-        public int stackSize;
+        private new string name;
+        private int value;
+        private int stackSize;
+
+        public string Name => name;
+        public int Value => value;
+        public int StackSize => stackSize;
 
         public void Initialize(ValuableData data, int stackSize){
-            id = data.valuableId;
             name = data.name;
+            itemId = data.itemId;
             value = data.value;
             this.stackSize = stackSize;
+        }
+
+        public void SetStacSize(int size){
+            stackSize = size;
         }
     }
 }

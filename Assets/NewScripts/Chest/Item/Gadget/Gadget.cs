@@ -4,17 +4,21 @@ using UnityEngine;
 
 namespace ProfessionalThief.Items
 {
-    public enum GadgetId{TORCH, STUN_GUN, NIGHT_VISION_GOOGLES}
-    
     public abstract class  Gadget : Item
     {
-        public bool IsActive;
-        public new string name;
-        public string icon;
-        public float maxCharge;
-        public float currentCharge;
+        protected bool isActive;
+        [SerializeField] protected new string name;
+        [SerializeField] protected string icon;
+        [SerializeField] protected float maxCharge;
+        protected float currentCharge;
 
-        protected virtual void Start(){
+        public bool IsActive => isActive;
+        public string Name => name;
+        public string Icon => icon;
+        public float MaxCharge => maxCharge;
+        public float Currentcharge => currentCharge;
+
+        private void Awake(){
             currentCharge = maxCharge;
         }
 
@@ -32,17 +36,17 @@ namespace ProfessionalThief.Items
         public void ToggleState(){
             if(IsActive)
                 Deactivate();
-            else 
+            else
                 Activate();
         }
 
-        public abstract void Equip();
+        public virtual void Equip() {}
 
-        public abstract void UnEquip();
+        public virtual void UnEquip() {}
 
-        protected abstract void Activate();
+        protected virtual void Activate() {}
 
-        protected abstract void Deactivate();
+        protected virtual void Deactivate() {}
     }
         
 }

@@ -10,8 +10,7 @@ namespace ProfessionalThief
     {
         [SerializeField] private Light2D light2D;
 
-        protected override void Start() {
-            base.Start();
+        private void Start() {
             light2D.enabled = false;
         }
         
@@ -20,15 +19,10 @@ namespace ProfessionalThief
         }
 
         private void UpdateCharge(){
-            if(IsActive){
+            if(IsActive)
                 ReduceCharge(Time.deltaTime);
-            }
-            else if(currentCharge <= maxCharge){
+            else if(currentCharge <= maxCharge)
                 RestoreCharge(Time.deltaTime);
-            }
-        }
-
-        public override void Equip(){
         }
 
         public override void UnEquip(){
@@ -36,12 +30,12 @@ namespace ProfessionalThief
         }
 
         protected override void Activate(){
-            IsActive = true;
+            isActive = true;
             light2D.enabled = true;
         }
 
         protected override void Deactivate(){
-            IsActive = false;
+            isActive = false;
             light2D.enabled = false;
         }
     }

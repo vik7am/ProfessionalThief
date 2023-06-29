@@ -21,20 +21,24 @@ namespace ProfessionalThief.UI
 
         private void Start(){
             actionLogTextUI.text = "";
-            RegisterForEvents();
         }
 
-        private void RegisterForEvents(){
+        private void OnEnable() {
             Inventory.onValuableAdded += OnValuableAdded;
             Inventory.onGadgetAdded += OnGadgetAdded;
         }
 
+        private void OnDisable() {
+            Inventory.onValuableAdded -= OnValuableAdded;
+            Inventory.onGadgetAdded -= OnGadgetAdded;
+        }
+
         private void OnGadgetAdded(Gadget gadget){
-            AddLogToQueue("Collected " + gadget.name);
+            AddLogToQueue("Collected " + gadget.Name);
         }
 
         private void OnValuableAdded(Valuable valuable, int quantity){
-            AddLogToQueue("Collected " + quantity + " $" +valuable.value + " " + valuable.name);
+            AddLogToQueue("Collected " + quantity + " $" +valuable.Value + " " + valuable.Name);
         }
 
         private void AddLogToQueue(string text){

@@ -12,7 +12,6 @@ namespace ProfessionalThief.CCTV_NS
 
         public override void Update()
         {
-            throw new System.NotImplementedException();
         }
     }
 }

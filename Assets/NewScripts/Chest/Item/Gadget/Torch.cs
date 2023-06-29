@@ -10,8 +10,7 @@ namespace ProfessionalThief.Items
     {
         [SerializeField] private Light2D light2D;
 
-        protected override void Start() {
-            base.Start();
+        private void Start() {
             light2D.enabled = false;
         }
         
@@ -28,22 +27,18 @@ namespace ProfessionalThief.Items
             }
         }
 
-        public override void Equip(){
-        }
-
         public override void UnEquip(){
             Deactivate();
         }
 
         protected override void Activate(){
-            IsActive = true;
+            isActive = true;
             light2D.enabled = true;
         }
 
         protected override void Deactivate(){
-            IsActive = false;
+            isActive = false;
             light2D.enabled = false;
         }
-
     }
 }

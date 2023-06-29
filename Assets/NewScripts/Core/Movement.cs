@@ -8,7 +8,7 @@ namespace ProfessionalThief.Core
         Vector2 GetMovementDirection();
     }
 
-    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(Rigidbody2D), typeof(IMovementInput))]
     public class Movement : MonoBehaviour
     {
         [SerializeField] private float speed;

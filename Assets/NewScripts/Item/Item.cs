@@ -22,7 +22,7 @@ namespace ProfessionalThief.Items
     {
         public ItemId itemId;
         public ItemType itemType;
-        public ItemId Id {get=> itemId;}
-        public ItemType Type {get=> itemType;}
+        public ItemId ItemId => itemId;
+        public ItemType ItemType => itemType;
     }
 }

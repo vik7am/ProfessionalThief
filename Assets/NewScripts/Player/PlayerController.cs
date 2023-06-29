@@ -16,13 +16,14 @@ namespace ProfessionalThief.Player
             movement = GetComponent<Movement>();
         }
 
-        private void Start() {
-            RegisterForEvents();
+        private void OnEnable() {
+            GameManager.onGameOver += DisablePlayerMovement;
+            GameManager.onMissionCompleted += DisablePlayerMovement;
         }
 
-        private void RegisterForEvents(){
-            GameManager.Instance.onGameOver += DisablePlayerMovement;
-            GameManager.Instance.onMissionCompleted += DisablePlayerMovement;
+        private void OnDisable() {
+            GameManager.onGameOver -= DisablePlayerMovement;
+            GameManager.onMissionCompleted -= DisablePlayerMovement;
         }
 
         private void DisablePlayerMovement(){

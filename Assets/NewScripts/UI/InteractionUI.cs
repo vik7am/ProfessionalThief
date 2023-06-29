@@ -12,25 +12,9 @@ namespace ProfessionalThief.UI
     {
         [SerializeField] private GameObject interactionPanel;
         [SerializeField] private TextMeshProUGUI interactionMessage;
-        
-        private void Start(){
-            RegisterForEvents();
-            ToggleInteractionUI(null);
-        }
 
-        private void RegisterForEvents(){
-            Interactor.onNearInteractableItem += ToggleInteractionUI;
-        }
-
-        private void ToggleInteractionUI(IInteractableItem item)
-        {
-            if(item == null){
-                interactionMessage.text = "";
-                interactionPanel.SetActive(false);
-                return;
-            }
+        public void SetInteractionMessage(IInteractableItem item){
             interactionMessage.text = item.InteractionMessage();
-            interactionPanel.SetActive(true);
         }
     }
 }

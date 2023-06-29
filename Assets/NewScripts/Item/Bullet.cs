@@ -6,7 +6,6 @@ namespace ProfessionalThief.Items
 {
     public class Bullet : MonoBehaviour
     {
-        //private Vector3 direction;
         [SerializeField] float despawnTime;
         [SerializeField] float speed;
         private new Rigidbody2D rigidbody2D;
@@ -19,10 +18,6 @@ namespace ProfessionalThief.Items
             rigidbody2D.velocity = speed * transform.right;
             Destroy(gameObject, despawnTime);
         }
-
-        // private void Update(){
-        //     transform.position += transform.right * speed * Time.deltaTime;
-        // }
 
         private void OnTriggerEnter2D(Collider2D other) {
             Destroy(gameObject);

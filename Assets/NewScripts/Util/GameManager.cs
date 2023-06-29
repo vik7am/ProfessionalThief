@@ -9,23 +9,20 @@ namespace ProfessionalThief.Util
 {
     public class GameManager : GenericMonoSingleton<GameManager>
     {
-        public event Action onGameOver;
-        public event Action onMissionCompleted;
-        //public event Action<UserInterfaceID> onSwitchUI;
-        public event Action onMainObjectiveCompleted;
+        public static event Action onGameOver;
+        public static event Action onMissionCompleted;
+        public static event Action onMainObjectiveCompleted;
 
         private void Start() {
             Inventory.onGadgetAdded += OnGadgetAdded;
         }
 
-        private void OnGadgetAdded(Gadget gadget)
-        {
+        private void OnGadgetAdded(Gadget gadget){
             if(gadget.itemId == ItemId.GADGET_TORCH)
                 onMainObjectiveCompleted?.Invoke();
         }
 
         public void ActivateAlarm(){
-            Debug.Log("Game Over");
             onGameOver?.Invoke();
             Time.timeScale = 0;
         }

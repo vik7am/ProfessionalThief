@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using ProfessionalThief.Items;
 using UnityEngine;
 using TMPro;
@@ -16,9 +13,9 @@ namespace ProfessionalThief.UI
 
         public void OnGadgetEquip(Gadget gadget){
             equippedGadget = gadget;
-            gadgetNameTextUI.text = gadget.icon;
-            chargeLeftUI.maxValue = gadget.maxCharge;
-            chargeLeftUI.value = equippedGadget.currentCharge;
+            gadgetNameTextUI.text = gadget.Icon;
+            chargeLeftUI.maxValue = gadget.MaxCharge;
+            chargeLeftUI.value = equippedGadget.Currentcharge;
         }
 
         public void OnGadgetUnEquip(){
@@ -27,7 +24,7 @@ namespace ProfessionalThief.UI
 
         private void Update(){
             if(equippedGadget){
-                chargeLeftUI.value = equippedGadget.currentCharge;
+                chargeLeftUI.value = equippedGadget.Currentcharge;
             }
         }
     }

@@ -1,21 +1,34 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 
 namespace ProfessionalThief.UI
 {
-    public class MissionCompletedUI : UserInterface
+    public class MissionCompletedUI : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
+        [SerializeField] private Button nextLevelButton;
+        [SerializeField] private Button exitButton;
+
+        private void Start(){
+            nextLevelButton.onClick.AddListener(LoadNextLevel);
+            exitButton.onClick.AddListener(ExitGame);
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-        
+        private void LoadNextLevel(){
+            int sceneCount = SceneManager.sceneCountInBuildSettings;
+            int currentScene = SceneManager.GetActiveScene().buildIndex;
+            int nextScene = (currentScene + 1) % sceneCount;
+            Time.timeScale = 1;
+            SceneManager.LoadScene(nextScene);
+        }
+
+        private void ExitGame(){
+            Application.Quit();
         }
     }
 }

@@ -16,7 +16,7 @@ namespace ProfessionalThief
         }
 
         void Start(){
-            GameManager.Instance.onMainObjectiveCompleted += UnlockDoor;
+            GameManager.onMainObjectiveCompleted += UnlockDoor;
         }
 
         private void UnlockDoor(){

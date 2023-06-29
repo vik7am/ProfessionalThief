@@ -34,9 +34,8 @@ namespace ProfessionalThief.Enemy
         }
 
         private void CheckDestination(){
-            if(Vector2.Distance(transform.position, nextWaypoint) < stoppingDistance){
+            if(Vector2.Distance(transform.position, nextWaypoint) < stoppingDistance)
                 UpdateWaypoint();
-            }
         }
 
         private void UpdateWaypoint(){

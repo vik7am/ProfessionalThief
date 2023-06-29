@@ -7,56 +7,46 @@ using ProfessionalThief.Util;
 
 namespace ProfessionalThief.UI
 {
-    public abstract class UserInterface : MonoBehaviour
-    {
-        public void ToggleUI(bool status){
-            gameObject.SetActive(status);
-        }
-    }
-
-    public enum UserInterfaceID {HUD, MISSION_COMPLETED, MISSION_FAILED}
+    public enum UI_ID {HUD, MISSION_COMPLETED, MISSION_FAILED}
 
     public class UIManager : MonoBehaviour
     {
         [SerializeField] private HUDUI hudUI;
         [SerializeField] private MissionCompletedUI missionCompletedUI;
         [SerializeField] private MissionFailedUI missionFailedUI;
-        private UserInterface activeUI;
+        private GameObject activeUI;
 
         private void Start(){
-            RegisterForEvents();
-            activeUI = hudUI;
-            activeUI.ToggleUI(true);
-            //SwitchUI(UserInterfaceID.HUD);
+            SwitchUI(UI_ID.HUD);
         }
 
-        private void RegisterForEvents(){
-            //GameManager.Instance.onSwitchUI += SwitchUI;
-            GameManager.Instance.onGameOver += OnGameOver;
-            GameManager.Instance.onMissionCompleted += OnMissionCompleted;
+        private void OnEnable() {
+            GameManager.onGameOver += OnGameOver;
+            GameManager.onMissionCompleted += OnMissionCompleted;
+        }
+
+        private void OnDisable() {
+            GameManager.onGameOver -= OnGameOver;
+            GameManager.onMissionCompleted -= OnMissionCompleted;
         }
 
         private void OnMissionCompleted(){
-            activeUI.ToggleUI(false);
-            activeUI = missionCompletedUI;
-            activeUI.ToggleUI(true);
+            SwitchUI(UI_ID.MISSION_COMPLETED);
         }
 
         private void OnGameOver(){
-            activeUI.ToggleUI(false);
-            activeUI = missionFailedUI;
-            activeUI.ToggleUI(true);
+            SwitchUI(UI_ID.MISSION_FAILED);
         }
 
-        // public void SwitchUI(UserInterfaceID userInterfaceID){
-        //     if(activeUI != null)
-        //         activeUI.ToggleUI(false);
-        //     switch(userInterfaceID){
-        //         case UserInterfaceID.HUD : activeUI = hudUI; break;
-        //         case UserInterfaceID.MISSION_COMPLETED : activeUI = missionCompletedUI; break;
-        //         case UserInterfaceID.MISSION_FAILED : activeUI = missionFailedUI; break;
-        //     }
-        //     activeUI.ToggleUI(true);
-        // }
+        public void SwitchUI(UI_ID userInterfaceID){
+            if(activeUI != null)
+                activeUI.SetActive(false);
+            switch(userInterfaceID){
+                case UI_ID.HUD : activeUI = hudUI.gameObject; break;
+                case UI_ID.MISSION_COMPLETED : activeUI = missionCompletedUI.gameObject; break;
+                case UI_ID.MISSION_FAILED : activeUI = missionFailedUI.gameObject; break;
+            }
+            activeUI.SetActive(true);
+        }
     }
 }
