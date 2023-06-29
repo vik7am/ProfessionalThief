@@ -29,18 +29,17 @@ namespace ProfessionalThief.Player
         public void AddItem(Item item){
             if(item.ItemType == ItemType.VALUABLE){
                 Valuable valuable = (Valuable)item;
-                int stackSize = valuable.StackSize;
+                int quantity = valuable.StackSize;
                 if(itemList.ContainsKey(item.ItemId)){
-                    Valuable v = (Valuable)itemList[item.ItemId];
-                    v.SetStacSize(v.StackSize + stackSize);
-                    AddValuable(valuable, stackSize);
+                    ((Valuable)itemList[item.itemId]).AddToStack((Valuable)item);
+                    AddValuable(valuable, quantity);
                     return;
                 }
                 itemList.Add(item.ItemId, item);
-                AddValuable(valuable, stackSize);
+                AddValuable(valuable, valuable.StackSize);
             }
             else if(item.ItemType == ItemType.GADGET){
-                Gadget gadget = item.GetComponent<Gadget>();
+                Gadget gadget = (Gadget)item;
                 itemList.Add(item.ItemId, item);
                 AddGadget(gadget);
             }
@@ -58,7 +57,7 @@ namespace ProfessionalThief.Player
 
         private void UpdateTotalTake(Valuable valuable, int stackSize){
             totalTake += valuable.Value * stackSize;
-            onTotalTakeUpdated(totalTake);
+            onTotalTakeUpdated?.Invoke(totalTake);
         }
     }
 }

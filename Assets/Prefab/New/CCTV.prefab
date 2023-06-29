@@ -118,6 +118,7 @@ GameObject:
   - component: {fileID: 2442508881420479890}
   - component: {fileID: 5229454863341920922}
   - component: {fileID: 7659827326867599271}
+  - component: {fileID: 2637551399330497300}
   m_Layer: 0
   m_Name: CCTV Body
   m_TagString: Untagged
@@ -264,6 +265,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80f32c468a9c41b469ec5a66a00d4708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2637551399330497300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5229454863341920927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e5f12a35e32891428e8890bdf5a0e5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stunnedDuration: 0
 --- !u!1 &5229454863386621971
 GameObject:
   m_ObjectHideFlags: 0

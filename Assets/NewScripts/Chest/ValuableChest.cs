@@ -9,15 +9,22 @@ namespace ProfessionalThief.Chest
     public class ValuableChest : Chest
     {
         [SerializeField] private Valuable valuablePrefab;
-        [SerializeField] private ValuableData valuableData;
+        [SerializeField] private List<ValuableData> valuableDataList;
+        private ValuableData valuableData;
         private Valuable valuable;
         private int quantity;
 
         protected override void InitializeItem(){
+            valuableData = GetValuableData();
             valuable = Instantiate<Valuable>(valuablePrefab);
             quantity = GetRandomValueInRange(valuableData.minStackSize, valuableData.maxStackSize);
             valuable.Initialize(valuableData, quantity);
             valuable.transform.SetParent(transform);
+        }
+
+        private ValuableData GetValuableData(){
+            int randomValuableIndex = Random.Range(0, valuableDataList.Count);
+            return valuableDataList[randomValuableIndex];
         }
 
         public override void Interact(Interactor interactor){

@@ -16353,6 +16353,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1612664645}
     m_Modifications:
+    - target: {fileID: 2637551399330497300, guid: 529645c389825d040b9a353250eb9ea2, type: 3}
+      propertyPath: stunnedDuration
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5229454862242334244, guid: 529645c389825d040b9a353250eb9ea2, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -17594,11 +17598,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2882306861792897829, guid: 23d835d2a0522914f9e6af75418b6c3d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.83
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: 2882306861792897829, guid: 23d835d2a0522914f9e6af75418b6c3d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2882306861792897829, guid: 23d835d2a0522914f9e6af75418b6c3d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -17632,9 +17636,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
-    - target: {fileID: 2882306861792897838, guid: 23d835d2a0522914f9e6af75418b6c3d, type: 3}
-      propertyPath: gadgetPrefab
-      value: 
-      objectReference: {fileID: 6488884175350466062, guid: 96d4a085b440b694a821dd794bbe65e7, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23d835d2a0522914f9e6af75418b6c3d, type: 3}

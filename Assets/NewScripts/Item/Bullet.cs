@@ -20,6 +20,10 @@ namespace ProfessionalThief.Items
         }
 
         private void OnTriggerEnter2D(Collider2D other) {
+            IStunable stunableEntity = other.GetComponent<IStunable>();
+            if(stunableEntity != null){
+                stunableEntity.TakeStunDamage();
+            }
             Destroy(gameObject);
         }
     }

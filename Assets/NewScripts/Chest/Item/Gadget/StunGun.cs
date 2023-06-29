@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace ProfessionalThief.Items
 {
+    public interface IStunable{
+        void TakeStunDamage();
+    }
     public class StunGun : Gadget
     {
         [SerializeField] private Bullet bulletPrefab;

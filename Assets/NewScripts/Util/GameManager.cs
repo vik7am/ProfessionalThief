@@ -1,7 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Events;
-using ProfessionalThief.UI;
 using ProfessionalThief.Player;
 using ProfessionalThief.Items;
 

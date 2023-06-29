@@ -21,8 +21,8 @@ namespace ProfessionalThief.Items
             this.stackSize = stackSize;
         }
 
-        public void SetStacSize(int size){
-            stackSize = size;
+        public void AddToStack(Valuable valuable){
+            stackSize += valuable.stackSize;
         }
     }
 }

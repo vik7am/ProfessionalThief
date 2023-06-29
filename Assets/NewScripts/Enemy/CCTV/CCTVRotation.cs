@@ -14,12 +14,15 @@ namespace ProfessionalThief
         private float currentRotationAngle;
         private int currentRotationDirection;
         private float deltaRotation;
+        private bool isRotationActive;
         
         private void Start(){
             currentRotationDirection = (int)RotationDirection.ClockWise;
         }
 
         private void Update(){
+            if(!isRotationActive)
+                return;
             UpdateRotationDirection();
             RotateCCTV();
         }
@@ -37,6 +40,10 @@ namespace ProfessionalThief
                 else
                     currentRotationDirection = (int)RotationDirection.AntiClockWise;
             }
+        }
+
+        public void SetRotationActive(bool state){
+            isRotationActive = state;
         }
     }
 }

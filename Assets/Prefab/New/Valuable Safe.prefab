@@ -123,4 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   valuablePrefab: {fileID: 5040107948512449846, guid: f2111de942e67434f98f018636a04691, type: 3}
-  valuableData: {fileID: 11400000, guid: 307f7ba039ad40a498f0275eca4ca68b, type: 2}
+  valuableDataList:
+  - {fileID: 11400000, guid: 307f7ba039ad40a498f0275eca4ca68b, type: 2}
+  - {fileID: 11400000, guid: 58d50d3ff86456141901e6ea847ed2b6, type: 2}
+  - {fileID: 11400000, guid: e174ee1fbb0354f409e34fe2030ebe91, type: 2}
