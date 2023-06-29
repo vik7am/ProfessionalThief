@@ -14,7 +14,7 @@ namespace ProfessionalThief.Enemy
         }
 
         public override void OnStateEnter(){
-            movement.DisableMovement(false);
+            movement.SetMovementActive(false);
         }
 
         public override void Update(){

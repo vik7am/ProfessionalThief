@@ -17,23 +17,25 @@ namespace ProfessionalThief.Items
         }
 
         void Update(){
-            HandleGadgetToggleInput();
+            EquipGadgetToggleInput();
             if(equippedGadget)
-                HandleEquippedGadgetToggleInput();
+                UseEquippedGadgetToggleInput();
         }
 
-        private void HandleGadgetToggleInput(){
+        private void EquipGadgetToggleInput(){
             if(Input.GetKeyDown(KeyCode.Alpha1)){
                 ToggleGadget(ItemId.GADGET_TORCH);
             }
             else if(Input.GetKeyDown(KeyCode.Alpha2)){
                 ToggleGadget(ItemId.GADGET_STUN_GUN);
             }
+            else if(Input.GetKeyDown(KeyCode.Alpha3)){
+                ToggleGadget(ItemId.GADGET_NIGHT_VISION_GOGGLES);
+            }
         }
 
-        private void HandleEquippedGadgetToggleInput(){
+        private void UseEquippedGadgetToggleInput(){
             if(Input.GetKeyDown(KeyCode.Space)){
-                Debug.Log("working");
                 equippedGadget.ToggleState();
             }
         }

@@ -26,7 +26,7 @@ namespace ProfessionalThief.Player
         }
 
         private void DisablePlayerMovement(){
-            movement.DisableMovement(true);
+            movement.SetMovementActive(false);
         }
     }
 }

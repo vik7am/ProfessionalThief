@@ -15,6 +15,11 @@ namespace ProfessionalThief.Enemy
         private Vector2 movementInput;
         private Movement movement;
         private Queue<Vector2> waypointQueue;
+        private bool isPatrollingActive;
+
+        private void Awake() {
+            movement = GetComponent<Movement>();
+        }
         
         private void Start(){
             waypointQueue = patrolPath.GetWaypointQueue();
@@ -24,7 +29,8 @@ namespace ProfessionalThief.Enemy
         }
 
         private void Update(){
-            CheckDestination();
+            if(isPatrollingActive)
+                CheckDestination();
         }
 
         private void CheckDestination(){
@@ -47,6 +53,11 @@ namespace ProfessionalThief.Enemy
 
         public Vector2 GetMovementDirection(){
             return movementInput.normalized;
+        }
+
+        public void SetPatrollingActive(bool state){
+            isPatrollingActive = state;
+            movement.SetMovementActive(state);
         }
     }
 }

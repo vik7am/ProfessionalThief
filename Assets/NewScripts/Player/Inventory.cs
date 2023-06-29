@@ -32,13 +32,21 @@ namespace ProfessionalThief.Player
         }
 
         public void AddItem(Item item){
-            itemList.Add(item.Id, item);
             if(item.Type == ItemType.VALUABLE){
-                Valuable valuable = item.GetComponent<Valuable>();
-                AddValuable(valuable, valuable.stackSize);
+                Valuable valuable = (Valuable)item;
+                int stackSize = valuable.stackSize;
+                if(itemList.ContainsKey(item.Id)){
+                    Valuable v = (Valuable)itemList[item.Id];
+                    v.stackSize += stackSize;
+                    AddValuable(valuable, stackSize);
+                    return;
+                }
+                itemList.Add(item.Id, item);
+                AddValuable(valuable, stackSize);
             }
             else if(item.Type == ItemType.GADGET){
                 Gadget gadget = item.GetComponent<Gadget>();
+                itemList.Add(item.Id, item);
                 AddGadget(gadget);
             }
         }
