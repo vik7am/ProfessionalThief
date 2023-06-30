@@ -22,7 +22,7 @@ namespace ProfessionalThief.Chest
         private Gadget GetGadgetPrefab(){
             int currentLvel = GetCurrentLevel();
             switch(currentLvel){
-                case 1 : return stunGun;
+                case 1 : return torch;
                 case 2 : return stunGun;
                 case 3 : return nightVisionGoggles;
                 default : return null;

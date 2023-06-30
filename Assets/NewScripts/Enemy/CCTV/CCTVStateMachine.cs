@@ -5,7 +5,7 @@ using ProfessionalThief.Items;
 
 namespace ProfessionalThief.CCTV_NS
 {
-    public class CCTVStateMachine : MonoBehaviour, IStunable
+    public class CCTVStateMachine : MonoBehaviour, IStunnable
     {
         [SerializeField] private float stunnedDuration;
         private CCTVRotation cCTVRotation;
@@ -18,7 +18,7 @@ namespace ProfessionalThief.CCTV_NS
         public CCTVRotation CCTVRotation => cCTVRotation;
         public ScanState ScanState => scanState;
         public StunnedState StunnedState => stunnedState;
-        public bool IsStunned {get => isStunned; set =>isStunned = value;}
+        public bool IsStunned {get => isStunned; set => isStunned = value;}
 
         private void Awake() {
             cCTVRotation = GetComponent<CCTVRotation>();

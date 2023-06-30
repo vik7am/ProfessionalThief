@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ProfessionalThief.Enemy;
 
 namespace ProfessionalThief.Items
 {
@@ -20,9 +21,12 @@ namespace ProfessionalThief.Items
         }
 
         private void OnTriggerEnter2D(Collider2D other) {
-            IStunable stunableEntity = other.GetComponent<IStunable>();
-            if(stunableEntity != null){
-                stunableEntity.TakeStunDamage();
+            IStunnable stunableEntity = other.GetComponent<IStunnable>();
+            if(other.TryGetComponent<IStunnable>(out IStunnable stunnable)){
+                stunnable.TakeStunDamage();
+            }
+            else if(other.TryGetComponent<PlayerDetector>(out PlayerDetector playerDetector)){
+                return;
             }
             Destroy(gameObject);
         }

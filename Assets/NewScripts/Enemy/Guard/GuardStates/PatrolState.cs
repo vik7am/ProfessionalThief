@@ -20,9 +20,10 @@ namespace ProfessionalThief.GuardNS
             patrolling.SetPatrollingActive(false);
         }
 
-        public override void Update()
-        {
-
+        public override void Update(){
+            if(guardStateMachine.IsStunned){
+                guardStateMachine.ChangeState(guardStateMachine.StunnedState);
+            }
         }
     }
 }

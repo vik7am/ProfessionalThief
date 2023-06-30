@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using ProfessionalThief.Util;
 
 namespace ProfessionalThief.Items
 {
@@ -15,6 +16,7 @@ namespace ProfessionalThief.Items
 
         private void Start(){
             gadgetList = new Dictionary<ItemId, Gadget>();
+            GameManager.Instance.GetGadgetForPreviousLevels(this);
         }
 
         void Update(){
@@ -43,8 +45,9 @@ namespace ProfessionalThief.Items
 
         public void AddGadget(Gadget gadget){
             gadgetList.Add(gadget.ItemId, gadget);
-            gadget.transform.SetParent(this.transform);
+            gadget.transform.SetParent(transform);
             gadget.transform.localPosition = Vector2.zero;
+            gadget.transform.right = transform.right;
         }
 
         private void ToggleGadget(ItemId itemId){

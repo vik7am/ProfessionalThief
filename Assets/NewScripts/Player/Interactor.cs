@@ -23,20 +23,20 @@ namespace ProfessionalThief.Player
         private void InteractWithItem(){
             if(interactableItem == null) return;
             interactableItem.Interact(this);
-            onNearInteractableItem(interactableItem);
+            onNearInteractableItem?.Invoke(interactableItem);
         }
 
         private void OnCollisionEnter2D(Collision2D other) {
             if(other.gameObject.TryGetComponent<IInteractableItem>(out IInteractableItem item)){
                 this.interactableItem = item;
-                onNearInteractableItem(item);
+                onNearInteractableItem?.Invoke(item);
             }
         }
 
         private void OnCollisionExit2D(Collision2D other) {
             if(other.gameObject.TryGetComponent<IInteractableItem>(out IInteractableItem item)){
                 this.interactableItem = null;
-                onNearInteractableItem(null);
+                onNearInteractableItem?.Invoke(null);
             }
         }
     }
