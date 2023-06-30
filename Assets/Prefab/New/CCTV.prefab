@@ -28,7 +28,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5229454863341920924}
-  - {fileID: 5229454863386621968}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
@@ -116,8 +115,8 @@ GameObject:
   - component: {fileID: 5229454863341920925}
   - component: {fileID: 2442508881420479892}
   - component: {fileID: 2442508881420479890}
+  - component: {fileID: 8365334193280683849}
   - component: {fileID: 5229454863341920922}
-  - component: {fileID: 7659827326867599271}
   - component: {fileID: 2637551399330497300}
   m_Layer: 0
   m_Name: CCTV Body
@@ -138,6 +137,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3954735118566589439}
+  - {fileID: 5229454863386621968}
   m_Father: {fileID: 5229454862242334244}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -239,6 +239,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.4}
   m_EdgeRadius: 0
+--- !u!114 &8365334193280683849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5229454863341920927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ebbf804b7ec17241b5e51863abacb10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerDetector: {fileID: 4119037795040992679}
+  light2D: {fileID: 5229454863386621999}
 --- !u!114 &5229454863341920922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,18 +267,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 30
   maxRotationAngle: 0.6
---- !u!114 &7659827326867599271
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5229454863341920927}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80f32c468a9c41b469ec5a66a00d4708, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2637551399330497300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,11 +304,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5229454863386621971}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 5229454862242334244}
+  m_Father: {fileID: 5229454863341920924}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5229454863386621999
@@ -360,7 +362,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3954735118566589439}
   - component: {fileID: 3444432958326214700}
-  - component: {fileID: 5229454863241189120}
+  - component: {fileID: 4119037795040992679}
   m_Layer: 0
   m_Name: Vision Cone
   m_TagString: Untagged
@@ -407,7 +409,7 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
---- !u!114 &5229454863241189120
+--- !u!114 &4119037795040992679
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -416,6 +418,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5564240479711671784}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d107925b150ecb438726573b6ba488c, type: 3}
+  m_Script: {fileID: 11500000, guid: 80f32c468a9c41b469ec5a66a00d4708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  light2D: {fileID: 5229454862247671694}

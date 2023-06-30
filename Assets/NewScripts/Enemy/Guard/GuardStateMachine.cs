@@ -7,30 +7,25 @@ using ProfessionalThief.Items;
 
 namespace ProfessionalThief.GuardNS
 {
-    public class GuardStateMachine : MonoBehaviour, IStunnable
+    public class GuardStateMachine : MonoBehaviour
     {
         [SerializeField] private float stunnedDuration;
-        private Movement movement;
         private PatrolState patrolState;
         private StunnedState stunnedState;
         private GuardState currentGuardState;
-        private Patroling patrolling;
-        private bool isStunned;
+        private Guard guard;
 
         public float StunnedDuration => stunnedDuration;
-        public Movement Movement => movement;
         public PatrolState PatrolState => patrolState;
         public StunnedState StunnedState => stunnedState;
-        public Patroling Patroling => patrolling;
-        public bool IsStunned {get => isStunned; set => isStunned = value;}
+        public Guard Guard => guard;
 
         private void Awake() {
-            movement = GetComponent<Movement>();
-            patrolling = GetComponent<Patroling>();
-            InitializeStates();
+            guard = GetComponent<Guard>();
         }
 
         private void Start(){
+            InitializeStates();
             ChangeState(patrolState);
         }
 
@@ -50,10 +45,6 @@ namespace ProfessionalThief.GuardNS
             currentGuardState = guardState;
             if(currentGuardState != null)
                 currentGuardState.OnStateEnter();
-        }
-
-        public void TakeStunDamage(){
-            isStunned = true;
         }
     }
 }

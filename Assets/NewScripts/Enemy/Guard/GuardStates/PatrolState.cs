@@ -6,24 +6,28 @@ namespace ProfessionalThief.GuardNS
 {
     public class PatrolState : GuardState
     {
+        private Guard guard;
         private Patroling patrolling;
 
         public PatrolState(GuardStateMachine guardStateMachine) : base(guardStateMachine){
-            patrolling = guardStateMachine.Patroling;
+            guard = guardStateMachine.Guard;
+            patrolling = guard.Patroling;
         }
 
         public override void OnStateEnter(){
+            guard.onHitByStunBullet += HandleOnHitByStunBullet;
             patrolling.SetPatrollingActive(true);
         }
 
+        public override void Update(){}
+
         public override void OnStateExit(){
+            guard.onHitByStunBullet -= HandleOnHitByStunBullet;
             patrolling.SetPatrollingActive(false);
         }
 
-        public override void Update(){
-            if(guardStateMachine.IsStunned){
-                guardStateMachine.ChangeState(guardStateMachine.StunnedState);
-            }
+        private void HandleOnHitByStunBullet(){
+            guardStateMachine.ChangeState(guardStateMachine.StunnedState);
         }
     }
 }

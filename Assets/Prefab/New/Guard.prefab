@@ -69,6 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80f32c468a9c41b469ec5a66a00d4708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  light2D: {fileID: 8619507971715024864}
 --- !u!1 &6285909414116616155
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,6 +236,7 @@ GameObject:
   - component: {fileID: 2053073271543599243}
   - component: {fileID: 2053073271543599242}
   - component: {fileID: 2053073271660078902}
+  - component: {fileID: 808899363359177946}
   - component: {fileID: 8619507972163302595}
   - component: {fileID: 8619507972163302594}
   - component: {fileID: 2987571548153023307}
@@ -328,6 +330,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &808899363359177946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8619507972163302592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6d9d625db8778c4aad5930628ae1f8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerDetector: {fileID: 4527570598226180149}
+  bodyLight: {fileID: 8619507972817337031}
 --- !u!114 &8619507972163302595
 MonoBehaviour:
   m_ObjectHideFlags: 0

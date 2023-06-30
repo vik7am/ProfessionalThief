@@ -2,30 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ProfessionalThief.Items;
+using ProfessionalThief.Enemy;
 
 namespace ProfessionalThief.CCTV_NS
 {
-    public class CCTVStateMachine : MonoBehaviour, IStunnable
+    public class CCTVStateMachine : MonoBehaviour
     {
         [SerializeField] private float stunnedDuration;
-        private CCTVRotation cCTVRotation;
         private ScanState scanState;
         private StunnedState stunnedState;
         private CCTVState currentCCTVState;
-        private bool isStunned;
-
+        private CCTV cCTV;
+        
         public float StunnedDuration => stunnedDuration;
-        public CCTVRotation CCTVRotation => cCTVRotation;
         public ScanState ScanState => scanState;
         public StunnedState StunnedState => stunnedState;
-        public bool IsStunned {get => isStunned; set => isStunned = value;}
+        public CCTV CCTV => cCTV;
 
         private void Awake() {
-            cCTVRotation = GetComponent<CCTVRotation>();
-            InitializeStates();
+            cCTV = GetComponent<CCTV>();
         }
 
         private void Start(){
+            InitializeStates();
             ChangeState(scanState);
         }
 
@@ -44,10 +43,6 @@ namespace ProfessionalThief.CCTV_NS
             currentCCTVState = cCTVState;
             if(currentCCTVState != null)
                 currentCCTVState.OnStateEnter();
-        }
-
-        public void TakeStunDamage(){
-            isStunned = true;
         }
     }
 }
