@@ -8,7 +8,7 @@ namespace ProfessionalThief.Enemy
 {
     public class Patroling : MonoBehaviour, IMovementInput
     {
-        [SerializeField] private PatrolPath patrolPath;
+        [SerializeField] private Patrol.PatrolPath patrolPath;
         [SerializeField] private float stoppingDistance;
         private Vector2 currentWayPoint;
         private Vector2 nextWaypoint;

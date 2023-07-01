@@ -16,6 +16,7 @@ namespace ProfessionalThief.GuardNS
 
         public override void OnStateEnter(){
             guard.onHitByStunBullet += HandleOnHitByStunBullet;
+            guard.PlayerDetector.SetDetectionActive(true);
             patrolling.SetPatrollingActive(true);
         }
 

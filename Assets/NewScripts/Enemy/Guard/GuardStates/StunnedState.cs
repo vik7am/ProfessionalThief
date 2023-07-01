@@ -32,7 +32,6 @@ namespace ProfessionalThief.GuardNS
 
         public override void OnStateExit(){
             guard.onHitByStunBullet -= HandleOnHitByStunBullet;
-            playerDetector.SetDetectionActive(true);
             guard.BodyLight.enabled = true;
         }
 

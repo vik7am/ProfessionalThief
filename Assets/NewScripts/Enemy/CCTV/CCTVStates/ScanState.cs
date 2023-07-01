@@ -14,6 +14,7 @@ namespace ProfessionalThief.CCTV_NS
 
         public override void OnStateEnter(){
             cCTV.onHitByStunBullet += HandleOnHitByStunBullet;
+            cCTV.PlayerDetector.SetDetectionActive(true);
             cCTVRotation.SetRotationActive(true);
         }
 

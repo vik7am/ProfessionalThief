@@ -33,7 +33,6 @@ namespace ProfessionalThief.CCTV_NS
 
         public override void OnStateExit(){
             cCTV.onHitByStunBullet -= HandleOnHitByStunBullet;
-            playerDetector.SetDetectionActive(true);
             cCTV.BodyLight.enabled = true;
         }
 
