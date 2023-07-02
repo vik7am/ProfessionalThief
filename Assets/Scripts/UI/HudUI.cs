@@ -1,88 +1,65 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using System;
+using ProfessionalThief.Player;
+using ProfessionalThief.Items;
+using ProfessionalThief.Chest;
 
-namespace ProfessionalThief.V1{
-public class HudUI : MonoBehaviour
+namespace ProfessionalThief.UI
 {
-    [SerializeField] TextMeshProUGUI scoreValue;
-    [SerializeField] TextMeshProUGUI itemInfo;
-    [SerializeField] TextMeshProUGUI actionLogText;
-    [SerializeField] TextMeshProUGUI availableBattery;
-    [SerializeField] TextMeshProUGUI equippedGadget;
-    [SerializeField] Slider chargeStatus;
-    Coroutine coroutine;
-    List<string> actionLog;
-    int actionLogCounter = 0;
-
-    void Start()
+    public class HUDUI : MonoBehaviour
     {
-        actionLog = new List<string>();
-        scoreValue.text = "$ 0";
-        itemInfo.text = "";
-        actionLogText.text = "";
-        ToggleGadgetUI(false);
-    }
+        [SerializeField] private GadgetUI gadgetUI;
+        [SerializeField] private ActionLogUI actionLogUI;
+        [SerializeField] private InteractionUI interactionUI;
+        [SerializeField] private TextMeshProUGUI totalTakeTextUI;
 
-    public void UpdateCollectableValue(int totalTake){
-        scoreValue.text = "$ " + totalTake;
-    }
-
-    public void UpdateItemInfo(string info){
-        itemInfo.text = info;
-    }
-
-    public void UpdateActionLog(string text){
-        actionLog.Add(text);
-        if(coroutine == null)
-            coroutine = StartCoroutine(ShowList());
-    }
-
-    IEnumerator ShowList(){
-        while(actionLogCounter < actionLog.Count){
-            actionLogText.text = actionLog[actionLogCounter];
-            yield return new WaitForSeconds(2);
-            actionLogText.text = "";
-            actionLogCounter++;
-            yield return new WaitForSeconds(1);
+        private void Start(){
+            gadgetUI.gameObject.SetActive(false);
+            interactionUI.gameObject.SetActive(false);
         }
-        coroutine = null;
-    }
 
-    public void UpdateEquippedGadget(GadgetType gadget, int charge){
-        switch(gadget){
-            case GadgetType.EMPTY : 
-                ToggleGadgetUI(false); break;
-            case GadgetType.TORCH :
-                ToggleGadgetUI(true);
-                equippedGadget.text = "T";
-                chargeStatus.maxValue = charge; break;
-            case GadgetType.STUN_GUN :
-                ToggleGadgetUI(true);
-                equippedGadget.text = "G";
-                chargeStatus.maxValue = charge; break;
-            case GadgetType.NIGHT_VISION_GOOGLES :
-                ToggleGadgetUI(true);
-                equippedGadget.text = "N";
-                chargeStatus.maxValue = charge; break;
+        private void OnEnable() {
+            Inventory.onTotalTakeUpdated += OnTotalTakeUpdated;
+            GadgetController.onGadgetEquip += OnGadgetEquip;
+            GadgetController.onGadgetUnEquip += OnGadgetUnEquip;
+            Interactor.onNearInteractableItem += ToggleInteractionUI;
+        }
+
+        private void OnDisable() {
+            Inventory.onTotalTakeUpdated -= OnTotalTakeUpdated;
+            GadgetController.onGadgetEquip -= OnGadgetEquip;
+            GadgetController.onGadgetUnEquip -= OnGadgetUnEquip;
+            Interactor.onNearInteractableItem -= ToggleInteractionUI;
+
+        }
+
+        private void OnTotalTakeUpdated(int amountInDollar){
+            totalTakeTextUI.text = "$ " + amountInDollar;
+        }
+
+        public void OnGadgetEquip(Gadget gadget){
+            gadgetUI.gameObject.SetActive(true);
+            gadgetUI.OnGadgetEquip(gadget);
+
+        }
+
+        public void OnGadgetUnEquip(){
+            gadgetUI.OnGadgetUnEquip();
+            gadgetUI.gameObject.SetActive(false);
+        }
+
+        public void ToggleInteractionUI(IInteractableItem item){
+            if(item == null){
+                interactionUI.gameObject.SetActive(false);
+                return;
+            }
+            interactionUI.gameObject.SetActive(true);
+            interactionUI.SetInteractionMessage(item);
+            
+            
         }
     }
-
-    public void ToggleGadgetUI(bool status){
-        chargeStatus.gameObject.SetActive(status);
-        availableBattery.gameObject.SetActive(status);
-        equippedGadget.gameObject.SetActive(status);
-    }
-
-    public void UpdateAvailableBattery(int number){
-        availableBattery.text = number.ToString();
-        
-    }
-
-    public void UpdateChargeStatus(float value){
-        chargeStatus.value = value;
-    }
-}
 }

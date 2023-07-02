@@ -1,25 +1,46 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using ProfessionalThief.Core;
+using ProfessionalThief.Util;
 
-namespace ProfessionalThief.V1{
-public class PlayerController : MonoBehaviour
+namespace ProfessionalThief.Player
 {
-    PlayerMovement playerMovement;
-    Animator animator;
-    [SerializeField] GadgetController gadgetController;
-    [SerializeField] GameObject torchLight;
-
-    void Awake()
-    {
-        playerMovement = GetComponent<PlayerMovement>();
-        animator = GetComponent<Animator>();
+    public class AnimatorParameter{
+        public static string PLAYER_SPEED = "speed";
     }
 
-    public void DisablePlayer()
+    public class PlayerController : MonoBehaviour
     {
-        playerMovement.StopMovement();
-        gadgetController.UnEquipAllGadget();
-        animator.enabled = false;
-        torchLight.SetActive(false);
+        [SerializeField] private Animator animator;
+        private PlayerInput playerInput;
+        private Movement movement;
+
+        private void Awake(){
+            playerInput = GetComponent<PlayerInput>();
+            movement = GetComponent<Movement>();
+        }
+
+        private void Update() {
+            UpdatePlayerAnimation();
+        }
+
+        private void OnEnable() {
+            GameManager.onGameOver += DisablePlayerMovement;
+            GameManager.onMissionCompleted += DisablePlayerMovement;
+        }
+
+        private void OnDisable() {
+            GameManager.onGameOver -= DisablePlayerMovement;
+            GameManager.onMissionCompleted -= DisablePlayerMovement;
+        }
+
+        private void DisablePlayerMovement(){
+            movement.SetMovementActive(false);
+        }
+
+        private void UpdatePlayerAnimation(){
+            animator.SetFloat(AnimatorParameter.PLAYER_SPEED, movement.CurrentSpeed);
+        }
     }
-}
 }

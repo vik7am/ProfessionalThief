@@ -1,58 +1,52 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using System;
+using ProfessionalThief.Util;
 
-namespace ProfessionalThief.V1{
-public class UIManager : MonoBehaviour
+namespace ProfessionalThief.UI
 {
-    static UIManager instance;
-    [SerializeField] HudUI hudUI;
-    [SerializeField] GameOverUI gameOverUI;
-    [SerializeField] LevelCompletedUI levelCompletedUI;
+    public enum UI_ID {HUD, MISSION_COMPLETED, MISSION_FAILED}
 
-    public static UIManager Instance(){
-        return instance;
-    }
-
-    void Awake()
+    public class UIManager : MonoBehaviour
     {
-        if(instance == null)
-            instance = this;
-        else
-            Destroy(gameObject);
-    }
+        [SerializeField] private HUDUI hudUI;
+        [SerializeField] private MissionCompletedUI missionCompletedUI;
+        [SerializeField] private MissionFailedUI missionFailedUI;
+        private GameObject activeUI;
 
-    public void UpdateCollectableValue(int value){
-        hudUI.UpdateCollectableValue(value);
-    }
+        private void Start(){
+            SwitchUI(UI_ID.HUD);
+        }
 
-    public void UpdateItemInfo(string info){
-        hudUI.UpdateItemInfo(info);
-    }
+        private void OnEnable() {
+            GameManager.onGameOver += OnGameOver;
+            GameManager.onMissionCompleted += OnMissionCompleted;
+        }
 
-    public void UpdateActionLog(string text){
-        hudUI.UpdateActionLog(text);
-    }
+        private void OnDisable() {
+            GameManager.onGameOver -= OnGameOver;
+            GameManager.onMissionCompleted -= OnMissionCompleted;
+        }
 
-    public void UpdateEquippedGadget(GadgetType gadget, int charge){
-        hudUI.UpdateEquippedGadget(gadget, charge);
-    }
+        private void OnMissionCompleted(){
+            SwitchUI(UI_ID.MISSION_COMPLETED);
+        }
 
-    public void UpdateAvailableBattery(int value){
-        hudUI.UpdateAvailableBattery(value);
-    }
+        private void OnGameOver(){
+            SwitchUI(UI_ID.MISSION_FAILED);
+        }
 
-    public void UpdateChargeStatus(float value){
-        hudUI.UpdateChargeStatus(value);
+        public void SwitchUI(UI_ID userInterfaceID){
+            if(activeUI != null)
+                activeUI.SetActive(false);
+            switch(userInterfaceID){
+                case UI_ID.HUD : activeUI = hudUI.gameObject; break;
+                case UI_ID.MISSION_COMPLETED : activeUI = missionCompletedUI.gameObject; break;
+                case UI_ID.MISSION_FAILED : activeUI = missionFailedUI.gameObject; break;
+            }
+            activeUI.SetActive(true);
+        }
     }
-
-    public void ShowGameoverUI(){
-        hudUI.gameObject.SetActive(false);
-        gameOverUI.gameObject.SetActive(true);
-    }
-
-    public void ShowLevelCompletedUI(){
-        hudUI.gameObject.SetActive(false);
-        levelCompletedUI.gameObject.SetActive(true);
-        levelCompletedUI.UpdateTotalCollection();
-    }
-}
 }
