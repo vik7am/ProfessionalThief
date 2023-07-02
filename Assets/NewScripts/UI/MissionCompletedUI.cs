@@ -28,7 +28,8 @@ namespace ProfessionalThief.UI
         }
 
         private void ExitGame(){
-            Application.Quit();
+            Time.timeScale = 1;
+            SceneManager.LoadScene(0);
         }
     }
 }

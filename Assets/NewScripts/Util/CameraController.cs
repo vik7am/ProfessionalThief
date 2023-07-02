@@ -1,3 +1,4 @@
+using ProfessionalThief.Util;
 using UnityEngine;
 
 namespace ProfessionalThief

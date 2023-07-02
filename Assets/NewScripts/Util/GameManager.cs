@@ -13,7 +13,7 @@ namespace ProfessionalThief.Util
         [SerializeField] private StunGun stunGun;
         [SerializeField] private NightVisionGoggles nightVisionGoggles;
         private Dictionary<int, Gadget> gadgetList;
-
+        
         public static event Action onGameOver;
         public static event Action onMissionCompleted;
         public static event Action onMainObjectiveCompleted;

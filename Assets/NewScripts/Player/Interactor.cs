@@ -10,7 +10,6 @@ namespace ProfessionalThief.Player
     public class Interactor : MonoBehaviour
     {
         private IInteractableItem interactableItem;
-        [SerializeField] private UIManager uIManager;
 
         public static Action<IInteractableItem> onNearInteractableItem;
 

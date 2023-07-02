@@ -43,3 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d211a051683a8e44180e34eca49302c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  torch: {fileID: 6488884175350466062, guid: 96d4a085b440b694a821dd794bbe65e7, type: 3}
+  stunGun: {fileID: 8560865581840378723, guid: 18a19fbf0fa933e4babfbf3d4a10f65c, type: 3}
+  nightVisionGoggles: {fileID: 1931093640479787787, guid: 936ba8d76307487408fd5c3120db7fe3, type: 3}
