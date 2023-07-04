@@ -5,7 +5,7 @@ using ProfessionalThief.Items;
 
 namespace ProfessionalThief.Player
 {
-    public class Inventory : MonoBehaviour, IItemInventory
+    public class PlayerInventory : MonoBehaviour, IItemInventory
     {
         private Dictionary<ItemId, Item> itemList;
         private GadgetController gadgetController;
@@ -26,31 +26,29 @@ namespace ProfessionalThief.Player
 
         public void AddItem(Item item){
             if(item.ItemType == ItemType.VALUABLE){
-                Valuable valuable = (Valuable)item;
-                int quantity = valuable.StackSize;
+                Valuable valuable = item.GetComponent<Valuable>();
                 if(itemList.ContainsKey(item.ItemId)){
-                    ((Valuable)itemList[item.itemId]).AddToStack((Valuable)item);
-                    AddValuable(valuable, quantity);
-                    return;
+                    itemList[item.ItemId].AddItemsToStack(item.StackSize);
                 }
-                itemList.Add(item.ItemId, item);
-                AddValuable(valuable, valuable.StackSize);
+                else{
+                    itemList.Add(item.ItemId, item);
+                }
+                OnValuableAdded(valuable, item.StackSize);
             }
             else if(item.ItemType == ItemType.GADGET){
-                Gadget gadget = (Gadget)item;
+                Gadget gadget = item.GetComponent<Gadget>();
                 itemList.Add(item.ItemId, item);
-                AddGadget(gadget);
+                OnGadgetAdded(gadget);
             }
         }
 
-        public void AddGadget(Gadget gadget){
-            gadgetController.AddGadget(gadget);
-            onGadgetAdded?.Invoke(gadget);
-        }
-
-        public void AddValuable(Valuable valuable , int quantity){
+        public void OnValuableAdded(Valuable valuable , int quantity){
             onValuableAdded?.Invoke(valuable, quantity);
             UpdateTotalTake(valuable, quantity);
+        }
+
+        public void OnGadgetAdded(Gadget gadget){
+            onGadgetAdded?.Invoke(gadget);
         }
 
         private void UpdateTotalTake(Valuable valuable, int stackSize){

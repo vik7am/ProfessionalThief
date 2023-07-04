@@ -19,17 +19,17 @@ namespace ProfessionalThief.UI
         }
 
         private void OnEnable() {
-            Inventory.onTotalTakeUpdated += OnTotalTakeUpdated;
+            PlayerInventory.onTotalTakeUpdated += OnTotalTakeUpdated;
             GadgetController.onGadgetEquip += OnGadgetEquip;
             GadgetController.onGadgetUnEquip += OnGadgetUnEquip;
-            Interactor.onNearInteractableItem += ToggleInteractionUI;
+            Interactor.onNearInteractable += ToggleInteractionUI;
         }
 
         private void OnDisable() {
-            Inventory.onTotalTakeUpdated -= OnTotalTakeUpdated;
+            PlayerInventory.onTotalTakeUpdated -= OnTotalTakeUpdated;
             GadgetController.onGadgetEquip -= OnGadgetEquip;
             GadgetController.onGadgetUnEquip -= OnGadgetUnEquip;
-            Interactor.onNearInteractableItem -= ToggleInteractionUI;
+            Interactor.onNearInteractable -= ToggleInteractionUI;
 
         }
 
@@ -48,7 +48,7 @@ namespace ProfessionalThief.UI
             gadgetUI.gameObject.SetActive(false);
         }
 
-        public void ToggleInteractionUI(IInteractableItem item){
+        public void ToggleInteractionUI(IInteractable item){
             if(item == null){
                 interactionUI.gameObject.SetActive(false);
                 return;

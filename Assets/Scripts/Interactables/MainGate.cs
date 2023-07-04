@@ -3,7 +3,7 @@ using ProfessionalThief.Core;
 
 namespace ProfessionalThief.Interactables
 {
-    public class MainGate : MonoBehaviour, IInteractableItem
+    public class MainGate : MonoBehaviour, IInteractable
     {
         private BoxCollider2D boxCollider2D;
         private bool isUnlocked;

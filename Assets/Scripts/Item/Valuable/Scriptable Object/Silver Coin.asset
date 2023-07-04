@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Silver Coin
   m_EditorClassIdentifier: 
   name: Silver Coin
-  itemId: 1
+  valuableId: 1
   minStackSize: 1
   maxStackSize: 5
   value: 50

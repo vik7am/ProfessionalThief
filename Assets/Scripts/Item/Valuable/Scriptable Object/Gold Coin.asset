@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Gold Coin
   m_EditorClassIdentifier: 
   name: Gold Coin
-  itemId: 2
+  valuableId: 2
   minStackSize: 1
   maxStackSize: 2
   value: 100

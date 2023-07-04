@@ -24,13 +24,13 @@ namespace ProfessionalThief.UI
         }
 
         private void OnEnable() {
-            Inventory.onValuableAdded += OnValuableAdded;
-            Inventory.onGadgetAdded += OnGadgetAdded;
+            PlayerInventory.onValuableAdded += OnValuableAdded;
+            PlayerInventory.onGadgetAdded += OnGadgetAdded;
         }
 
         private void OnDisable() {
-            Inventory.onValuableAdded -= OnValuableAdded;
-            Inventory.onGadgetAdded -= OnGadgetAdded;
+            PlayerInventory.onValuableAdded -= OnValuableAdded;
+            PlayerInventory.onGadgetAdded -= OnGadgetAdded;
         }
 
         private void OnGadgetAdded(Gadget gadget){

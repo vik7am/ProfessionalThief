@@ -7,14 +7,14 @@ namespace ProfessionalThief.Items
 {
     public class GadgetController : MonoBehaviour
     {
-        private Dictionary<ItemId, Gadget> gadgetList;
+        private Dictionary<GadgetId, Gadget> gadgetList;
         private Gadget equippedGadget;
         
         public static Action<Gadget> onGadgetEquip;
         public static Action onGadgetUnEquip;
 
         private void Start(){
-            gadgetList = new Dictionary<ItemId, Gadget>();
+            gadgetList = new Dictionary<GadgetId, Gadget>();
             GameManager.Instance.GetGadgetForPreviousLevels(this);
         }
 
@@ -26,13 +26,13 @@ namespace ProfessionalThief.Items
 
         private void EquipGadgetToggleInput(){
             if(Input.GetKeyDown(KeyCode.Alpha1)){
-                ToggleGadget(ItemId.GADGET_TORCH);
+                ToggleGadget(GadgetId.TORCH);
             }
             else if(Input.GetKeyDown(KeyCode.Alpha2)){
-                ToggleGadget(ItemId.GADGET_STUN_GUN);
+                ToggleGadget(GadgetId.STUN_GUN);
             }
             else if(Input.GetKeyDown(KeyCode.Alpha3)){
-                ToggleGadget(ItemId.GADGET_NIGHT_VISION_GOGGLES);
+                ToggleGadget(GadgetId.NIGHT_VISION_GOGGLES);
             }
         }
 
@@ -43,28 +43,28 @@ namespace ProfessionalThief.Items
         }
 
         public void AddGadget(Gadget gadget){
-            gadgetList.Add(gadget.ItemId, gadget);
+            gadgetList.Add(gadget.GadgetId, gadget);
             gadget.transform.SetParent(transform);
             gadget.transform.localPosition = Vector2.zero;
             gadget.transform.right = transform.right;
         }
 
-        private void ToggleGadget(ItemId itemId){
-            if(!gadgetList.ContainsKey(itemId)) return;
+        private void ToggleGadget(GadgetId gadgetId){
+            if(!gadgetList.ContainsKey(gadgetId)) return;
             if(equippedGadget == null){
-                EquipGadget(itemId);
+                EquipGadget(gadgetId);
             }
-            else if(equippedGadget.ItemId == itemId){
+            else if(equippedGadget.GadgetId == gadgetId){
                 UnEquipGadget();
             }
             else{
                 UnEquipGadget();
-                EquipGadget(itemId);
+                EquipGadget(gadgetId);
             }
         }
 
-        private void EquipGadget(ItemId itemId){
-            equippedGadget = gadgetList[itemId];
+        private void EquipGadget(GadgetId gadgetId){
+            equippedGadget = gadgetList[gadgetId];
             equippedGadget.Equip();
             onGadgetEquip?.Invoke(equippedGadget);
         }

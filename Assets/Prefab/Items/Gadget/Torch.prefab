@@ -81,6 +81,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6488884175350466063}
+  - component: {fileID: 4392008623863150189}
   - component: {fileID: 6488884175350466062}
   m_Layer: 0
   m_Name: Torch
@@ -104,6 +105,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4392008623863150189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6488884175350466057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3117d02b9c3acb44a8eda50c6310ca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemType: 1
 --- !u!114 &6488884175350466062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,11 +130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc3b9317da3d82945a46b342588fd3db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 3
-  itemType: 1
-  IsActive: 0
+  gadgetId: 3
   name: Torch
   icon: T
   maxCharge: 10
-  currentCharge: 0
   light2D: {fileID: 2900141707584120863}

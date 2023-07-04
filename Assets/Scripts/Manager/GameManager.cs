@@ -19,7 +19,7 @@ namespace ProfessionalThief.Core
         public static event Action onMainObjectiveCompleted;
 
         private void Start() {
-            Inventory.onGadgetAdded += OnGadgetAdded;
+            PlayerInventory.onGadgetAdded += OnGadgetAdded;
         }
 
         private void AddGadgetsToList(){
@@ -40,7 +40,7 @@ namespace ProfessionalThief.Core
         }
 
         private void OnGadgetAdded(Gadget gadget){
-            if(gadget.itemType == ItemType.GADGET)
+            //if(gadget.GadgetId == ItemType.GADGET)
                 onMainObjectiveCompleted?.Invoke();
         }
 

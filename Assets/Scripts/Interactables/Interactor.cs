@@ -5,9 +5,9 @@ namespace ProfessionalThief.Interactables
 {
     public class Interactor : MonoBehaviour
     {
-        private IInteractableItem interactableItem;
+        private IInteractable interactable;
 
-        public static Action<IInteractableItem> onNearInteractableItem;
+        public static Action<IInteractable> onNearInteractable;
 
         private void Update(){
             if(Input.GetKeyDown(KeyCode.E)){
@@ -16,22 +16,22 @@ namespace ProfessionalThief.Interactables
         }
 
         private void InteractWithItem(){
-            if(interactableItem == null) return;
-            interactableItem.Interact(this);
-            onNearInteractableItem?.Invoke(interactableItem);
+            if(interactable == null) return;
+            interactable.Interact(this);
+            onNearInteractable?.Invoke(interactable);
         }
 
         private void OnCollisionEnter2D(Collision2D other) {
-            if(other.gameObject.TryGetComponent<IInteractableItem>(out IInteractableItem item)){
-                this.interactableItem = item;
-                onNearInteractableItem?.Invoke(item);
+            if(other.gameObject.TryGetComponent<IInteractable>(out IInteractable interactable)){
+                this.interactable = interactable;
+                onNearInteractable?.Invoke(interactable);
             }
         }
 
         private void OnCollisionExit2D(Collision2D other) {
-            if(other.gameObject.TryGetComponent<IInteractableItem>(out IInteractableItem item)){
-                this.interactableItem = null;
-                onNearInteractableItem?.Invoke(null);
+            if(other.gameObject.TryGetComponent<IInteractable>(out IInteractable interactable)){
+                this.interactable = null;
+                onNearInteractable?.Invoke(null);
             }
         }
     }

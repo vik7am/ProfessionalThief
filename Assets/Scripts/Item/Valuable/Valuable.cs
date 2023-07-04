@@ -1,25 +1,28 @@
 
+using UnityEngine;
+
 namespace ProfessionalThief.Items
 {
-    public class Valuable : Item
+    public enum ValuableId{
+        CASH,
+        SILVER_COIN,
+        GOLD_COIN
+    }
+
+    public class Valuable : MonoBehaviour
     {
+        private ValuableId valuableId;
         private new string name;
         private int value;
-        private int stackSize;
 
         public string Name => name;
         public int Value => value;
-        public int StackSize => stackSize;
+        public ValuableId ValuableId => valuableId;
 
-        public void Initialize(ValuableData data, int stackSize){
+        public void Initialize(ValuableData data){
             name = data.name;
-            itemId = data.itemId;
+            valuableId = data.valuableId;
             value = data.value;
-            this.stackSize = stackSize;
-        }
-
-        public void AddToStack(Valuable valuable){
-            stackSize += valuable.stackSize;
         }
     }
 }

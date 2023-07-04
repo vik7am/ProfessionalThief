@@ -2,15 +2,23 @@ using UnityEngine;
 
 namespace ProfessionalThief.Items
 {
-    public abstract class  Gadget : Item
+    public enum GadgetId{
+        TORCH = ItemId.GADGET_TORCH,
+        STUN_GUN = ItemId.GADGET_STUN_GUN,
+        NIGHT_VISION_GOGGLES = ItemId.GADGET_NIGHT_VISION_GOGGLES
+    }
+
+    public class  Gadget : MonoBehaviour
     {
         protected bool isActive;
+        [SerializeField] private GadgetId gadgetId;
         [SerializeField] protected new string name;
         [SerializeField] protected string icon;
         [SerializeField] protected float maxCharge;
         protected float currentCharge;
 
         public bool IsActive => isActive;
+        public GadgetId GadgetId => gadgetId;
         public string Name => name;
         public string Icon => icon;
         public float MaxCharge => maxCharge;

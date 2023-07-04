@@ -20,11 +20,25 @@ namespace ProfessionalThief.Items
         void AddItem(Item item);
     }
 
-    public abstract class Item : MonoBehaviour
+    public class Item : MonoBehaviour
     {
-        public ItemId itemId;
-        public ItemType itemType;
+        [SerializeField] private ItemType itemType;
+        private ItemId itemId;
+        private int stackSize;
         public ItemId ItemId => itemId;
         public ItemType ItemType => itemType;
+        public int StackSize => stackSize;
+
+        private void Awake() {
+            stackSize = 0;
+        }
+
+        public void SetItemId(ItemId itemId){
+            this.itemId = itemId;
+        }
+
+        public void AddItemsToStack(int quantity){
+            stackSize += quantity;
+        }
     }
 }

@@ -13,25 +13,15 @@ namespace ProfessionalThief.Interactables
         private int quantity;
 
         protected override void InitializeItem(){
-            valuableData = GetValuableData();
-            valuable = Instantiate<Valuable>(valuablePrefab);
-            quantity = GetRandomValueInRange(valuableData.minStackSize, valuableData.maxStackSize);
-            valuable.Initialize(valuableData, quantity);
-            valuable.transform.SetParent(transform);
+            base.InitializeItem();
+            valuable = item.GetComponent<Valuable>();
+            valuable.Initialize(valuableData);
+            item.SetItemId((ItemId)valuable.ValuableId);
         }
 
         private ValuableData GetValuableData(){
             int randomValuableIndex = Random.Range(0, valuableDataList.Count);
             return valuableDataList[randomValuableIndex];
-        }
-
-        public override void Interact(Interactor interactor){
-            if(isEmpty) return;
-            IItemInventory inventory = interactor.GetComponent<IItemInventory>();
-            if(inventory != null){
-                inventory.AddItem(valuable);
-                isEmpty = true;
-            }
         }
 
         private int GetRandomValueInRange(int min, int max){
@@ -42,6 +32,15 @@ namespace ProfessionalThief.Interactables
             if(isEmpty)
                 return "Empty Chest";
             return "Press E to collect Valuables ";
+        }
+
+        public override void SetItemPrefab(){
+            valuableData = GetValuableData();
+            itemPrefab = valuablePrefab.GetComponent<Item>();
+        }
+
+        protected override int GetStackSize(){
+            return GetRandomValueInRange(valuableData.minStackSize, valuableData.maxStackSize);
         }
     }
 }

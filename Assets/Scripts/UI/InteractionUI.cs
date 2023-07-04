@@ -9,8 +9,8 @@ namespace ProfessionalThief.UI
         [SerializeField] private GameObject interactionPanel;
         [SerializeField] private TextMeshProUGUI interactionMessage;
 
-        public void SetInteractionMessage(IInteractableItem item){
-            interactionMessage.text = item.InteractionMessage();
+        public void SetInteractionMessage(IInteractable interactable){
+            interactionMessage.text = interactable.InteractionMessage();
         }
     }
 }
