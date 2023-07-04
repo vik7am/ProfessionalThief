@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using ProfessionalThief.Util;
+using ProfessionalThief.Core;
 
 namespace ProfessionalThief.Items
 {

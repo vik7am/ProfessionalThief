@@ -1,11 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using ProfessionalThief.Core;
-using ProfessionalThief.Enemy;
-using ProfessionalThief.Items;
 
-namespace ProfessionalThief.GuardNS
+namespace ProfessionalThief.Guard
 {
     public class GuardStateMachine : MonoBehaviour
     {

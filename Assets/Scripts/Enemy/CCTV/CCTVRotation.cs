@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ProfessionalThief
+namespace ProfessionalThief.CCTV
 {
     public enum RotationDirection{
         ClockWise = -1,

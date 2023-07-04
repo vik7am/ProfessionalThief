@@ -1,14 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine;
 
 namespace ProfessionalThief.Items
 {
-    public interface IStunnable{
-        void TakeStunDamage();
-    }
-    
     public class StunGun : Gadget
     {
         [SerializeField] private Bullet bulletPrefab;

@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-namespace ProfessionalThief.GuardNS
+namespace ProfessionalThief.Guard
 {
     public abstract class GuardState
     {

@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using ProfessionalThief.Util;
 using ProfessionalThief.Player;
 using UnityEngine.Experimental.Rendering.Universal;
 
-namespace ProfessionalThief.Enemy
+namespace ProfessionalThief.Core
 {
     public class PlayerDetector : MonoBehaviour
     {

@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ProfessionalThief.Patrol
+namespace ProfessionalThief.Guard
 {
     public class PatrolPath : MonoBehaviour
     {

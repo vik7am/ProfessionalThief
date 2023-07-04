@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using ProfessionalThief.Core;
-using ProfessionalThief.Util;
 
 namespace ProfessionalThief.Player
 {

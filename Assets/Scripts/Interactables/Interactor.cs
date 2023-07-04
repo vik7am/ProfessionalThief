@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
-using ProfessionalThief.Chest;
-using ProfessionalThief.UI;
 
-namespace ProfessionalThief.Player
+namespace ProfessionalThief.Interactables
 {
     public class Interactor : MonoBehaviour
     {

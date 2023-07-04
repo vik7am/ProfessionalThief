@@ -1,10 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ProfessionalThief.Player;
 using ProfessionalThief.Items;
 
-namespace ProfessionalThief.Chest
+namespace ProfessionalThief.Interactables
 {
     public class ValuableChest : Chest
     {
@@ -29,8 +27,8 @@ namespace ProfessionalThief.Chest
 
         public override void Interact(Interactor interactor){
             if(isEmpty) return;
-            Inventory inventory = interactor.GetComponent<Inventory>();
-            if(inventory){
+            IItemInventory inventory = interactor.GetComponent<IItemInventory>();
+            if(inventory != null){
                 inventory.AddItem(valuable);
                 isEmpty = true;
             }

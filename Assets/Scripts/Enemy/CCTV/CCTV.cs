@@ -1,12 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using ProfessionalThief.Enemy;
-using ProfessionalThief.Items;
+using ProfessionalThief.Core;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
-namespace ProfessionalThief
+namespace ProfessionalThief.CCTV
 {
     public class CCTV : MonoBehaviour, IStunnable
     {

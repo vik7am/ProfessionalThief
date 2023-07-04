@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using ProfessionalThief.Items;
-using ProfessionalThief.Enemy;
 
-namespace ProfessionalThief.CCTV_NS
+namespace ProfessionalThief.CCTV
 {
     public class CCTVStateMachine : MonoBehaviour
     {

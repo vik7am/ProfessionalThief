@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using System;
-using ProfessionalThief.Util;
+using ProfessionalThief.Core;
 
 namespace ProfessionalThief.UI
 {

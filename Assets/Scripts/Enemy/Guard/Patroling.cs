@@ -1,14 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 using ProfessionalThief.Core;
 
-namespace ProfessionalThief.Enemy
+namespace ProfessionalThief.Guard
 {
     public class Patroling : MonoBehaviour, IMovementInput
     {
-        [SerializeField] private Patrol.PatrolPath patrolPath;
+        [SerializeField] private PatrolPath patrolPath;
         [SerializeField] private float stoppingDistance;
         private Vector2 currentWayPoint;
         private Vector2 nextWaypoint;

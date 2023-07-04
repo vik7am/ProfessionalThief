@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using ProfessionalThief.Player;
 
-namespace ProfessionalThief.Chest
+namespace ProfessionalThief.Interactables
 {
     public interface IInteractableItem{
         void Interact(Interactor interactor);

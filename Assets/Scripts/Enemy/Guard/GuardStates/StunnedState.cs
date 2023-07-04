@@ -1,25 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using ProfessionalThief.Enemy;
 using UnityEngine;
 
-namespace ProfessionalThief.GuardNS
+namespace ProfessionalThief.Guard
 {
     public class StunnedState : GuardState
     {
         private Guard guard;
         private float stunnedDurationLeft;
-        private PlayerDetector playerDetector;
 
         public StunnedState(GuardStateMachine guardStateMachine) : base(guardStateMachine){
             guard = guardStateMachine.Guard;
-            playerDetector = guard.PlayerDetector;
         }
 
         public override void OnStateEnter(){
             guard.onHitByStunBullet += HandleOnHitByStunBullet;
             stunnedDurationLeft = guardStateMachine.StunnedDuration;
-            playerDetector.SetDetectionActive(false);
+            guard.PlayerDetector.SetDetectionActive(false);
             guard.BodyLight.enabled = false;
         }
 
@@ -32,6 +27,7 @@ namespace ProfessionalThief.GuardNS
 
         public override void OnStateExit(){
             guard.onHitByStunBullet -= HandleOnHitByStunBullet;
+            guard.PlayerDetector.SetDetectionActive(true);
             guard.BodyLight.enabled = true;
         }
 

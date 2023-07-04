@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using ProfessionalThief.Enemy;
+using ProfessionalThief.Core;
 using UnityEngine;
 
-namespace ProfessionalThief.CCTV_NS
+namespace ProfessionalThief.CCTV
 {
     public class StunnedState : CCTVState
     {

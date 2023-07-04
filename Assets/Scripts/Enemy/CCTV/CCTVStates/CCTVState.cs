@@ -1,5 +1,5 @@
 
-namespace ProfessionalThief.CCTV_NS
+namespace ProfessionalThief.CCTV
 {
     public abstract class CCTVState
     {

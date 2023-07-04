@@ -1,18 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using ProfessionalThief.Core;
-using ProfessionalThief.Enemy;
-using ProfessionalThief.Items;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
+using ProfessionalThief.Core;
 
-namespace ProfessionalThief.GuardNS
+namespace ProfessionalThief.Guard
 {
-    public class AnimatorParameter{
-        public static string GUARD_SPEED = "speed";
-    }
-
     public class Guard : MonoBehaviour, IStunnable
     {
         private Movement movement;

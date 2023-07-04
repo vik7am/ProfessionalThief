@@ -1,7 +1,6 @@
-using ProfessionalThief.Util;
 using UnityEngine;
 
-namespace ProfessionalThief
+namespace ProfessionalThief.Core
 {
     public class CameraController : MonoBehaviour
     {

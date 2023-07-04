@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProfessionalThief.Items
@@ -16,6 +14,10 @@ namespace ProfessionalThief.Items
         GADGET_TORCH,
         GADGET_STUN_GUN,
         GADGET_NIGHT_VISION_GOGGLES
+    }
+
+    public interface IItemInventory{
+        void AddItem(Item item);
     }
 
     public abstract class Item : MonoBehaviour

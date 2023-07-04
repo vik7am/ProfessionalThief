@@ -5,7 +5,7 @@ using ProfessionalThief.Player;
 using ProfessionalThief.Items;
 using UnityEngine.SceneManagement;
 
-namespace ProfessionalThief.Util
+namespace ProfessionalThief.Core
 {
     public class GameManager : GenericMonoSingleton<GameManager>
     {

@@ -1,12 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using ProfessionalThief.Chest;
-using ProfessionalThief.Player;
-using ProfessionalThief.Util;
 using UnityEngine;
+using ProfessionalThief.Core;
 
-namespace ProfessionalThief
+namespace ProfessionalThief.Interactables
 {
     public class MainGate : MonoBehaviour, IInteractableItem
     {

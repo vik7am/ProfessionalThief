@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ProfessionalThief.Util
+namespace ProfessionalThief.Core
 {
     public class GenericMonoSingleton<T> : MonoBehaviour where T : GenericMonoSingleton<T>
     {

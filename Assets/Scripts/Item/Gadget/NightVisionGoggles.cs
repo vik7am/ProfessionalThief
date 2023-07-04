@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using ProfessionalThief.Items;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
-namespace ProfessionalThief
+namespace ProfessionalThief.Items
 {
     public class NightVisionGoggles : Gadget
     {

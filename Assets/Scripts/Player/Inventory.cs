@@ -1,13 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 using ProfessionalThief.Items;
 
-
 namespace ProfessionalThief.Player
 {
-    public class Inventory : MonoBehaviour
+    public class Inventory : MonoBehaviour, IItemInventory
     {
         private Dictionary<ItemId, Item> itemList;
         private GadgetController gadgetController;

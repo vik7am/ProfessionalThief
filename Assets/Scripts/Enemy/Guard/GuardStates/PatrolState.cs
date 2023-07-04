@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using ProfessionalThief.Enemy;
-namespace ProfessionalThief.GuardNS
+
+namespace ProfessionalThief.Guard
 {
     public class PatrolState : GuardState
     {

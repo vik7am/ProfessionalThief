@@ -1,9 +1,8 @@
 using UnityEngine;
-using ProfessionalThief.Player;
 using ProfessionalThief.Items;
 using UnityEngine.SceneManagement;
 
-namespace ProfessionalThief.Chest
+namespace ProfessionalThief.Interactables
 {
     public class GadgetChest : Chest
     {
@@ -35,9 +34,9 @@ namespace ProfessionalThief.Chest
 
         public override void Interact(Interactor interactor){
             if(isEmpty) return;
-            Inventory inventory = interactor.GetComponent<Inventory>();
-            if(inventory){
-                inventory.AddGadget(gadget);
+            IItemInventory inventory = interactor.GetComponent<IItemInventory>();
+            if(inventory != null){
+                inventory.AddItem(gadget);
                 isEmpty = true;
             }
         }

@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System;
 using ProfessionalThief.Player;
 using ProfessionalThief.Items;
-using ProfessionalThief.Chest;
+using ProfessionalThief.Interactables;
 
 namespace ProfessionalThief.UI
 {
