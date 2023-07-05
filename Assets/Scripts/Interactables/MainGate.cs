@@ -14,8 +14,12 @@ namespace ProfessionalThief.Interactables
             boxCollider2D = GetComponent<BoxCollider2D>();
         }
 
-        private void Start(){
+        private void OnEnable() {
             GameManager.onMainObjectiveCompleted += UnlockDoor;
+        }
+
+        private void OnDisable(){
+            GameManager.onMainObjectiveCompleted -= UnlockDoor;
         }
 
         private void UnlockDoor(){
@@ -24,7 +28,7 @@ namespace ProfessionalThief.Interactables
 
         public void Interact(Interactor interactor){
             if(!isUnlocked) return;
-            GameManager.Instance.MissionCompleted();
+            GameManager.Instance.ExitBuilding();
         }
 
         public string InteractionMessage(){

@@ -1,9 +1,8 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using ProfessionalThief.Player;
 using ProfessionalThief.Items;
-using UnityEngine.SceneManagement;
+using ProfessionalThief.Interactables;
 
 namespace ProfessionalThief.Core
 {
@@ -12,46 +11,57 @@ namespace ProfessionalThief.Core
         [SerializeField] private Torch torch;
         [SerializeField] private StunGun stunGun;
         [SerializeField] private NightVisionGoggles nightVisionGoggles;
-        private Dictionary<int, Gadget> gadgetList;
+        [SerializeField] private GadgetChest gadgetChest;
         
         public static event Action onGameOver;
-        public static event Action onMissionCompleted;
+        public static event Action onLevelCompleted;
         public static event Action onMainObjectiveCompleted;
 
-        private void Start() {
+        private void OnEnable() {
             PlayerInventory.onGadgetAdded += OnGadgetAdded;
         }
 
-        private void AddGadgetsToList(){
-            gadgetList = new Dictionary<int, Gadget>();
-            gadgetList.Add(1, torch);
-            gadgetList.Add(2, stunGun);
-            gadgetList.Add(3, nightVisionGoggles);
+        private void OnDisable() {
+            PlayerInventory.onGadgetAdded -= OnGadgetAdded;
         }
 
-        public void GetGadgetForPreviousLevels(GadgetController gadgetController){
-            if(gadgetList == null)
-                AddGadgetsToList();
-            int currentLevel = SceneManager.GetActiveScene().buildIndex;
+        public void GetGadgetForPreviousLevels(PlayerInventory playerInventory){
+            int currentLevel = LevelManager.Instance.CurrentLevelIndex;
             for(int i=currentLevel-1; i>0; i--){
-                Gadget gadget = Instantiate<Gadget>(gadgetList[i]);
-                gadgetController.AddGadget(gadget);
+                Gadget gadgetPrefab = GetGadgetPrefabForLevel((LevelName)i);
+                Gadget gadget = Instantiate<Gadget>(gadgetPrefab);
+                Item item = gadget.GetComponent<Item>();
+                item.AddItemsToStack(1);
+                item.SetItemId((ItemId)gadget.GadgetId);
+                playerInventory.AddItem(item);
+            }
+        }
+
+        private Gadget GetGadgetPrefabForLevel(LevelName levelName){
+            switch(levelName){
+                case LevelName.LEVEL1 : return torch;
+                case LevelName.LEVEL2 : return stunGun;
+                case LevelName.LEVEL3 : return nightVisionGoggles;
+                default : return null;
             }
         }
 
         private void OnGadgetAdded(Gadget gadget){
-            //if(gadget.GadgetId == ItemType.GADGET)
+            LevelName currentLevelName = LevelManager.Instance.CurrentlevelName;
+            Gadget targetGadget = GetGadgetPrefabForLevel(currentLevelName);
+            if(gadget.GadgetId == targetGadget.GadgetId)
                 onMainObjectiveCompleted?.Invoke();
         }
 
         public void ActivateAlarm(){
             onGameOver?.Invoke();
-            Time.timeScale = 0;
         }
 
-        public void MissionCompleted(){
-            Time.timeScale = 0;
-            onMissionCompleted.Invoke();
+        public void ExitBuilding(){
+            onLevelCompleted.Invoke();
         }
+
+        public void PauseGame() {Time.timeScale = 0;}
+        public void ResumeGame() {Time.timeScale = 1;}
     }
 }

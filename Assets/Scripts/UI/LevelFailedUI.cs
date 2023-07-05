@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+using ProfessionalThief.Core;
 
 namespace ProfessionalThief.UI
 {
-    public class MissionFailedUI : MonoBehaviour
+    public class LevelFailedUI : MonoBehaviour
     {
         [SerializeField] private Button restartLevelButton;
         [SerializeField] private Button exitButton;
@@ -15,14 +15,13 @@ namespace ProfessionalThief.UI
         }
 
         private void RestartCurrentLevel(){
-            int currentScene = SceneManager.GetActiveScene().buildIndex;
-            Time.timeScale = 1;
-            SceneManager.LoadScene(currentScene);
+            GameManager.Instance.ResumeGame();
+            LevelManager.Instance.ReloadCurrentLevel();
         }
 
         private void ExitGame(){
-            Time.timeScale = 1;
-            SceneManager.LoadScene(0);
+            GameManager.Instance.ResumeGame();
+            LevelManager.Instance.LoadMainMenu();
         }
     }
 }

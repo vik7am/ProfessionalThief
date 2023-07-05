@@ -1,5 +1,5 @@
+using ProfessionalThief.Core;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace ProfessionalThief.UI
@@ -15,7 +15,7 @@ namespace ProfessionalThief.UI
         }
     
         private void StartNewGame(){
-            SceneManager.LoadScene(1);
+            LevelManager.Instance.LoadNextLevel();
         }
     
         private void ExitGame(){

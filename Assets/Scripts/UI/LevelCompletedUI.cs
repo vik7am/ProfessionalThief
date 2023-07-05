@@ -1,11 +1,11 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using ProfessionalThief.Core;
 
 
 namespace ProfessionalThief.UI
 {
-    public class MissionCompletedUI : MonoBehaviour
+    public class LevelCompletedUI : MonoBehaviour
     {
         [SerializeField] private Button nextLevelButton;
         [SerializeField] private Button exitButton;
@@ -16,16 +16,13 @@ namespace ProfessionalThief.UI
         }
 
         private void LoadNextLevel(){
-            int sceneCount = SceneManager.sceneCountInBuildSettings;
-            int currentScene = SceneManager.GetActiveScene().buildIndex;
-            int nextScene = (currentScene + 1) % sceneCount;
-            Time.timeScale = 1;
-            SceneManager.LoadScene(nextScene);
+            GameManager.Instance.ResumeGame();
+            LevelManager.Instance.LoadNextLevel();
         }
 
         private void ExitGame(){
-            Time.timeScale = 1;
-            SceneManager.LoadScene(0);
+            GameManager.Instance.ResumeGame();
+            LevelManager.Instance.LoadMainMenu();
         }
     }
 }

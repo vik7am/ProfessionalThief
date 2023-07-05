@@ -7,7 +7,7 @@ namespace ProfessionalThief.Core
         private static T instance;
         public static T Instance { get => instance; }
 
-        protected void Awake(){
+        protected virtual void Awake(){
             if(instance == null){
                 instance = (T)this;
                 DontDestroyOnLoad(this);

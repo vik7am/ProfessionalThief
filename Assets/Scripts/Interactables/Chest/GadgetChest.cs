@@ -1,6 +1,7 @@
 using UnityEngine;
 using ProfessionalThief.Items;
 using UnityEngine.SceneManagement;
+using ProfessionalThief.Core;
 
 namespace ProfessionalThief.Interactables
 {
@@ -11,18 +12,16 @@ namespace ProfessionalThief.Interactables
         [SerializeField] private NightVisionGoggles nightVisionGoggles;
         private Gadget gadgetPrefab;
 
-
         protected override void InitializeItem(){
             base.InitializeItem();
             item.SetItemId((ItemId)gadgetPrefab.GadgetId);
         }
 
-        private Gadget GetGadgetPrefab(){
-            int currentLvel = GetCurrentLevel();
-            switch(currentLvel){
-                case 1 : return torch;
-                case 2 : return stunGun;
-                case 3 : return nightVisionGoggles;
+        private Gadget GetGadgetPrefabForLevel(LevelName levelName){
+            switch(levelName){
+                case LevelName.LEVEL1 : return torch;
+                case LevelName.LEVEL2 : return stunGun;
+                case LevelName.LEVEL3 : return nightVisionGoggles;
                 default : return null;
             }
         }
@@ -39,7 +38,8 @@ namespace ProfessionalThief.Interactables
         }
 
         public override void SetItemPrefab(){
-            gadgetPrefab = GetGadgetPrefab();
+            LevelName currentLevelName = LevelManager.Instance.CurrentlevelName;
+            gadgetPrefab = GetGadgetPrefabForLevel(currentLevelName);
             itemPrefab = gadgetPrefab.GetComponent<Item>();
         }
     }

@@ -30,7 +30,6 @@ namespace ProfessionalThief.UI
             GadgetController.onGadgetEquip -= OnGadgetEquip;
             GadgetController.onGadgetUnEquip -= OnGadgetUnEquip;
             Interactor.onNearInteractable -= ToggleInteractionUI;
-
         }
 
         private void OnTotalTakeUpdated(int amountInDollar){
@@ -40,7 +39,6 @@ namespace ProfessionalThief.UI
         public void OnGadgetEquip(Gadget gadget){
             gadgetUI.gameObject.SetActive(true);
             gadgetUI.OnGadgetEquip(gadget);
-
         }
 
         public void OnGadgetUnEquip(){
@@ -48,15 +46,13 @@ namespace ProfessionalThief.UI
             gadgetUI.gameObject.SetActive(false);
         }
 
-        public void ToggleInteractionUI(IInteractable item){
-            if(item == null){
+        public void ToggleInteractionUI(IInteractable interactable){
+            if(interactable == null){
                 interactionUI.gameObject.SetActive(false);
                 return;
             }
             interactionUI.gameObject.SetActive(true);
-            interactionUI.SetInteractionMessage(item);
-            
-            
+            interactionUI.SetInteractionMessage(interactable);
         }
     }
 }

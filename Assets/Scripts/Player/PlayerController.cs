@@ -14,11 +14,17 @@ namespace ProfessionalThief.Player
         private PlayerInput playerInput;
         private Movement movement;
         private GadgetController gadgetController;
+        private PlayerInventory playerInventory;
 
         private void Awake(){
             playerInput = GetComponent<PlayerInput>();
             movement = GetComponent<Movement>();
             gadgetController = GetComponent<GadgetController>();
+            playerInventory = GetComponent<PlayerInventory>();
+        }
+
+        private void Start() {
+            GameManager.Instance.GetGadgetForPreviousLevels(playerInventory);
         }
 
         private void Update() {
@@ -27,13 +33,13 @@ namespace ProfessionalThief.Player
 
         private void OnEnable() {
             GameManager.onGameOver += DisablePlayerMovement;
-            GameManager.onMissionCompleted += DisablePlayerMovement;
+            GameManager.onLevelCompleted += DisablePlayerMovement;
             PlayerInventory.onGadgetAdded += gadgetController.AddGadget;
         }
 
         private void OnDisable() {
             GameManager.onGameOver -= DisablePlayerMovement;
-            GameManager.onMissionCompleted -= DisablePlayerMovement;
+            GameManager.onLevelCompleted -= DisablePlayerMovement;
             PlayerInventory.onGadgetAdded -= gadgetController.AddGadget;
         }
 
