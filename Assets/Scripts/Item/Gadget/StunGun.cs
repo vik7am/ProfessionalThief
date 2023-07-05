@@ -24,7 +24,6 @@ namespace ProfessionalThief.Items
         protected override void Activate(){
             if(currentCharge < maxCharge) return;
             FireBullet();
-            isActive = true;
         }
 
         private void FireBullet(){
