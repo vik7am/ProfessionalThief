@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using ProfessionalThief.Core;
+using System;
+using TMPro;
 
 namespace ProfessionalThief.UI
 {
@@ -8,6 +10,7 @@ namespace ProfessionalThief.UI
     {
         [SerializeField] private Button restartLevelButton;
         [SerializeField] private Button exitButton;
+        [SerializeField] private TextMeshProUGUI levelFailedReasonTextUI;
 
         private void Start(){
             restartLevelButton.onClick.AddListener(RestartCurrentLevel);
@@ -22,6 +25,10 @@ namespace ProfessionalThief.UI
         private void ExitGame(){
             GameManager.Instance.ResumeGame();
             LevelManager.Instance.LoadMainMenu();
+        }
+
+        public void SetLevelFailedReason(string detectorName){
+            levelFailedReasonTextUI.text = "You have been spotted by " + detectorName;
         }
     }
 }

@@ -30,7 +30,7 @@ namespace ProfessionalThief.Interactables
         public void Interact(Interactor interactor){
             if(!isUnlocked) return;
             PlayerInventory playerInventory = interactor.GetComponent<PlayerInventory>();
-            GameManager.Instance.ExitBuilding(playerInventory);
+            GameManager.Instance.ExitBuilding(playerInventory.GetTotalItemValue());
         }
 
         public string InteractionMessage(){

@@ -18,6 +18,7 @@ namespace ProfessionalThief.Items
 
     public interface IItemInventory{
         void AddItem(Item item);
+        int GetTotalItemValue();
     }
 
     public class Item : MonoBehaviour

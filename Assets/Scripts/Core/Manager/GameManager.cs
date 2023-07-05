@@ -13,19 +13,20 @@ namespace ProfessionalThief.Core
         [SerializeField] private NightVisionGoggles nightVisionGoggles;
         [SerializeField] private GadgetChest gadgetChest;
         
-        public static event Action onGameOver;
+        public static event Action<String> onGameOver;
         public static event Action<int> onLevelCompleted;
+        public static event Action<bool> onGamePaused;
         public static event Action onMainObjectiveCompleted;
 
         private void OnEnable() {
-            PlayerInventory.onGadgetAdded += OnGadgetAdded;
+            PlayerInventory.onGadgetAdded += CheckMainObjectiveStatus;
         }
 
         private void OnDisable() {
-            PlayerInventory.onGadgetAdded -= OnGadgetAdded;
+            PlayerInventory.onGadgetAdded -= CheckMainObjectiveStatus;
         }
 
-        public void GetGadgetForPreviousLevels(PlayerInventory playerInventory){
+        public void GetGadgetForPreviousLevels(IItemInventory inventory){
             int currentLevel = LevelManager.Instance.CurrentLevelIndex;
             for(int i=currentLevel-1; i>0; i--){
                 Gadget gadgetPrefab = GetGadgetPrefabForLevel((LevelName)i);
@@ -33,7 +34,7 @@ namespace ProfessionalThief.Core
                 Item item = gadget.GetComponent<Item>();
                 item.AddItemsToStack(1);
                 item.SetItemId((ItemId)gadget.GadgetId);
-                playerInventory.AddItem(item);
+                inventory.AddItem(item);
             }
         }
 
@@ -46,23 +47,28 @@ namespace ProfessionalThief.Core
             }
         }
 
-        private void OnGadgetAdded(Gadget gadget){
+        private void CheckMainObjectiveStatus(Gadget gadget){
             LevelName currentLevelName = LevelManager.Instance.CurrentlevelName;
             Gadget targetGadget = GetGadgetPrefabForLevel(currentLevelName);
             if(gadget.GadgetId == targetGadget.GadgetId)
                 onMainObjectiveCompleted?.Invoke();
         }
 
-        public void ActivateAlarm(){
-            onGameOver?.Invoke();
+        public void ActivateAlarm(String detectorName){
+            onGameOver?.Invoke(detectorName);
         }
 
-        public void ExitBuilding(PlayerInventory playerInventory){
-            onLevelCompleted.Invoke(playerInventory.TotalTake);
+        public void ExitBuilding(int totalItemValue){
+            onLevelCompleted.Invoke(totalItemValue);
         }
 
-        public void PauseGame() {Time.timeScale = 0;}
+        public void PauseGame() {
+            onGamePaused.Invoke(true);
+            Time.timeScale = 0;
+        }
         
-        public void ResumeGame() {Time.timeScale = 1;}
+        public void ResumeGame() {
+            onGamePaused.Invoke(false);
+            Time.timeScale = 1;}
     }
 }

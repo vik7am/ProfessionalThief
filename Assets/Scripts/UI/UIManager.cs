@@ -1,5 +1,6 @@
 using UnityEngine;
 using ProfessionalThief.Core;
+using ProfessionalThief.Items;
 
 namespace ProfessionalThief.UI
 {
@@ -31,15 +32,16 @@ namespace ProfessionalThief.UI
             GameManager.onLevelCompleted -= OnLevelCompleted;
         }
 
-        private void OnLevelCompleted(int amount){
+        private void OnLevelCompleted(int totalItemValue){
             GameManager.Instance.PauseGame();
             SwitchUI(UI_ID.LEVEL_COMPLETED);
-            levelCompletedUI.SetTotalTake(amount);
+            levelCompletedUI.SetTotalItemValue(totalItemValue);
         }
 
-        private void OnGameOver(){
+        private void OnGameOver(string detectorName){
             GameManager.Instance.PauseGame();
             SwitchUI(UI_ID.LEVEL_FAILED);
+            levelFailedUI.SetLevelFailedReason(detectorName);
         }
 
         public void SwitchUI(UI_ID userInterfaceID){

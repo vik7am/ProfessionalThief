@@ -9,7 +9,7 @@ namespace ProfessionalThief.UI
     {
         [SerializeField] private Button nextLevelButton;
         [SerializeField] private Button exitButton;
-        [SerializeField] private TextMeshProUGUI totalTake;
+        [SerializeField] private TextMeshProUGUI totalItemValueTextUI;
 
         private void Start(){
             nextLevelButton.onClick.AddListener(LoadNextLevel);
@@ -26,8 +26,8 @@ namespace ProfessionalThief.UI
             LevelManager.Instance.LoadMainMenu();
         }
 
-        public void SetTotalTake(float amount){
-            totalTake.text = "Score $ " + amount;
+        public void SetTotalItemValue(float totalItemValue){
+            totalItemValueTextUI.text = "Score $ " + totalItemValue;
         }
     }
 }

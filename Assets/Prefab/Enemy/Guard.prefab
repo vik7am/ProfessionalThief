@@ -70,6 +70,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   light2D: {fileID: 6952704923694269969}
+  detectorName: Guard
 --- !u!1 &4674267820918613546
 GameObject:
   m_ObjectHideFlags: 0

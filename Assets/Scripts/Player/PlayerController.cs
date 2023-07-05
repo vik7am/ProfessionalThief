@@ -4,10 +4,6 @@ using ProfessionalThief.Items;
 
 namespace ProfessionalThief.Player
 {
-    public class AnimatorParameter{
-        public static string PLAYER_SPEED = "speed";
-    }
-
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private Animator animator;
@@ -32,23 +28,17 @@ namespace ProfessionalThief.Player
         }
 
         private void OnEnable() {
-            GameManager.onGameOver += DisablePlayerMovement;
-            GameManager.onLevelCompleted += DisablePlayerMovement;
+            GameManager.onGamePaused += OnGamePaused;
             PlayerInventory.onGadgetAdded += gadgetController.AddGadget;
         }
 
         private void OnDisable() {
-            GameManager.onGameOver -= DisablePlayerMovement;
-            GameManager.onLevelCompleted -= DisablePlayerMovement;
+            GameManager.onGamePaused -= OnGamePaused;
             PlayerInventory.onGadgetAdded -= gadgetController.AddGadget;
         }
 
-        private void DisablePlayerMovement(){
-            movement.SetMovementActive(false);
-        }
-
-        private void DisablePlayerMovement(int amount){
-            movement.SetMovementActive(false);
+        private void OnGamePaused(bool status){
+            movement.SetMovementActive(!status);
         }
 
         private void UpdatePlayerAnimation(){

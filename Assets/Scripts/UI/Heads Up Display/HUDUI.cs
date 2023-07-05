@@ -11,7 +11,7 @@ namespace ProfessionalThief.UI
         [SerializeField] private GadgetUI gadgetUI;
         [SerializeField] private ActionLogUI actionLogUI;
         [SerializeField] private InteractionUI interactionUI;
-        [SerializeField] private TextMeshProUGUI totalTakeTextUI;
+        [SerializeField] private TextMeshProUGUI totalItemValueTextUI;
 
         private void Start(){
             gadgetUI.gameObject.SetActive(false);
@@ -19,21 +19,21 @@ namespace ProfessionalThief.UI
         }
 
         private void OnEnable() {
-            PlayerInventory.onTotalTakeUpdated += OnTotalTakeUpdated;
+            PlayerInventory.onTotalItemValueUpdated += OnTotalItemValueUpdated;
             GadgetController.onGadgetEquip += OnGadgetEquip;
             GadgetController.onGadgetUnEquip += OnGadgetUnEquip;
             Interactor.onNearInteractable += ToggleInteractionUI;
         }
 
         private void OnDisable() {
-            PlayerInventory.onTotalTakeUpdated -= OnTotalTakeUpdated;
+            PlayerInventory.onTotalItemValueUpdated -= OnTotalItemValueUpdated;
             GadgetController.onGadgetEquip -= OnGadgetEquip;
             GadgetController.onGadgetUnEquip -= OnGadgetUnEquip;
             Interactor.onNearInteractable -= ToggleInteractionUI;
         }
 
-        private void OnTotalTakeUpdated(int amountInDollar){
-            totalTakeTextUI.text = "$ " + amountInDollar;
+        private void OnTotalItemValueUpdated(int amountInDollar){
+            totalItemValueTextUI.text = "$ " + amountInDollar;
         }
 
         public void OnGadgetEquip(Gadget gadget){

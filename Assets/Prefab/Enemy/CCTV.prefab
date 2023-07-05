@@ -422,3 +422,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   light2D: {fileID: 5229454862247671694}
+  detectorName: CCTV

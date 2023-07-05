@@ -1,5 +1,5 @@
 
-namespace ProfessionalThief
+namespace ProfessionalThief.Core
 {
     public class AnimatorParameter
     {

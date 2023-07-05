@@ -9,12 +9,11 @@ namespace ProfessionalThief.Player
     {
         private Dictionary<ItemId, Item> itemList;
         private GadgetController gadgetController;
-        private int totalTake;
+        private int totalItemValue;
 
         public static event Action<Valuable ,int> onValuableAdded;
         public static event Action<Gadget> onGadgetAdded;
-        public static event Action<int> onTotalTakeUpdated;
-        public int TotalTake => totalTake;
+        public static event Action<int> onTotalItemValueUpdated;
 
         private void Awake() {
             gadgetController = GetComponent<GadgetController>();
@@ -22,7 +21,7 @@ namespace ProfessionalThief.Player
         
         private void Start(){
             itemList = new Dictionary<ItemId, Item>();
-            totalTake = 0;
+            totalItemValue = 0;
         }
 
         public void AddItem(Item item){
@@ -45,16 +44,20 @@ namespace ProfessionalThief.Player
 
         public void OnValuableAdded(Valuable valuable , int quantity){
             onValuableAdded?.Invoke(valuable, quantity);
-            UpdateTotalTake(valuable, quantity);
+            UpdateTotalitemValue(valuable, quantity);
         }
 
         public void OnGadgetAdded(Gadget gadget){
             onGadgetAdded?.Invoke(gadget);
         }
 
-        private void UpdateTotalTake(Valuable valuable, int stackSize){
-            totalTake += valuable.Value * stackSize;
-            onTotalTakeUpdated?.Invoke(totalTake);
+        private void UpdateTotalitemValue(Valuable valuable, int stackSize){
+            totalItemValue += valuable.Value * stackSize;
+            onTotalItemValueUpdated?.Invoke(totalItemValue);
+        }
+
+        public int GetTotalItemValue(){
+            return totalItemValue;
         }
     }
 }

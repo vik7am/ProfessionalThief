@@ -1,5 +1,5 @@
-using UnityEngine;
 using ProfessionalThief.Player;
+using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
 namespace ProfessionalThief.Core
@@ -8,6 +8,7 @@ namespace ProfessionalThief.Core
     {
         private bool isDetectionActive;
         [SerializeField] private Light2D light2D;
+        [SerializeField] private string detectorName;
 
         private void Start() {
             SetDetectionActive(true);
@@ -21,7 +22,7 @@ namespace ProfessionalThief.Core
         private void OnTriggerEnter2D(Collider2D other) {
             if(!isDetectionActive) return;
             if(other.GetComponent<PlayerController>()){
-                GameManager.Instance.ActivateAlarm();
+                GameManager.Instance.ActivateAlarm(detectorName);
             }
         }
     }
