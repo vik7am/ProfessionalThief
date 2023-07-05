@@ -1,5 +1,6 @@
 using UnityEngine;
 using ProfessionalThief.Core;
+using ProfessionalThief.Player;
 
 namespace ProfessionalThief.Interactables
 {
@@ -28,7 +29,8 @@ namespace ProfessionalThief.Interactables
 
         public void Interact(Interactor interactor){
             if(!isUnlocked) return;
-            GameManager.Instance.ExitBuilding();
+            PlayerInventory playerInventory = interactor.GetComponent<PlayerInventory>();
+            GameManager.Instance.ExitBuilding(playerInventory);
         }
 
         public string InteractionMessage(){

@@ -31,9 +31,10 @@ namespace ProfessionalThief.UI
             GameManager.onLevelCompleted -= OnLevelCompleted;
         }
 
-        private void OnLevelCompleted(){
+        private void OnLevelCompleted(int amount){
             GameManager.Instance.PauseGame();
             SwitchUI(UI_ID.LEVEL_COMPLETED);
+            levelCompletedUI.SetTotalTake(amount);
         }
 
         private void OnGameOver(){

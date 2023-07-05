@@ -14,7 +14,7 @@ namespace ProfessionalThief.Core
         [SerializeField] private GadgetChest gadgetChest;
         
         public static event Action onGameOver;
-        public static event Action onLevelCompleted;
+        public static event Action<int> onLevelCompleted;
         public static event Action onMainObjectiveCompleted;
 
         private void OnEnable() {
@@ -57,11 +57,12 @@ namespace ProfessionalThief.Core
             onGameOver?.Invoke();
         }
 
-        public void ExitBuilding(){
-            onLevelCompleted.Invoke();
+        public void ExitBuilding(PlayerInventory playerInventory){
+            onLevelCompleted.Invoke(playerInventory.TotalTake);
         }
 
         public void PauseGame() {Time.timeScale = 0;}
+        
         public void ResumeGame() {Time.timeScale = 1;}
     }
 }

@@ -14,6 +14,7 @@ namespace ProfessionalThief.Player
         public static event Action<Valuable ,int> onValuableAdded;
         public static event Action<Gadget> onGadgetAdded;
         public static event Action<int> onTotalTakeUpdated;
+        public int TotalTake => totalTake;
 
         private void Awake() {
             gadgetController = GetComponent<GadgetController>();

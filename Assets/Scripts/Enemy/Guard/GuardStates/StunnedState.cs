@@ -16,6 +16,7 @@ namespace ProfessionalThief.Guard
             stunnedDurationLeft = guardStateMachine.StunnedDuration;
             guard.PlayerDetector.SetDetectionActive(false);
             guard.BodyLight.enabled = false;
+            guard.BoxCollider2D.isTrigger = true;
         }
 
         public override void Update(){
@@ -29,6 +30,7 @@ namespace ProfessionalThief.Guard
             guard.onHitByStunBullet -= HandleOnHitByStunBullet;
             guard.PlayerDetector.SetDetectionActive(true);
             guard.BodyLight.enabled = true;
+            guard.BoxCollider2D.isTrigger = false;
         }
 
         private void HandleOnHitByStunBullet(){

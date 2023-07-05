@@ -15,7 +15,6 @@ namespace ProfessionalThief.Items
 
         private void Start(){
             gadgetList = new Dictionary<GadgetId, Gadget>();
-           // GameManager.Instance.GetGadgetForPreviousLevels(this);
         }
 
         void Update(){

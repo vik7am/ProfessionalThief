@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using ProfessionalThief.Core;
-
+using TMPro;
 
 namespace ProfessionalThief.UI
 {
@@ -9,6 +9,7 @@ namespace ProfessionalThief.UI
     {
         [SerializeField] private Button nextLevelButton;
         [SerializeField] private Button exitButton;
+        [SerializeField] private TextMeshProUGUI totalTake;
 
         private void Start(){
             nextLevelButton.onClick.AddListener(LoadNextLevel);
@@ -23,6 +24,10 @@ namespace ProfessionalThief.UI
         private void ExitGame(){
             GameManager.Instance.ResumeGame();
             LevelManager.Instance.LoadMainMenu();
+        }
+
+        public void SetTotalTake(float amount){
+            totalTake.text = "Score $ " + amount;
         }
     }
 }

@@ -47,6 +47,10 @@ namespace ProfessionalThief.Player
             movement.SetMovementActive(false);
         }
 
+        private void DisablePlayerMovement(int amount){
+            movement.SetMovementActive(false);
+        }
+
         private void UpdatePlayerAnimation(){
             animator.SetFloat(AnimatorParameter.PLAYER_SPEED, movement.CurrentSpeed);
         }
