@@ -28,6 +28,10 @@ namespace ProfessionalThief.Interactables
             item.transform.SetParent(transform);
         }
 
+        protected virtual int GetStackSize(){
+            return 1;
+        }
+
         public void Interact(Interactor interactor){
             if(isEmpty) return;
             IItemInventory inventory = interactor.GetComponent<IItemInventory>();
@@ -35,10 +39,6 @@ namespace ProfessionalThief.Interactables
                 inventory.AddItem(item);
                 isEmpty = true;
             }
-        }
-
-        protected virtual int GetStackSize(){
-            return 1;
         }
 
         public abstract void SetItemPrefab();

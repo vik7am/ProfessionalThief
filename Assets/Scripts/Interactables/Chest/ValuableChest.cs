@@ -10,7 +10,6 @@ namespace ProfessionalThief.Interactables
         [SerializeField] private List<ValuableData> valuableDataList;
         private ValuableData valuableData;
         private Valuable valuable;
-        private int quantity;
 
         protected override void InitializeItem(){
             base.InitializeItem();
@@ -28,6 +27,10 @@ namespace ProfessionalThief.Interactables
             return Random.Range(min, max+1);
         }
 
+        protected override int GetStackSize(){
+            return GetRandomValueInRange(valuableData.minStackSize, valuableData.maxStackSize);
+        }
+
         public override string InteractionMessage(){
             if(isEmpty)
                 return "Empty Chest";
@@ -37,10 +40,6 @@ namespace ProfessionalThief.Interactables
         public override void SetItemPrefab(){
             valuableData = GetValuableData();
             itemPrefab = valuablePrefab.GetComponent<Item>();
-        }
-
-        protected override int GetStackSize(){
-            return GetRandomValueInRange(valuableData.minStackSize, valuableData.maxStackSize);
         }
     }
 }

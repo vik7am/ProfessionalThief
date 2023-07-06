@@ -183,7 +183,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8051203608680640661}
-  - component: {fileID: 8051203608680640658}
+  - component: {fileID: 2008815281231941237}
   - component: {fileID: 8051203608680640660}
   - component: {fileID: 8051203608680640663}
   - component: {fileID: 8051203608680640662}
@@ -214,8 +214,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &8051203608680640658
-CapsuleCollider2D:
+--- !u!58 &2008815281231941237
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -228,8 +228,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.4, y: 0.7}
-  m_Direction: 0
+  serializedVersion: 2
+  m_Radius: 0.35
 --- !u!50 &8051203608680640660
 Rigidbody2D:
   serializedVersion: 4

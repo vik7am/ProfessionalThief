@@ -13,17 +13,8 @@ namespace ProfessionalThief.Items
 
         private void UpdateCharge(){
             if(currentCharge <= maxCharge){
-                RestoreCharge(Time.deltaTime);
+                RestoreCharge(chargeRestorationRate * Time.deltaTime);
             }
-        }
-
-        public override void UnEquip(){
-            Deactivate();
-        }
-
-        protected override void Activate(){
-            if(currentCharge < maxCharge) return;
-            FireBullet();
         }
 
         private void FireBullet(){
@@ -31,8 +22,17 @@ namespace ProfessionalThief.Items
             ReduceCharge(maxCharge);
         }
 
+        protected override void Activate(){
+            if(currentCharge < maxCharge) return;
+            FireBullet();
+        }
+
         protected override void Deactivate(){
             isActive = false;
+        }
+
+        public override void UnEquip(){
+            Deactivate();
         }
     }
 }

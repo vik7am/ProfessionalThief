@@ -17,7 +17,7 @@ namespace ProfessionalThief.Items
             gadgetList = new Dictionary<GadgetId, Gadget>();
         }
 
-        void Update(){
+        private void Update(){
             EquipGadgetToggleInput();
             if(equippedGadget)
                 UseEquippedGadgetToggleInput();
@@ -39,13 +39,6 @@ namespace ProfessionalThief.Items
             if(Input.GetKeyDown(KeyCode.Space)){
                 equippedGadget.ToggleState();
             }
-        }
-
-        public void AddGadget(Gadget gadget){
-            gadgetList.Add(gadget.GadgetId, gadget);
-            gadget.transform.SetParent(transform);
-            gadget.transform.localPosition = Vector2.zero;
-            gadget.transform.right = transform.right;
         }
 
         private void ToggleGadget(GadgetId gadgetId){
@@ -72,6 +65,13 @@ namespace ProfessionalThief.Items
             equippedGadget.UnEquip();
             onGadgetUnEquip?.Invoke();
             equippedGadget = null;
+        }
+
+        public void AddGadget(Gadget gadget){
+            gadgetList.Add(gadget.GadgetId, gadget);
+            gadget.transform.SetParent(transform);
+            gadget.transform.localPosition = Vector2.zero;
+            gadget.transform.right = transform.right;
         }
     }
 }

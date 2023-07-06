@@ -17,15 +17,11 @@ namespace ProfessionalThief.Items
 
         private void UpdateCharge(){
             if(IsActive){
-                ReduceCharge(Time.deltaTime);
+                ReduceCharge(chargeReductionRate * Time.deltaTime);
             }
             else if(currentCharge <= maxCharge){
-                RestoreCharge(Time.deltaTime);
+                RestoreCharge(chargeRestorationRate * Time.deltaTime);
             }
-        }
-
-        public override void UnEquip(){
-            Deactivate();
         }
 
         protected override void Activate(){
@@ -36,6 +32,10 @@ namespace ProfessionalThief.Items
         protected override void Deactivate(){
             isActive = false;
             light2D.enabled = false;
+        }
+        
+        public override void UnEquip(){
+            Deactivate();
         }
     }
 }

@@ -10,27 +10,31 @@ namespace ProfessionalThief.Items
 
     public class  Gadget : MonoBehaviour
     {
-        protected bool isActive;
         [SerializeField] private GadgetId gadgetId;
         [SerializeField] protected new string name;
         [SerializeField] protected string icon;
-        [SerializeField] protected float maxCharge;
+        [SerializeField][Range(0,1)]
+        protected float chargeReductionRate;
+        [SerializeField][Range(0,1)]
+        protected float chargeRestorationRate;
+        protected bool isActive;
+        protected float maxCharge;
         protected float currentCharge;
 
-        public bool IsActive => isActive;
         public GadgetId GadgetId => gadgetId;
         public string Name => name;
         public string Icon => icon;
+        public bool IsActive => isActive;
         public float MaxCharge => maxCharge;
         public float Currentcharge => currentCharge;
 
         private void Awake(){
-            currentCharge = maxCharge;
+            currentCharge = maxCharge = 1;
         }
 
         protected void RestoreCharge(float charge){
             currentCharge += charge;
-            currentCharge = Mathf.Clamp(currentCharge, 0 , maxCharge);
+            currentCharge = Mathf.Clamp01(currentCharge);
         }
 
         protected void ReduceCharge(float charge){
@@ -46,13 +50,11 @@ namespace ProfessionalThief.Items
                 Activate();
         }
 
-        public virtual void Equip() {}
-
-        public virtual void UnEquip() {}
-
         protected virtual void Activate() {}
-
         protected virtual void Deactivate() {}
+
+        public virtual void Equip() {}
+        public virtual void UnEquip() {}
     }
         
 }

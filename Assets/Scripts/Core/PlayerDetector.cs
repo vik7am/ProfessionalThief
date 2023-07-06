@@ -14,16 +14,16 @@ namespace ProfessionalThief.Core
             SetDetectionActive(true);
         }
 
-        public void SetDetectionActive(bool status){
-            isDetectionActive = status;
-            light2D.enabled = status;
-        }
-
         private void OnTriggerEnter2D(Collider2D other) {
             if(!isDetectionActive) return;
             if(other.GetComponent<PlayerController>()){
                 GameManager.Instance.ActivateAlarm(detectorName);
             }
+        }
+        
+        public void SetDetectionActive(bool status){
+            isDetectionActive = status;
+            light2D.enabled = status;
         }
     }
 }

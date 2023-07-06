@@ -26,11 +26,6 @@ namespace ProfessionalThief.Interactables
             }
         }
 
-        private int GetCurrentLevel(){
-            return SceneManager.GetActiveScene().buildIndex;
-        }
-
-
         public override string InteractionMessage(){
             if(isEmpty)
                 return "Empty Chest";

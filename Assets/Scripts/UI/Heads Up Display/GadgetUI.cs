@@ -11,6 +11,12 @@ namespace ProfessionalThief.UI
         [SerializeField] private Slider chargeLeftUI;
         private Gadget equippedGadget;
 
+        private void Update(){
+            if(equippedGadget){
+                chargeLeftUI.value = equippedGadget.Currentcharge;
+            }
+        }
+
         public void OnGadgetEquip(Gadget gadget){
             equippedGadget = gadget;
             gadgetNameTextUI.text = gadget.Icon;
@@ -20,12 +26,6 @@ namespace ProfessionalThief.UI
 
         public void OnGadgetUnEquip(){
             equippedGadget = null;
-        }
-
-        private void Update(){
-            if(equippedGadget){
-                chargeLeftUI.value = equippedGadget.Currentcharge;
-            }
         }
     }
 }

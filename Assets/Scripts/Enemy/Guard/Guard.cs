@@ -14,7 +14,6 @@ namespace ProfessionalThief.Guard
         [SerializeField] private Light2D bodyLight;
         [SerializeField] private Animator animator;
 
-        public Movement Movement => movement;
         public Patroling Patroling => patrolling;
         public PlayerDetector PlayerDetector => playerDetector;
         public Light2D BodyLight => bodyLight;

@@ -61,7 +61,8 @@ MonoBehaviour:
   gadgetId: 4
   name: Stun Gun
   icon: G
-  maxCharge: 10
+  chargeRestorationRate: 0.25
+  chargeReductionRate: 1
   bulletPrefab: {fileID: 1488050727361039494, guid: d0bec0c961cb8ce4e828223af7ba9951, type: 3}
   bulletFirePoint: {fileID: 8560865582053442173}
 --- !u!1 &8560865582053442172

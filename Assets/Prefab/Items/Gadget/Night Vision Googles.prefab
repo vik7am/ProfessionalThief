@@ -133,5 +133,6 @@ MonoBehaviour:
   gadgetId: 5
   name: NightVision Goggles
   icon: N
-  maxCharge: 10
+  chargeRestorationRate: 0.05
+  chargeReductionRate: 0.2
   light2D: {fileID: 1931093639781121854}

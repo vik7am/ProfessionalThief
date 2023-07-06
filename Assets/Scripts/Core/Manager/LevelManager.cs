@@ -19,6 +19,10 @@ namespace ProfessionalThief.Core
             currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
         }
 
+        private void LoadLevel(int index){
+            SceneManager.LoadScene(index);
+        }
+
         public void LoadMainMenu(){
             currentLevelIndex = 0;
             LoadLevel(currentLevelIndex);
@@ -31,10 +35,6 @@ namespace ProfessionalThief.Core
 
         public void ReloadCurrentLevel(){
             LoadLevel(currentLevelIndex);
-        }
-
-        private void LoadLevel(int index){
-            SceneManager.LoadScene(index);
         }
 
         public int GetNextLevelIndex(){

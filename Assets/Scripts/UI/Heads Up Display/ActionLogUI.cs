@@ -48,7 +48,7 @@ namespace ProfessionalThief.UI
             }
         }
 
-        IEnumerator ShowActionLogCoroutine(){
+        private IEnumerator ShowActionLogCoroutine(){
             while(actionLogQueue.Count>0){
                 actionLogTextUI.text = actionLogQueue.Dequeue();
                 yield return new WaitForSeconds(logTextVisibilityDuration);

@@ -26,18 +26,6 @@ namespace ProfessionalThief.Core
             PlayerInventory.onGadgetAdded -= CheckMainObjectiveStatus;
         }
 
-        public void GetGadgetForPreviousLevels(IItemInventory inventory){
-            int currentLevel = LevelManager.Instance.CurrentLevelIndex;
-            for(int i=currentLevel-1; i>0; i--){
-                Gadget gadgetPrefab = GetGadgetPrefabForLevel((LevelName)i);
-                Gadget gadget = Instantiate<Gadget>(gadgetPrefab);
-                Item item = gadget.GetComponent<Item>();
-                item.AddItemsToStack(1);
-                item.SetItemId((ItemId)gadget.GadgetId);
-                inventory.AddItem(item);
-            }
-        }
-
         private Gadget GetGadgetPrefabForLevel(LevelName levelName){
             switch(levelName){
                 case LevelName.LEVEL1 : return torch;
@@ -52,6 +40,18 @@ namespace ProfessionalThief.Core
             Gadget targetGadget = GetGadgetPrefabForLevel(currentLevelName);
             if(gadget.GadgetId == targetGadget.GadgetId)
                 onMainObjectiveCompleted?.Invoke();
+        }
+
+        public void GetGadgetForPreviousLevels(IItemInventory inventory){
+            int currentLevel = LevelManager.Instance.CurrentLevelIndex;
+            for(int i=currentLevel-1; i>0; i--){
+                Gadget gadgetPrefab = GetGadgetPrefabForLevel((LevelName)i);
+                Gadget gadget = Instantiate<Gadget>(gadgetPrefab);
+                Item item = gadget.GetComponent<Item>();
+                item.AddItemsToStack(1);
+                item.SetItemId((ItemId)gadget.GadgetId);
+                inventory.AddItem(item);
+            }
         }
 
         public void ActivateAlarm(String detectorName){
