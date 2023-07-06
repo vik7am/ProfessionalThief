@@ -17,9 +17,6 @@ namespace ProfessionalThief.Player
 
         private void Awake() {
             gadgetController = GetComponent<GadgetController>();
-        }
-        
-        private void Start(){
             itemList = new Dictionary<ItemId, Item>();
             totalItemValue = 0;
         }

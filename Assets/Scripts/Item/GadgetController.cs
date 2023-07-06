@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using ProfessionalThief.Core;
 
 namespace ProfessionalThief.Items
 {
@@ -13,7 +12,7 @@ namespace ProfessionalThief.Items
         public static Action<Gadget> onGadgetEquip;
         public static Action onGadgetUnEquip;
 
-        private void Start(){
+        private void Awake(){
             gadgetList = new Dictionary<GadgetId, Gadget>();
         }
 

@@ -1,6 +1,5 @@
 using UnityEngine;
 using ProfessionalThief.Core;
-using ProfessionalThief.Items;
 
 namespace ProfessionalThief.UI
 {
