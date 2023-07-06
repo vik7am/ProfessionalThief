@@ -1,54 +1,63 @@
+using System.Collections.Generic;
 using UnityEngine;
+using System;
+using ProfessionalThief.Items;
 
-namespace ProfessionalThief{
-public class PlayerInventory : MonoBehaviour
+namespace ProfessionalThief.Player
 {
-    int totalItemValue;
-    int availableBattery;
+    public class PlayerInventory : MonoBehaviour, IItemInventory
+    {
+        private Dictionary<ItemId, Item> itemList;
+        private GadgetController gadgetController;
+        private int totalItemValue;
 
-    void Start(){
-        totalItemValue = 0;
-        availableBattery = 0;
-        UIManager.Instance().UpdateAvailableBattery(availableBattery);
-    }
+        public static event Action<Valuable ,int> onValuableAdded;
+        public static event Action<Gadget> onGadgetAdded;
+        public static event Action<int> onTotalItemValueUpdated;
 
-    public void AddItem(CollectableItem item, int quantity){
-        int itemValue = item.GetItemValue();
-        string itemName = item.GetItemName();
-        AddUsableItems(item.GetItemType(), quantity);
-        totalItemValue += itemValue * quantity;
-        string actionLogText = "Collected " + quantity + " " + itemName;
-        UpdateHUD(actionLogText);
-    }
+        private void Awake() {
+            gadgetController = GetComponent<GadgetController>();
+        }
+        
+        private void Start(){
+            itemList = new Dictionary<ItemId, Item>();
+            totalItemValue = 0;
+        }
 
-    void AddUsableItems(ItemType itemType , int quantity){
-        if(itemType == ItemType.BATTERY){
-            availableBattery += quantity;
-            UIManager.Instance().UpdateAvailableBattery(availableBattery);
+        public void AddItem(Item item){
+            if(item.ItemType == ItemType.VALUABLE){
+                Valuable valuable = item.GetComponent<Valuable>();
+                if(itemList.ContainsKey(item.ItemId)){
+                    itemList[item.ItemId].AddItemsToStack(item.StackSize);
+                }
+                else{
+                    itemList.Add(item.ItemId, item);
+                }
+                OnValuableAdded(valuable, item.StackSize);
+            }
+            else if(item.ItemType == ItemType.GADGET){
+                Gadget gadget = item.GetComponent<Gadget>();
+                itemList.Add(item.ItemId, item);
+                OnGadgetAdded(gadget);
+            }
+        }
+
+        public void OnValuableAdded(Valuable valuable , int quantity){
+            onValuableAdded?.Invoke(valuable, quantity);
+            UpdateTotalitemValue(valuable, quantity);
+        }
+
+        public void OnGadgetAdded(Gadget gadget){
+            onGadgetAdded?.Invoke(gadget);
+        }
+
+        private void UpdateTotalitemValue(Valuable valuable, int stackSize){
+            totalItemValue += valuable.Value * stackSize;
+            onTotalItemValueUpdated?.Invoke(totalItemValue);
+        }
+
+        public int GetTotalItemValue(){
+            return totalItemValue;
         }
     }
-
-    public bool UseBattery(){
-        if(availableBattery > 0){
-            availableBattery--;
-            return true;
-        }
-        else
-            return false;
-    }
-
-    public int GetAvalableBattery(){
-        return availableBattery;
-    }
-
-    void UpdateHUD(string actionLogText){
-        UIManager.Instance().UpdateCollectableValue(totalItemValue);
-        UIManager.Instance().UpdateActionLog(actionLogText);
-        UIManager.Instance().UpdateItemInfo("");
-    }
-
-    public int GetTotalItemValue(){
-        return totalItemValue;
-    }
-}
 }

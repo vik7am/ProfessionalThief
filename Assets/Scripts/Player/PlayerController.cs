@@ -1,25 +1,48 @@
 using UnityEngine;
+using ProfessionalThief.Core;
+using ProfessionalThief.Items;
 
-namespace ProfessionalThief{
-public class PlayerController : MonoBehaviour
+namespace ProfessionalThief.Player
 {
-    PlayerMovement playerMovement;
-    Animator animator;
-    [SerializeField] GadgetController gadgetController;
-    [SerializeField] GameObject torchLight;
-
-    void Awake()
+    public class PlayerController : MonoBehaviour
     {
-        playerMovement = GetComponent<PlayerMovement>();
-        animator = GetComponent<Animator>();
-    }
+        [SerializeField] private Animator animator;
+        private PlayerInput playerInput;
+        private Movement movement;
+        private GadgetController gadgetController;
+        private PlayerInventory playerInventory;
 
-    public void DisablePlayer()
-    {
-        playerMovement.StopMovement();
-        gadgetController.UnEquipAllGadget();
-        animator.enabled = false;
-        torchLight.SetActive(false);
+        private void Awake(){
+            playerInput = GetComponent<PlayerInput>();
+            movement = GetComponent<Movement>();
+            gadgetController = GetComponent<GadgetController>();
+            playerInventory = GetComponent<PlayerInventory>();
+        }
+
+        private void Start() {
+            GameManager.Instance.GetGadgetForPreviousLevels(playerInventory);
+        }
+
+        private void Update() {
+            UpdatePlayerAnimation();
+        }
+
+        private void OnEnable() {
+            GameManager.onGamePaused += OnGamePaused;
+            PlayerInventory.onGadgetAdded += gadgetController.AddGadget;
+        }
+
+        private void OnDisable() {
+            GameManager.onGamePaused -= OnGamePaused;
+            PlayerInventory.onGadgetAdded -= gadgetController.AddGadget;
+        }
+
+        private void OnGamePaused(bool status){
+            movement.SetMovementActive(!status);
+        }
+
+        private void UpdatePlayerAnimation(){
+            animator.SetFloat(AnimatorParameter.PLAYER_SPEED, movement.CurrentSpeed);
+        }
     }
-}
 }

@@ -1,58 +1,59 @@
 using UnityEngine;
+using ProfessionalThief.Core;
+using ProfessionalThief.Items;
 
-namespace ProfessionalThief{
-public class UIManager : MonoBehaviour
+namespace ProfessionalThief.UI
 {
-    static UIManager instance;
-    [SerializeField] HudUI hudUI;
-    [SerializeField] GameOverUI gameOverUI;
-    [SerializeField] LevelCompletedUI levelCompletedUI;
+    public enum UI_ID {MAIN_MENU, HUD, LEVEL_COMPLETED, LEVEL_FAILED}
 
-    public static UIManager Instance(){
-        return instance;
-    }
-
-    void Awake()
+    public class UIManager : MonoBehaviour
     {
-        if(instance == null)
-            instance = this;
-        else
-            Destroy(gameObject);
-    }
+        [SerializeField] private MainMenuUI mainMenuUI;
+        [SerializeField] private HUDUI hudUI;
+        [SerializeField] private LevelCompletedUI levelCompletedUI;
+        [SerializeField] private LevelFailedUI levelFailedUI;
+        private GameObject activeUI;
 
-    public void UpdateCollectableValue(int value){
-        hudUI.UpdateCollectableValue(value);
-    }
+        private void Start(){
+            if(LevelManager.Instance.CurrentLevelIndex == 0){
+                SwitchUI(UI_ID.MAIN_MENU);
+                return;
+            }
+            SwitchUI(UI_ID.HUD);
+        }
 
-    public void UpdateItemInfo(string info){
-        hudUI.UpdateItemInfo(info);
-    }
+        private void OnEnable() {
+            GameManager.onGameOver += OnGameOver;
+            GameManager.onLevelCompleted += OnLevelCompleted;
+        }
 
-    public void UpdateActionLog(string text){
-        hudUI.UpdateActionLog(text);
-    }
+        private void OnDisable() {
+            GameManager.onGameOver -= OnGameOver;
+            GameManager.onLevelCompleted -= OnLevelCompleted;
+        }
 
-    public void UpdateEquippedGadget(GadgetType gadget, int charge){
-        hudUI.UpdateEquippedGadget(gadget, charge);
-    }
+        private void OnLevelCompleted(int totalItemValue){
+            GameManager.Instance.PauseGame();
+            SwitchUI(UI_ID.LEVEL_COMPLETED);
+            levelCompletedUI.SetTotalItemValue(totalItemValue);
+        }
 
-    public void UpdateAvailableBattery(int value){
-        hudUI.UpdateAvailableBattery(value);
-    }
+        private void OnGameOver(string detectorName){
+            GameManager.Instance.PauseGame();
+            SwitchUI(UI_ID.LEVEL_FAILED);
+            levelFailedUI.SetLevelFailedReason(detectorName);
+        }
 
-    public void UpdateChargeStatus(float value){
-        hudUI.UpdateChargeStatus(value);
+        public void SwitchUI(UI_ID userInterfaceID){
+            if(activeUI != null)
+                activeUI.SetActive(false);
+            switch(userInterfaceID){
+                case UI_ID.MAIN_MENU : activeUI = mainMenuUI.gameObject; break;
+                case UI_ID.HUD : activeUI = hudUI.gameObject; break;
+                case UI_ID.LEVEL_COMPLETED : activeUI = levelCompletedUI.gameObject; break;
+                case UI_ID.LEVEL_FAILED : activeUI = levelFailedUI.gameObject; break;
+            }
+            activeUI.SetActive(true);
+        }
     }
-
-    public void ShowGameoverUI(){
-        hudUI.gameObject.SetActive(false);
-        gameOverUI.gameObject.SetActive(true);
-    }
-
-    public void ShowLevelCompletedUI(){
-        hudUI.gameObject.SetActive(false);
-        levelCompletedUI.gameObject.SetActive(true);
-        levelCompletedUI.UpdateTotalCollection();
-    }
-}
 }

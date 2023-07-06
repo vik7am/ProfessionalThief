@@ -1,30 +1,33 @@
-using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.UI;
+using ProfessionalThief.Core;
 using TMPro;
 
-namespace ProfessionalThief{
-public class LevelCompletedUI : MonoBehaviour
+namespace ProfessionalThief.UI
 {
-    [SerializeField] Button nextLevelButton;
-    [SerializeField] Button quitButton;
-    [SerializeField] TextMeshProUGUI collection;
-    
-    void Start()
+    public class LevelCompletedUI : MonoBehaviour
     {
-        nextLevelButton.onClick.AddListener(LoadNextLevel);
-        quitButton.onClick.AddListener(QuitGame);
-    }
+        [SerializeField] private Button nextLevelButton;
+        [SerializeField] private Button exitButton;
+        [SerializeField] private TextMeshProUGUI totalItemValueTextUI;
 
-    public void UpdateTotalCollection(){
-        collection.text = "Collected $" +  GameManager.Instance().GetTotalCollection();
-    }
+        private void Start(){
+            nextLevelButton.onClick.AddListener(LoadNextLevel);
+            exitButton.onClick.AddListener(ExitGame);
+        }
 
-    void LoadNextLevel(){
-        GameManager.Instance().LoadNextLevel();
-    }
+        private void LoadNextLevel(){
+            GameManager.Instance.ResumeGame();
+            LevelManager.Instance.LoadNextLevel();
+        }
 
-    void QuitGame(){
-        Utils.LoadLevel(LevelName.MAIN_MENU);
+        private void ExitGame(){
+            GameManager.Instance.ResumeGame();
+            LevelManager.Instance.LoadMainMenu();
+        }
+
+        public void SetTotalItemValue(float totalItemValue){
+            totalItemValueTextUI.text = "Score $ " + totalItemValue;
+        }
     }
-}
 }
