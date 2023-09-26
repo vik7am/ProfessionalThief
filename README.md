@@ -1,7 +1,11 @@
 
-# ProfessionalThief
+# Professional Thief
 
 The Professional thief is a Top-Down 2D stealth game where you play as a thief whose aim is to steal special gadgets and money from the mansions. After stealing these gadgets you can also use them to your advantage to easily avoid patrolling guards and cameras.
+
+<img src= "https://i.imgur.com/UcTLm7E.jpg">
+
+[Click Here](https://vik7am.itch.io/professional-thief) to play WebGL Build.
 
 ## Features
 
@@ -18,6 +22,21 @@ The Professional thief is a Top-Down 2D stealth game where you play as a thief w
 2. **Observer Pattern** = It is used to update UI elements and change in game state like win and lose state.
 3. **Singleton** - Added Singleton classes to create Game and Level managers.
 
-## Demo
+## Gameplay Screenshots
+<p float="left">
+<img src= "https://i.imgur.com/Atg7T6x.jpg" width="48%">
+<img src= "https://i.imgur.com/7OqYo06.jpg" width="48%">
+<img src= "https://i.imgur.com/TQ3oRxa.jpg" width="48%">
+<img src= "https://i.imgur.com/7RbIxau.jpg" width="48%">
+<img src= "https://i.imgur.com/y2AZiyR.jpg" width="48%">
+<img src= "https://i.imgur.com/PJZGRdP.jpg" width="48%">
+<img src= "https://i.imgur.com/HhIXIJ6.jpg" width="48%">
+<img src= "https://i.imgur.com/5Pd3D4n.jpg" width="48%"> 
+<img src= "https://i.imgur.com/TJY0KnA.jpg" width="48%">
+<img src= "https://i.imgur.com/FF1OVSZ.jpg" width="48%">
+<img src= "https://i.imgur.com/qMXyfu1.jpg" width="48%">
+<img src= "https://i.imgur.com/y6ia2YG.jpg" width="48%">
+<img src= "https://i.imgur.com/RayXdpy.jpg" width="48%">
+<img src= "https://i.imgur.com/nRpkAyq.jpg" width="48%">
+</p> 
 
-[Click Here](https://vik7am.itch.io/professional-thief) to play WebGL Build.
