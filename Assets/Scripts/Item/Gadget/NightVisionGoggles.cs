@@ -1,11 +1,11 @@
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
+
 
 namespace ProfessionalThief.Items
 {
     public class NightVisionGoggles : Gadget
     {
-        [SerializeField] private Light2D light2D;
+        [SerializeField] private UnityEngine.Rendering.Universal.Light2D light2D;
 
         private void Start() {
             light2D.enabled = false;

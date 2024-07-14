@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using ProfessionalThief.UI;
 
 namespace ProfessionalThief.Interactables
 {
@@ -9,10 +10,18 @@ namespace ProfessionalThief.Interactables
 
         public static Action<IInteractable> onNearInteractable;
 
-        private void Update(){
-            if(Input.GetKeyDown(KeyCode.E)){
-                InteractWithItem();
-            }
+        // private void Update(){
+        //     if(Input.GetKeyDown(KeyCode.E)){
+        //         InteractWithItem();
+        //     }
+        // }
+
+        private void OnEnable() {
+            HUDUI.onItemInteraction += InteractWithItem;
+        }
+
+        private void OnDisable() {
+            HUDUI.onItemInteraction -= InteractWithItem;
         }
 
         private void InteractWithItem(){

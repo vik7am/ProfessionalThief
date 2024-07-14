@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using ProfessionalThief.Core;
+using ProfessionalThief.UI;
 
 namespace ProfessionalThief.Items
 {
@@ -17,28 +17,19 @@ namespace ProfessionalThief.Items
             gadgetList = new Dictionary<GadgetId, Gadget>();
         }
 
-        private void Update(){
-            EquipGadgetToggleInput();
+        private void OnEnable() {
+            HUDUI.onGadgetSelected += ToggleGadget;
+            HUDUI.onUseGadget += UseSelectedGadget;
+        }
+
+        private void OnDisable() {
+            HUDUI.onGadgetSelected -= ToggleGadget;
+            HUDUI.onUseGadget -= UseSelectedGadget;
+        }
+
+        private void UseSelectedGadget(){
             if(equippedGadget)
-                UseEquippedGadgetToggleInput();
-        }
-
-        private void EquipGadgetToggleInput(){
-            if(Input.GetKeyDown(KeyCode.Alpha1)){
-                ToggleGadget(GadgetId.TORCH);
-            }
-            else if(Input.GetKeyDown(KeyCode.Alpha2)){
-                ToggleGadget(GadgetId.STUN_GUN);
-            }
-            else if(Input.GetKeyDown(KeyCode.Alpha3)){
-                ToggleGadget(GadgetId.NIGHT_VISION_GOGGLES);
-            }
-        }
-
-        private void UseEquippedGadgetToggleInput(){
-            if(Input.GetKeyDown(KeyCode.Space)){
                 equippedGadget.ToggleState();
-            }
         }
 
         private void ToggleGadget(GadgetId gadgetId){

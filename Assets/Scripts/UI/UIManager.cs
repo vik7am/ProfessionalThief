@@ -6,12 +6,13 @@ namespace ProfessionalThief.UI
 {
     public enum UI_ID {MAIN_MENU, HUD, LEVEL_COMPLETED, LEVEL_FAILED}
 
-    public class UIManager : MonoBehaviour
+    public class UIManager : Singleton<UIManager>
     {
         [SerializeField] private MainMenuUI mainMenuUI;
         [SerializeField] private HUDUI hudUI;
         [SerializeField] private LevelCompletedUI levelCompletedUI;
         [SerializeField] private LevelFailedUI levelFailedUI;
+        [field: SerializeField] public FloatingJoystick floatingJoystick {get; private set;}
         private GameObject activeUI;
 
         private void Start(){

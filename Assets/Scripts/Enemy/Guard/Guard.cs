@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
+
 using ProfessionalThief.Core;
 
 namespace ProfessionalThief.Guard
@@ -11,12 +11,12 @@ namespace ProfessionalThief.Guard
         private Patroling patrolling;
         private BoxCollider2D boxCollider2D;
         [SerializeField] private PlayerDetector playerDetector;
-        [SerializeField] private Light2D bodyLight;
+        [SerializeField] private UnityEngine.Rendering.Universal.Light2D bodyLight;
         [SerializeField] private Animator animator;
 
         public Patroling Patroling => patrolling;
         public PlayerDetector PlayerDetector => playerDetector;
-        public Light2D BodyLight => bodyLight;
+        public UnityEngine.Rendering.Universal.Light2D BodyLight => bodyLight;
         public BoxCollider2D BoxCollider2D => boxCollider2D;
 
         public event Action onHitByStunBullet;

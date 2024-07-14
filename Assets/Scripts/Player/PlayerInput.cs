@@ -1,16 +1,14 @@
 using UnityEngine;
 using ProfessionalThief.Core;
+using System;
+using ProfessionalThief.UI;
 
 namespace ProfessionalThief.Player
 {
     public class PlayerInput : MonoBehaviour, IMovementInput
     {
-        private Vector2 movementInput;
-
         public Vector2 GetMovementDirection(){
-            movementInput.x = Input.GetAxisRaw("Horizontal");
-            movementInput.y = Input.GetAxisRaw("Vertical");
-            return movementInput.normalized;
+            return UIManager.Instance.floatingJoystick.Direction.normalized;
         }
     }
 }
