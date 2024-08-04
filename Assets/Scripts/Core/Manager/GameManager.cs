@@ -6,14 +6,14 @@ using ProfessionalThief.Interactables;
 
 namespace ProfessionalThief.Core
 {
-    public class GameManager : GenericMonoSingleton<GameManager>
+    public class GameManager : Singleton<GameManager>
     {
         [SerializeField] private Torch torch;
         [SerializeField] private StunGun stunGun;
         [SerializeField] private NightVisionGoggles nightVisionGoggles;
         [SerializeField] private GadgetChest gadgetChest;
         
-        public static event Action<String> onGameOver;
+        public static event Action<string> onGameOver;
         public static event Action<int> onLevelCompleted;
         public static event Action<bool> onGamePaused;
         public static event Action onMainObjectiveCompleted;
@@ -59,16 +59,16 @@ namespace ProfessionalThief.Core
         }
 
         public void ExitBuilding(int totalItemValue){
-            onLevelCompleted.Invoke(totalItemValue);
+            onLevelCompleted?.Invoke(totalItemValue);
         }
 
         public void PauseGame() {
-            onGamePaused.Invoke(true);
+            onGamePaused?.Invoke(true);
             Time.timeScale = 0;
         }
         
         public void ResumeGame() {
-            onGamePaused.Invoke(false);
+            onGamePaused?.Invoke(false);
             Time.timeScale = 1;}
     }
 }

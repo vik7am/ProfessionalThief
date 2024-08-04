@@ -4,7 +4,7 @@ namespace ProfessionalThief.Core
 {
     public enum LevelName {MAIN_MENU, LEVEL1, LEVEL2, LEVEL3}
 
-    public class LevelManager : GenericMonoSingleton<LevelManager>
+    public class LevelManager : Singleton<LevelManager>
     {
         private int levelCount;
         private int currentLevelIndex;
